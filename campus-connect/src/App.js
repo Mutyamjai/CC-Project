@@ -3,7 +3,7 @@
 function App() {
   return (
     <div className="App">
-      <h1>Headding</h1>
+      <h1 className="bg-slate-500">Headding</h1>
     </div>
   );
 }
