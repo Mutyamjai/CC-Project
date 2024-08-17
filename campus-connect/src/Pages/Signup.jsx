@@ -85,7 +85,7 @@ export default function Signup() {
                                     {...register('email', {required: true})}
                                     placeholder="Enter Email Address" className="">     
                                 </input>
-                                {errors.last_name && <p className='text-[#FF0000] text-[15px]'>Email Address is required</p>}
+                                {errors.email && <p className='text-[#FF0000] text-[15px]'>Email Address is required</p>}
                             </div>
                             <div className="mail flex flex-col">
                                 <label className="text-[16px]">Contact Number <sup className="text-pink-300">*</sup> </label>
