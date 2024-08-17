@@ -61,7 +61,9 @@ exports.sign_up = async (req, res) => {
     try{
         
         const { user_name, email, password, confirm_password, contact_number, account_type, otp } = req.body;
-
+        
+        console.log(user_name, email, password, confirm_password, contact_number, account_type);
+        
         if(!user_name || !email || !password || !contact_number || !confirm_password || !otp){
             return res.status(403).json({
                 success: false,
