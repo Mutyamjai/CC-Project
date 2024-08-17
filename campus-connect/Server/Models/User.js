@@ -25,9 +25,6 @@ const user_schema = new mongoose.Schema({
         required: true,
         enum: ["Student", "Laundry"]
     },
-    token: {
-        type: String,
-    },
     reset_password_expiry_time: {
         type: Date,
     }
