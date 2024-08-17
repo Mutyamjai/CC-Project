@@ -9,7 +9,7 @@ import { set_user_details } from '../Slices/profileSlice';
 import {GoEye, GoEyeClosed} from "react-icons/go";
 import { useState } from 'react';
 import { log_in } from '../Services/Service_Functions/auth';
-import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
 
@@ -39,7 +39,6 @@ export default function Login() {
           localStorage.setItem("token", JSON.stringify(result.user.token));
           localStorage.setItem("user_details", JSON.stringify(result.user));
 
-          toast.success("LOGIN DONE SUCCESSFULLY");
       }
 
       dispatch(set_loading(false));
@@ -83,9 +82,9 @@ export default function Login() {
                     </button>
                 </div>
                 {errors.password && <p className='text-[#FF0000] text-[15px]'>{errors.password.message}</p>}
-
+                    
                 <div>
-                      <Link to="/"></Link>
+                      <Link to="/Reset_Password">Forgot Password???</Link>
                 </div>
             </div>
             <button type='submit' className=''>

@@ -5,7 +5,8 @@ import { FaLongArrowAltLeft } from "react-icons/fa";
 import Spinner from '../Components/Common/Spinner';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { send_reset_password_token } from '../Services/Service_Functions/Auth';
+import { send_reset_password_token } from '../Services/Service_Functions/auth';
+import {set_loading} from "../Slices/authSlice"
 
 export default function ResetPassword() {
 
@@ -19,9 +20,12 @@ export default function ResetPassword() {
         set_email(event.target.value);
     }
 
-    function handle_click(event){
+    async function handle_click(event){
         event.preventDefault();
-        dispatch(send_reset_password_token(email, set_mail_sent));
+        
+        dispatch(set_loading(true));
+        await send_reset_password_token(email, set_mail_sent);
+        dispatch(set_loading(false));
     }
 
     return (

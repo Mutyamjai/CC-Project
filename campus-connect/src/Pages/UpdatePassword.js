@@ -7,15 +7,19 @@ import Spinner from '../Components/Common/Spinner';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import {GoEye, GoEyeClosed} from "react-icons/go";
-import { reset_password } from '../Services/Service_Functions/Auth';
+import { reset_password } from '../Services/Service_Functions/auth';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { set_loading } from '../Slices/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function UpdatePassword() {
 
     const {register, handleSubmit, formState:{errors}} = useForm();
     const {loading} = useSelector((state) => state.auth);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    
     const {id} = useParams();
 
     const [x, setX] = useState("password");
@@ -37,8 +41,11 @@ export default function UpdatePassword() {
             setXX("password");
     }
 
-    function on_submit(data){
-        dispatch(reset_password(data.password, data.confirm_password, id));
+    async function on_submit(data){
+
+        dispatch(set_loading(true));
+        await reset_password(data.password, data.confirm_password, id, navigate);
+        dispatch(set_loading(false));
     }
 
     return (
