@@ -2,14 +2,22 @@ import React from 'react'
 import Spinner from '../Components/Common/Spinner'
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { set_loading } from '../Slices/authSlice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { set_loading, set_token } from '../Slices/authSlice';
+import { set_user_details } from '../Slices/profileSlice';
 import {GoEye, GoEyeClosed} from "react-icons/go";
 import { useState } from 'react';
+import { log_in } from '../Services/Service_Functions/auth';
+import toast from 'react-hot-toast';
 
 export default function Login() {
+
   const {register,handleSubmit,formState: {errors}} = useForm();
   const {loading} = useSelector((state) => state.auth);
   const [x, setX] = useState("password");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function eyehandler1(event){
     event.preventDefault();
@@ -21,7 +29,20 @@ export default function Login() {
 
   const on_submit = async (data) => {
 
-      
+      dispatch(set_loading(true));
+
+      const result = await log_in(data.email, data.password, navigate);
+      if(result){
+          dispatch(set_token(result.user.token));
+          dispatch(set_user_details(result.user));
+
+          localStorage.setItem("token", JSON.stringify(result.user.token));
+          localStorage.setItem("user_details", JSON.stringify(result.user));
+
+          toast.success("LOGIN DONE SUCCESSFULLY");
+      }
+
+      dispatch(set_loading(false));
   }
 
   if(loading){
@@ -30,7 +51,7 @@ export default function Login() {
 
   return (
     <div>
-        <form >
+        <form onSubmit={handleSubmit(on_submit)}>
             
             <div>
                 <label className=''>Email Address<sup className=''>*</sup></label>
@@ -62,7 +83,14 @@ export default function Login() {
                     </button>
                 </div>
                 {errors.password && <p className='text-[#FF0000] text-[15px]'>{errors.password.message}</p>}
+
+                <div>
+                      <Link to="/"></Link>
+                </div>
             </div>
+            <button type='submit' className=''>
+                Log in
+            </button>
         </form>
     </div>
   )

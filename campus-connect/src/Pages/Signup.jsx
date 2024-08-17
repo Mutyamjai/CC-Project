@@ -119,7 +119,7 @@ export default function Signup() {
                                                     value: 5, message: "Password should contain atleast 5 characters"
                                                 },
                                             })}
-                                            className=""></input>
+                                            className="" ></input>
                                         <button className="" onClick={eyehandler1}>
                                         {
                                             (x === "password") ? <GoEye></GoEye> : <GoEyeClosed></GoEyeClosed>
