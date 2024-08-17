@@ -6,7 +6,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'Signup_bck': "url('C:\Projects\CC-Project\campus-connect\signup-bckground.jpg')",
   },
   plugins: [],
+}
 }
 }
