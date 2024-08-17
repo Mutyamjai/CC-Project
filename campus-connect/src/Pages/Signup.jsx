@@ -64,7 +64,7 @@ export default function Signup() {
                                 <label htmlFor="role">Select your role:</label>
                                 <select id="account_type" {...register('account_type')} defaultValue="Student">
                                     <option value="Student">Student</option>
-                                    <option value="Dhobi">Dhobi</option>
+                                    <option value="Laundry">Laundry</option>
                                     <option value="Saloon">Saloon</option>
                                     <option value="Cycle">Cycle</option>
                                     <option value="Magaram">Magaram</option>
