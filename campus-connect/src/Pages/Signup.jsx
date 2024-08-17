@@ -7,6 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react'
 import {GoEye, GoEyeClosed} from "react-icons/go";
+import toast from 'react-hot-toast';
+import {set_loading, set_signup_data} from '../Slices/authSlice';
+import { send_otp } from '../Services/Service_Functions/auth';
 
 export default function Signup() {
     const dispatch = useDispatch();
@@ -31,6 +34,19 @@ export default function Signup() {
         else    
             setXX("password");
     }
+    const on_submit = async (data) => {
+        console.log(data)
+        if(data.password !== data.confirm_password)
+            toast.error("PASSWORD AND CONFIRM PASSWORD ARE NOT SAME");
+        else{
+            dispatch(set_loading(true));
+            
+            dispatch(set_signup_data(data));
+            await send_otp(data.email, navigate);
+
+            dispatch(set_loading(false));
+        }
+    }
     return (
         <div className="bg-[url('./signup-bckground.jpg')]" >
             {
@@ -43,7 +59,7 @@ export default function Signup() {
                             <p>Already a member?</p>
                             <Link to = '/Login'>Login</Link>
                         </div>
-                        <form onSubmit={handleSubmit()}>
+                        <form onSubmit={handleSubmit(on_submit)}>
                             <div>
                                 <label htmlFor="role">Select your role:</label>
                                 <select id="account_type" {...register('account_type')} defaultValue="Student">
@@ -55,7 +71,7 @@ export default function Signup() {
                                 </select>
                             </div>
                             <div className=''>
-                                <label htmlFor='user_name'>First name</label>
+                                <label htmlFor='user_name'>User name</label>
                                 <br/>
                                 <input type="text" name="user_name" 
                                     {...register('user_name', {required: true})}
@@ -70,6 +86,23 @@ export default function Signup() {
                                     placeholder="Enter Email Address" className="">     
                                 </input>
                                 {errors.last_name && <p className='text-[#FF0000] text-[15px]'>Email Address is required</p>}
+                            </div>
+                            <div className="mail flex flex-col">
+                                <label className="text-[16px]">Contact Number <sup className="text-pink-300">*</sup> </label>
+                                <input type="number" name="contact_number" 
+                                    {...register('contact_number', {
+                                        required: {
+                                            value: true, message: "Contact Number is Required"
+                                        },
+                                        minLength:{
+                                            value: 10, message: "Invalid Number!!!!"
+                                        },
+                                        maxLength: {
+                                            value: 12, message: "Invalid Number!!!"
+                                        }
+                                    })}
+                                    placeholder="Enter your mobile number" className="px-2 py-3 mt-1 rounded-md bg-richblack-800 border-b-[1px] border-pure-greys-200"></input>
+                                {errors.contact_number && <p className='text-[#FF0000] text-[15px]'>{errors.contact_number.message}</p>}
                             </div>
                             <div className="">
                                 <div className="">
