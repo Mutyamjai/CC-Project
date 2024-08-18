@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 exports.reset_password_token = async (req, res) => {
 
     try{
-
+        console
         const email = req.body.email;
 
         const user = await User.findOne({email : email});
@@ -28,7 +28,7 @@ exports.reset_password_token = async (req, res) => {
             {new : true}
         )
 
-        const url = `http://localhost:3000/update_password/${token}`;
+        const url = `http://localhost:3000/Update_Password/${token}`;
 
         await mail_sender(email, "Reset Password Link", url);
 
@@ -52,6 +52,7 @@ exports.reset_password = async (req, res) => {
     try{
         //Get details from the request
         const {password, confirm_password, token} = req.body;
+        console.log(password, confirm_password, token);
 
         if(password !== confirm_password){
             return res.status(401).json({

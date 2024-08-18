@@ -95,9 +95,9 @@ export default function Signup()
                                 <input type="email"
                                  name="email" 
                                 {...register('email', {required: true})}
-                                placeholder="Enter Email Address" className="block w-full mt-1 p-1 border rounded">     
+                                placeholder="Enter Email Address" className="block w-full mt-1 p-1 border rounded text-black">     
                                 </input>
-                                {errors.last_name && <p className='text-[#FF0000] text-[15px]'>Email Address is required</p>}
+                                {errors.email && <p className='text-[#FF0000] text-[15px]'>Email Address is required</p>}
                             </div>
                             <div className="mail flex flex-col mt-2">
                                 <label className="text-[16px]">Contact Number <sup className="text-red-500">*</sup>  </label>
@@ -113,7 +113,7 @@ export default function Signup()
                                             value: 12, message: "Invalid Number!!!"
                                         }
                                     })}
-                                    placeholder="Enter your mobile number" className="block w-full mt-1 p-1 border rounded"></input>
+                                    placeholder="Enter your mobile number" className="block w-full mt-1 p-1 border rounded text-black"></input>
                                 {errors.contact_number && <p className='text-[#FF0000] text-[15px]'>{errors.contact_number.message}</p>}
                             </div>
                             <div className="mt-2">
@@ -134,7 +134,7 @@ export default function Signup()
                                             className="block w-full mt-1 p-1 pr-10 border rounded"></input>
                                         <button className="absolute top-1/2 right-5 transform -translate-y-1/2 text-black" onClick={eyehandler1}>
                                         {
-                                            (x === "password") ? <GoEye></GoEye> : <GoEyeClosed></GoEyeClosed>
+                                            (x === "password") ?  <GoEyeClosed></GoEyeClosed> : <GoEye></GoEye>
                                         }
                                         </button>
                                     </div>
@@ -154,10 +154,10 @@ export default function Signup()
                                                     value: 5, message: "Confirm Password should contain atleast 5 characters"
                                                 },
                                             })}
-                                            className="block w-full mt-1 p-1 border rounded"></input>
+                                            className="block w-full mt-1 p-1 border rounded text-black"></input>
                                         <button className="absolute top-1/2 right-5 transform -translate-y-1/2 text-black" onClick={eyehandler2}>
                                         {
-                                            (xx === "password") ? <GoEye></GoEye> : <GoEyeClosed></GoEyeClosed>
+                                            (xx === "password") ? <GoEyeClosed></GoEyeClosed> : <GoEye></GoEye> 
                                         }
                                         </button>
                                     </div>
