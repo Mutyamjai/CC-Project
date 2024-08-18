@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import Washing_form from './WashingForm';
 import Dry_Cleaning_form from './DryCleaningForm';
 import Iron_form from './IronForm';
 import StringtoNumber from '../../../Utility/StringtoNumber';
-
+import { fetch_order_number } from '../../../Services/Service_Functions/laundry';
+import Spinner from '../../../Components/Common/Spinner';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 export default function Create_Order() {
 
     const {register,handleSubmit,formState:{errors}} = useForm();
@@ -21,6 +24,11 @@ export default function Create_Order() {
     const [z, set_z] = useState(0);
     const [zz, set_zz] = useState(0);
     const [zzz, set_zzz] = useState(0);
+    const [order_number,set_order_number] = useState(-1);
+    const [loading, set_loading] = useState(false);
+
+    const {token} = useSelector((state) => state.auth);
+    const navigate = useNavigate();
 
     const on_submit = (data) => {
 
@@ -34,11 +42,20 @@ export default function Create_Order() {
             total_pieces: z + zz + zzz,
             total_washing: z,
             total_dry_cleaning: zz,
-            total_iron: zzz
+            total_iron: zzz,
+            status : "under_washing"
         }
 
         console.log(details);
     }
+
+    useEffect(async () => {
+        const result = await fetch_order_number(token, navigate);
+        await set_order_number(result);
+    }, [])
+
+    if(loading)
+        return <Spinner/>
 
   return (
 

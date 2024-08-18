@@ -7,3 +7,7 @@ export const auth = {
     RESET_PASSWORD_TOKEN : BASE_URL + "/auth/reset_password_token",
     RESET_PASSWORD : BASE_URL + "/auth/reset_password"
 }
+export const laundry = {
+    CREATE_ORDER : BASE_URL + '/laundry/create_order',
+    FETCH_ORDER_NUMBER :  BASE_URL + '/laundry/fetch_order_number'
+}
