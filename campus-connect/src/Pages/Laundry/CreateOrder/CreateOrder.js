@@ -5,10 +5,11 @@ import Washing_form from './WashingForm';
 import Dry_Cleaning_form from './DryCleaningForm';
 import Iron_form from './IronForm';
 import StringtoNumber from '../../../Utility/StringtoNumber';
-import { fetch_order_number } from '../../../Services/Service_Functions/laundry';
+import { create_laundry_order, fetch_order_number } from '../../../Services/Service_Functions/laundry';
 import Spinner from '../../../Components/Common/Spinner';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import ConfirmationModel from '../../../Components/Common/ConfirmationModel';
 export default function Create_Order() {
 
     const {register,handleSubmit,formState:{errors}} = useForm();
@@ -26,12 +27,14 @@ export default function Create_Order() {
     const [zzz, set_zzz] = useState(0);
     const [order_number,set_order_number] = useState(-1);
     const [loading, set_loading] = useState(false);
+    const [confirmation_model, set_confirmation_model] = useState(null);
 
     const {token} = useSelector((state) => state.auth);
     const navigate = useNavigate();
 
-    const on_submit = (data) => {
+    const on_submit = async (data) => {
 
+        set_loading(true);
         const details = {
             user_name: data.user_name,
             order_number: 0,
@@ -43,16 +46,26 @@ export default function Create_Order() {
             total_washing: z,
             total_dry_cleaning: zz,
             total_iron: zzz,
-            status : "under_washing"
+            status : "Under_washing"
         }
-
-        console.log(details);
+        await create_laundry_order(details, token, navigate);
+        set_confirmation_model(null);
+        set_loading(false);
     }
 
-    useEffect(async () => {
-        const result = await fetch_order_number(token, navigate);
-        await set_order_number(result);
-    }, [])
+    useEffect(() => {
+        const fetchOrderNumber = async () => {
+            try {
+                const result = await fetch_order_number(token, navigate);
+                set_order_number(result);
+            } catch (error) {
+                console.error("Error fetching order number:", error);
+            }
+        };
+    
+        fetchOrderNumber();
+    }, []);
+    
 
     if(loading)
         return <Spinner/>
@@ -61,6 +74,10 @@ export default function Create_Order() {
 
         <form onSubmit={handleSubmit(on_submit)}> 
             <div>
+
+                <div>
+                    Order No : {order_number}
+                </div>
                 <div>
                     <label>UserName</label>
                     <input type='text' name='user_name'
@@ -94,6 +111,10 @@ export default function Create_Order() {
                 )
             }
 
+            {
+                confirmation_model && <ConfirmationModel confirmation_model={confirmation_model}/>
+            }
+
             <div>
                 total = {y + yy + yyy}
             </div>
@@ -103,7 +124,16 @@ export default function Create_Order() {
             </div>
 
             <div>
-                <button type='submit'>Create Order</button>
+                <div className='hover:cursor-pointer' onClick={() =>
+                    set_confirmation_model({
+                        data_1: "Confirm Order ???",
+                        data_2: "Please note that order details can not be changed later.",
+                        btn1_text: "Confirm",
+                        btn2_text: "Cancel",
+                        btn1_fun: handleSubmit(on_submit),
+                        btn2_fun: () => set_confirmation_model(null)
+                    })
+                    }>Create Order</div>
             </div>
         </form>
   )

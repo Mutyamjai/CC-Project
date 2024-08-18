@@ -74,8 +74,8 @@ export default function Signup()
                     <div className='form-group mt-4'>
                         <label htmlFor="role" className='block text-white-700'>Select your role <sup className="text-red-500">*</sup>  </label>
                         <select id="account_type" {...register('account_type')} defaultValue="Student" className='"block w-full mt-1 p-1 border rounded text-black rounded"'>
-                            <option selected="selected" value="Student">Student</option>
-                            <option value="Dhobi">Dhobi</option>
+                            <option value="Student">Student</option>
+                            <option value="Laundry">Dhobi</option>
                             <option value="Saloon">Saloon</option>
                             <option value="Cycle">Cycle</option>
                             <option value="Magaram">Magaram</option>
@@ -131,7 +131,7 @@ export default function Signup()
                                                     value: 5, message: "Password should contain atleast 5 characters"
                                                 },
                                             })}
-                                            className="block w-full mt-1 p-1 pr-10 border rounded"></input>
+                                            className="block w-full mt-1 p-1 pr-10 border rounded text-black"></input>
                                         <button className="absolute top-1/2 right-5 transform -translate-y-1/2 text-black" onClick={eyehandler1}>
                                         {
                                             (x === "password") ?  <GoEyeClosed></GoEyeClosed> : <GoEye></GoEye>
