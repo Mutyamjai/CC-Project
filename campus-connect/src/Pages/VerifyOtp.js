@@ -30,53 +30,76 @@ export default function VerifyOtp() {
                         signup_data.confirm_password, signup_data.contact_number, signup_data.account_type, otp, navigate  );
 
         dispatch(set_loading(false));
+    
+    if(loading)
+        return (<Spinner/>);
+        
+
     }
     return (
-        <div className='w-[100%] h-[100vh] '>
+        <div className='w-full h-screen flex items-center justify-center bg-gray-950'>
             {
-                loading ? (<Spinner/>) : (
-                    <div className=' flex flex-col w-11/12 md:w-[400px] h-full justify-center gap-4 mx-auto'>
+                <div className="relative w-full h-full">
+                {/* Background Image and Gradient Overlay */}
+                <div className="absolute inset-0 bg-[url('./Assets/signup_bckground.jpg')] bg-cover bg-center">
+                    <div className="absolute inset-0 bg-gradient-to-r from-black via-gray-800 to-black opacity-80">
+                        <div className="relative z-10 w-full h-full flex items-center justify-center">
+                            {/* Form Container */}
+                                <div className="flex items-start justify-center gap-8">
+                                    <div className="bg-black bg-opacity-80 rounded-lg p-8 max-w-lg w-full mx-auto shadow-lg">
+                                        <div className='flex flex-col items-center justify-center gap-4'>
 
-                        <div className='text-3xl font-bold'>
-                                Verify email
-                        </div>
+                                            <div className=' flex flex-col w-11/12 md:w-[400px] h-full justify-center gap-4 mx-auto'>
 
-                        <div className='text-[18px] opacity-60'>
-                            A verification has been to you. Please enter the code below.
-                        </div>
+                                                <div className='text-3xl font-bold text-white overflow-y-hidden'>
+                                                        Verify email
+                                                </div>
 
-                        <OTPInput value={otp}
-                            onChange={set_otp}
-                            numInputs={6}
-                            renderInput={(props) => <input {...props} 
-                                placeholder='-'
-                                className=" border-0 bg-richblack-800 rounded-[0.5rem] text-richblack-5 aspect-square focus:border-0 focus:outline-2 focus:outline-yellow-50"
-                            />}
-                            containerStyle={{justifyContent : 'space-between'}}
-                            inputStyle={{
-                                width : 48,
-                                aspectRatio : 1
-                            }}
-                        />
+                                                <div className='text-[18px] opacity-60 text-white'>
+                                                    A verification code has been sent to you. Please enter the code below.
+                                                </div>
 
-                        <button className='w-full py-3 px-2 bg-yellow-100 rounded-md text-black' onClick={handle_submit}>
-                            Verify email
-                        </button>
+                                                <OTPInput value={otp}
+                                                    onChange={set_otp}
+                                                    numInputs={6}
+                                                    renderInput={(props) => <input {...props} 
+                                                        placeholder='-'
+                                                        className=" border-0 bg-richblack-800 rounded-[0.5rem] text-richblack-5 aspect-square focus:border-0 focus:outline-2 focus:outline-yellow-50"
+                                                    />}
+                                                    containerStyle={{justifyContent : 'space-between'}}
+                                                    inputStyle={{
+                                                        width : 48,
+                                                        aspectRatio : 1
+                                                    }}
+                                                />
+                                    
+                                                <button className='w-full py-3 px-2 bg-green-500 rounded-md text-black ' onClick={handle_submit}>
+                                                 <div className='text-xl text-semibold'>
+                                                    Verify email
+                                                 </div>   
+                                                </button>
+                                                
 
-                        <div className='flex justify-between'>
-                            <Link to={"/"} className='flex items-center gap-2'>
-                                <FaLongArrowAltLeft />
-                                <p>Back to login</p>
-                            </Link>
+                                                <div className='flex justify-between text-blue-500'>
+                                                    <Link to={"/"} className='flex items-center gap-2'>
+                                                        <FaLongArrowAltLeft />
+                                                        <p>Back to login</p>
+                                                    </Link>
 
-                            <div className='flex items-center gap-2 text-blue-200' onClick={(event) => {send_otp(signup_data.email)}}>
-                                <FaClockRotateLeft />
-                                <p>Resend mail</p>
-                            </div>
+                                                    <div className='flex items-center gap-2 text-blue-500' onClick={(event) => {send_otp(signup_data.email)}}>
+                                                        <FaClockRotateLeft />
+                                                        <p>Resend mail</p>
+                                            </div></div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>   
                         </div>
                     </div>
-                )
+                </div>
+            </div>    
             }
         </div>
+   
     )
 }
