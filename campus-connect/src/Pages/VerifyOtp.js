@@ -42,7 +42,7 @@ export default function VerifyOtp() {
                 <div className="relative w-full h-full">
                 {/* Background Image and Gradient Overlay */}
                 <div className="absolute inset-0 bg-[url('./Assets/signup_bckground.jpg')] bg-cover bg-center">
-                    <div className="absolute inset-0 bg-gradient-to-r from-black via-gray-800 to-black opacity-80">
+                    <div className="absolute inset-0 bg-gradient-to-r from-black via-[rgba(0,0,0,0.5)] to-black opacity-80">
                         <div className="relative z-10 w-full h-full flex items-center justify-center">
                             {/* Form Container */}
                                 <div className="flex items-start justify-center gap-8">
@@ -51,7 +51,7 @@ export default function VerifyOtp() {
 
                                             <div className=' flex flex-col w-11/12 md:w-[400px] h-full justify-center gap-4 mx-auto'>
 
-                                                <div className='text-3xl font-bold text-white overflow-y-hidden'>
+                                                <div className='text-3xl font-bold text-white overflow-y-hidden'> 
                                                         Verify email
                                                 </div>
 
