@@ -30,6 +30,16 @@ const user_schema = new mongoose.Schema({
     },
     reset_password_expiry_time: {
         type: Date,
+    },
+    laundry_orders: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Laundry_Order"
+        }
+    ],
+    laundry_account: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Laundry_account"
     }
 })
 
