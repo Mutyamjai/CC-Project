@@ -19,9 +19,9 @@ exports.send_otp = async (req, res) => {
             })
         }
 
-        user = await User.findOne({user_name: user_name});
+        const user2 = await User.findOne({user_name: user_name});
 
-        if(user){
+        if(user2){
             return res.status(401).json({
                 success: false,
                 message: "USER NAME IS ALREADY TAKEN. PLEASE TRY OTHER USER NAME.",

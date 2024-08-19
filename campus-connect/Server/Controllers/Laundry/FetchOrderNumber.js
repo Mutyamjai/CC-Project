@@ -5,7 +5,9 @@ exports.fetch_order_number = async (req, res) => {
     try{
 
         const laundry_id = req.user.id;
-        const laundry_account_id = await User.findOne({_id: laundry_id}).laundry_account;
+        const user = await User.findOne({_id: laundry_id});
+        const laundry_account_id = user.laundry_account;
+
         const laundry_account = await Laundry_account.findById(laundry_account_id);
         
         return res.status(200).json({

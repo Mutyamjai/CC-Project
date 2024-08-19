@@ -9,7 +9,8 @@ exports.create_order = async (req, res) => {
     try{
         let details = req.body;
         const laundry_id = req.user.id;
-        const laundry_account_id = await User.findOne({_id: laundry_id}).laundry_account;
+        const laundry_account_user = await User.findOne({_id: laundry_id});
+        const laundry_account_id = laundry_account_user.laundry_account;
 
         const user = await User.findOne({user_name: details.user_name});
 
@@ -23,10 +24,11 @@ exports.create_order = async (req, res) => {
         const washing = await Washing.create(details.washing);
         const dry_cleaning = await Dry_cleaning.create(details.dry_cleaning);
         const iron = await Iron.create(details.iron);
-
+        console.log(details);
         details.washing = washing._id;
         details.dry_cleaning = dry_cleaning._id;
         details.iron = iron._id;
+        console.log(details);
 
         const created_order = await Laundry_Order.create(details);
 

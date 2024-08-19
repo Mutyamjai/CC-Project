@@ -33,7 +33,7 @@ function App() {
         {
           user_details?.account_type === "Laundry" && (
               <>
-                  <Route path = 'Laundry/Create_Order' element=<Create_Order/>/>
+                  <Route path = '/Laundry/Create_Order' element=<Create_Order/>/>
               </>
           )
         }
