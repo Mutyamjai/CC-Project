@@ -20,24 +20,31 @@ export default function Dry_Cleaning_form({set_xx, set_dry_cleaning_data, set_to
         await set_xx(false);
     }
   return (
-    <div className='absolute inset-0 z-[60] bg-white bg-opacity-70'>
-        <h1>DRY CLEANING FORM</h1>
+    <div className='absolute inset-0 z-60 bg-black bg-opacity-50 flex items-center justify-center'>
+        <div className='bg-spotify-dark-gray border-2 border-blue-700 rounded-lg shadow-xl w-11/12 max-w-lg p-8 relative mt-20'>
+            <h1 className='text-2xl font-bold text-center text-blue-500 mb-4'>DRY CLEANING ORDER DETAILS</h1>
 
-        <div className='flex justify-end'>
-            <button onClick={() => set_xx(false)}>X</button>
-        </div>
+            <div className='absolute top-2 right-4 text-gray-500'>
+                <button onClick={() => set_xx(false)}
+                className='text-2xl font-bold text-gray-500 hover:text-red-500 focus:outline-none'>X</button>
+            </div>
 
-        {
-            dryCleanData.map((item, index) => (
-                <LaundryInput key={index} register={register} item={item} initial={order_data ? order_data[item.name] : 0}/>
-            ))
-        }
-        
-        <div>
-            <button type='button' onClick={
-                handleSubmit(on_submit)
-            }>Save</button>
-        </div>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-x-14 gap-y-4'>
+            {
+                dryCleanData.map((item, index) => (
+                    <LaundryInput key={index} register={register} item={item} initial={order_data ? order_data[item.name] : 0}/>
+                ))
+            }
+            </div>
+            
+            <div className='mt-6 flex justify-center'>
+                    <button type='button'
+                    className='bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'
+                    onClick={
+                        handleSubmit(on_submit)
+                    }>Save</button>
+            </div>
+        </div>    
 
     </div>
   )

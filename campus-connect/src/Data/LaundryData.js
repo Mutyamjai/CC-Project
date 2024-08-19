@@ -31,7 +31,7 @@ export const washingData = [
     },
     {
         name:"bed_sheet",
-        displayName:"B.Sheet/Blankets",
+        displayName:"B.Sheet/Blanket",
         price:10
     },
     {
