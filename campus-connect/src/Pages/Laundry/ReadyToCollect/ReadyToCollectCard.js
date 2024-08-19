@@ -1,11 +1,24 @@
 import React from 'react'
-//import 
-export default function ReadyToCollectCard({data, set_confirmation_model, set_loading}) {
-    const on_submit = async () =>{
+import { make_it_completed_order } from '../../../Services/Service_Functions/laundry';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import convert_date from '../../../Utility/dateConvertor';
+import { Link } from 'react-router-dom';
 
+export default function ReadyToCollectCard({data, set_confirmation_model, set_loading}) {
+
+    const {token} = useSelector((state) => state.auth);
+    const {user_details} = useSelector((state) => state.profile);
+    const navigate = useNavigate();
+
+    const on_submit = async () =>{
+        set_loading(true);
+        await make_it_completed_order(user_details.laundry_account, data._id, token, navigate);
+        set_confirmation_model(null);
+        set_loading(false);
     }
     return (
-        <div>
+        <div onClick={() => navigate(`/Laundry/View_Details/${data._id}`)} className="hover:cursor-pointer">
             <div>
                 order no : {data.order_number}
             </div>
@@ -13,7 +26,7 @@ export default function ReadyToCollectCard({data, set_confirmation_model, set_lo
                 user name : {data.user_name}
             </div>
             <div>
-                date : {data.created_at}
+                date : {convert_date(data.created_at)}
             </div>
             <div>
                 total pieces : {data.total_pieces}
@@ -22,18 +35,31 @@ export default function ReadyToCollectCard({data, set_confirmation_model, set_lo
                 total cost : {data.total_price}
             </div>
 
-            <button
-                onClick={() => {
-                    set_confirmation_model({
-                        data_1: "Proceed to Payment???",
-                        data_2: "Please note that the change can not be altered.",
-                        btn1_text: "Confirm",
-                        btn2_text: "Cancel",
-                        btn1_fun: () => on_submit(),
-                        btn2_fun: () => set_confirmation_model(null)
-                    })
-                }}
-            >Make Bill</button>
+           
+            {
+                data.status === "Ready_to_collect" && (
+                    <div>Payment pending!!!</div>
+                )
+            }
+            {
+                data.status === 'Payment_done' && (
+                    <div>
+                        <div>Payment done through {data.paid_in}</div>
+                        <button
+                            onClick={() => {
+                                set_confirmation_model({
+                                    data_1: "Confirm Payment???",
+                                    btn1_text: "Confirm",
+                                    btn2_text: "Cancel",
+                                    btn1_fun: () => on_submit(),
+                                    btn2_fun: () => set_confirmation_model(null)
+                                })
+                            }}
+                        >Confirm Payment</button>
+                    </div>
+                )
+            }
+            
         </div>
   )
 }
