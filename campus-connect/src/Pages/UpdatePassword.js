@@ -93,7 +93,6 @@ export default function UpdatePassword() {
                                                                 </div>
                                                                 {errors.password && <p className='text-[#FF0000] text-[15px]'>{errors.password.message}</p>}
                                                             </div>
-                                                            
                                                             <div className="flex flex-col">
                                                                 <label className="text-[16px] text-white ">Confirm Password <sup className="text-red-700">*</sup></label>
                                                                 <div className="relative flex items-center">
