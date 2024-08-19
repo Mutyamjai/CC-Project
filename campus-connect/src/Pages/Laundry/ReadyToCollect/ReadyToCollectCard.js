@@ -3,6 +3,8 @@ import { make_it_completed_order } from '../../../Services/Service_Functions/lau
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import convert_date from '../../../Utility/dateConvertor';
+import { Link } from 'react-router-dom';
+
 export default function ReadyToCollectCard({data, set_confirmation_model, set_loading}) {
 
     const {token} = useSelector((state) => state.auth);
@@ -16,7 +18,7 @@ export default function ReadyToCollectCard({data, set_confirmation_model, set_lo
         set_loading(false);
     }
     return (
-        <div>
+        <div onClick={() => navigate(`/Laundry/View_Details/${data._id}`)} className="hover:cursor-pointer">
             <div>
                 order no : {data.order_number}
             </div>
@@ -33,6 +35,7 @@ export default function ReadyToCollectCard({data, set_confirmation_model, set_lo
                 total cost : {data.total_price}
             </div>
 
+           
             {
                 data.status === "Ready_to_collect" && (
                     <div>Payment pending!!!</div>

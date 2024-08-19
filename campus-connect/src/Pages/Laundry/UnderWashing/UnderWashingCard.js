@@ -18,7 +18,7 @@ export default function UnderWashingCard({data, set_confirmation_model, set_load
     }
 
   return (
-    <div>
+    <div onClick={() => navigate(`/Laundry/View_Details/${data._id}`)} className="hover:cursor-pointer">
         <div>
             order no : {data.order_number}
         </div>
