@@ -16,7 +16,7 @@ export async function create_laundry_order(details, token,navigate){
     catch(error){
         console.log(error);
 
-        if(error.response.data)
+        if(error.response.data?.message)
             toast.error(error.response.data.message);
         else
             toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
@@ -38,7 +38,7 @@ export async function fetch_order_number(token ,navigate){
     catch(error){
         console.log(error);
 
-        if(error.response.data)
+        if(error.response.data?.message)
             toast.error(error.response.data.message);
         else
             toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
@@ -63,7 +63,7 @@ export async function fetch_under_washing_orders(laundry_account, token){
     catch(error){
         console.log(error);
 
-        if(error.response.data)
+        if(error.response.data?.message)
             toast.error(error.response.data.message);
         else
             toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
@@ -87,7 +87,7 @@ export async function fetch_ready_to_collect_orders(laundry_account, token){
     catch(error){
         console.log(error);
 
-        if(error.response.data)
+        if(error.response.data?.message)
             toast.error(error.response.data.message);
         else
             toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
@@ -111,7 +111,7 @@ export async function fetch_completed_orders(laundry_account, token){
     catch(error){
         console.log(error);
 
-        if(error.response.data)
+        if(error.response.data?.message)
             toast.error(error.response.data.message);
         else
             toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
@@ -135,7 +135,7 @@ export async function fetch_student_completed_orders( token){
     catch(error){
         console.log(error);
 
-        if(error.response.data)
+        if(error.response.data?.message)
             toast.error(error.response.data.message);
         else
             toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
@@ -158,7 +158,7 @@ export async function fetch_student_active_orders( token){
     catch(error){
         console.log(error);
 
-        if(error.response.data)
+        if(error.response.data?.message)
             toast.error(error.response.data.message);
         else
             toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
@@ -181,10 +181,69 @@ export async function make_ready_to_collect(laundry_account, order_id , token, n
     catch(error){
         console.log(error);
 
-        if(error.response.data)
+        if(error.response.data?.message)
             toast.error(error.response.data.message);
         else
             toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
     }
 }
+
+export async function make_it_completed_order(laundry_account, order_id , token, navigate){
+    try{
+        const response = await api_connector("POST", laundry.MAKE_IT_COMPLETED_ORDER, {laundry_account: laundry_account, order_id: order_id} ,{Authorization: `Bearer ${token}`} );
+
+        if(!response.data.success)
+            throw new Error(response.data.message);
+
+        toast.success(response.data.message);
+        navigate("/Laundry/Completed_Orders");
+    }
+    catch(error){
+        console.log(error);
+
+        if(error.response.data?.message)
+            toast.error(error.response.data.message);
+        else
+            toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
+    }
+}
+
+export async function paid_in_cash(order_id, token, navigate){
+    try{
+        const response = await api_connector("POST", laundry.PAID_IN_CASH, { order_id: order_id} ,{Authorization: `Bearer ${token}`} );
+
+        if(!response.data.success)
+            throw new Error(response.data.message);
+
+        toast.success(response.data.message);
+    }
+    catch(error){
+        console.log(error);
+
+        if(error.response.data?.message)
+            toast.error(error.response.data.message);
+        else
+            toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
+    }
+}
+
+export async function paid_in_online(order_id, token, navigate){
+    try{
+        const response = await api_connector("POST", laundry.PAID_IN_ONLINE, { order_id: order_id} ,{Authorization: `Bearer ${token}`} );
+
+        if(!response.data.success)
+            throw new Error(response.data.message);
+
+        toast.success(response.data.message);
+    }
+    catch(error){
+        console.log(error);
+
+        if(error.response.data?.message)
+            toast.error(error.response.data.message);
+        else
+            toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
+    }
+}
+
 
