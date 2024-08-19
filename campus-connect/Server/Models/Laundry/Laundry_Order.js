@@ -13,7 +13,11 @@ const laundry_order_schema = new mongoose.Schema({
     status: {
         type: String,
         required: true,
-        enum: ["Under_washing", "Ready_to_collect", "Completed"]
+        enum: ["Under_washing", "Ready_to_collect", "Payment_done" , "Completed"]
+    },
+    paid_in: {
+        type: String,
+        enum: ["Cash", "Online"]
     },
     total_price: {
         type: Number,
@@ -48,6 +52,10 @@ const laundry_order_schema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Iron"
     },
+    created_at: {
+        type: Date,
+        default: Date.now()
+    }
 })
 
 module.exports = mongoose.model("Laundry_Order", laundry_order_schema);

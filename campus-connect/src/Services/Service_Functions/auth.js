@@ -17,7 +17,7 @@ export async function send_otp(email, navigate){
     }
     catch(error){
         console.log(error);
-        if(error.response.data)
+        if(error.response.data?.message)
             toast.error(error.response.data.message);
         else
             toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
@@ -42,7 +42,7 @@ export async function sign_up(user_name, email, password, confirm_password, cont
     }
     catch(error){
         console.log(error);
-        if(error.response.data)
+        if(error.response.data?.message)
             toast.error(error.response.data.message);
         else
             toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
@@ -68,7 +68,7 @@ export async function log_in(email, password, navigate){
     catch(error){
         console.log(error);
 
-        if(error.response.data)
+        if(error.response.data?.message)
             toast.error(error.response.data.message);
         else
             toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
@@ -92,7 +92,7 @@ export async function send_reset_password_token(email, set_mail_sent){
     catch(error){
         console.log(error);
 
-        if(error.response.data)
+        if(error.response.data?.message)
             toast.error(error.response.data.message);
         else
             toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
@@ -113,7 +113,7 @@ export async function reset_password(password, confirm_password, id, navigate){
     catch(error){
         console.log(error);
 
-        if(error.response.data)
+        if(error.response.data?.message)
             toast.error(error.response.data.message);
         else
             toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");

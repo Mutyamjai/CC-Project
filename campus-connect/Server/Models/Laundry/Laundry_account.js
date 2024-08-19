@@ -6,7 +6,7 @@ const laundry_account_schema = new mongoose.Schema({
         type: Number,
         default: 27
     },
-    all_orders: [
+    completed_orders: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Laundry_Order"

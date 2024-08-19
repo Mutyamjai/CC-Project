@@ -11,6 +11,12 @@ import { useSelector } from 'react-redux'
 import ProtectedRoute from './Components/Common/ProtectedRoute'
 import LaundryHome from './Pages/Laundry/LaundryHome'
 import Create_Order from './Pages/Laundry/CreateOrder/CreateOrder'
+import OrderStatus from './Pages/Laundry/UnderWashing/UnderWashing'
+import ReadyToCollect from './Pages/Laundry/ReadyToCollect/ReadyToCollect'
+import CompletedOrders from './Pages/Laundry/CompletedOrders/CompletedOrders'
+import StudentActiveOrders from './Pages/Laundry/StudentActiveOrders/StudentActiveOrders'
+import StudentCompletedOrders from './Pages/Laundry/StudentCompletedOrders/StudentCompletedOrders'
+
 function App() {
   const {user_details} = useSelector((state) => state.profile)
   return (
@@ -34,6 +40,20 @@ function App() {
           user_details?.account_type === "Laundry" && (
               <>
                   <Route path = '/Laundry/Create_Order' element=<Create_Order/>/>
+                  <Route path = '/Laundry/Under_Washing' element=<OrderStatus/>/>
+                  <Route path = '/Laundry/Ready_to_Collect' element=<ReadyToCollect/>/>
+                  <Route path = '/Laundry/Completed_Orders' element=<CompletedOrders/>/>
+                 
+                  <Route path = '/Laundry/' element=<CompletedOrders/>/>
+
+              </>
+          )
+        }
+        {
+          user_details?.account_type === "Student" && (
+              <>
+              <Route path = '/Laundry/Student_Active_Orders' element=<StudentActiveOrders/>/>
+              <Route path = '/Laundry/Student_Completed_Orders' element=<StudentCompletedOrders/>/>
               </>
           )
         }
