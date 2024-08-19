@@ -1,4 +1,5 @@
 const Laundry_account = require("../../Models/Laundry/Laundry_account");
+const User = require("../../Models/User");
 
 exports.fetch_under_washing_orders = async (req, res) => {
     try{
@@ -59,6 +60,58 @@ exports.fetch_completed_orders = async (req, res) => {
             success: true,
             completed_orders: completed_orders,
             message: "COMPLETED ORDERS FETCHED SUCCESFULLY/",
+        })
+    }
+    catch(error){
+
+        return res.status(500).json({
+            success: false,
+            details: error.message,
+            message: "ERROR OCCURED WHILE FETCHING COMPLETED ORDERS",
+        })
+    }
+}
+
+exports.fetch_student_active_orders = async (req, res) => {
+    try{
+
+        const user_id = req.user.id;
+        const user = await User.findById(user_id)
+                            .populate({
+                                path: "laundry_orders",
+                                match: { status: { $ne: "Completed" } }
+                            }).exec();
+        
+        return res.status(200).json({
+            success: true,
+            active_orders: user.laundry_orders,
+            message: "ACTIVE ORDERS FETCHED SUCCESFULLY.",
+        })
+    }
+    catch(error){
+
+        return res.status(500).json({
+            success: false,
+            details: error.message,
+            message: "ERROR OCCURED WHILE FETCHING ACTIVE ORDERS",
+        })
+    }
+}
+
+exports.fetch_student_completed_orders = async (req, res) => {
+    try{
+
+        const user_id = req.user.id;
+        const user = await User.findById(user_id)
+                            .populate({
+                                path: "laundry_orders",
+                                match: { status: "Completed" }
+                            }).exec();
+        
+        return res.status(200).json({
+            success: true,
+            completed_orders: user.laundry_orders,
+            message: "COMPLETED ORDERS FETCHED SUCCESFULLY.",
         })
     }
     catch(error){
