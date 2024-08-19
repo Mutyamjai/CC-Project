@@ -5,12 +5,14 @@ import Spinner from '../../../Components/Common/Spinner';
 import { useState } from 'react';
 import UnderWashingCard from './UnderWashingCard';
 import { useForm } from 'react-hook-form';
+import ConfirmationModel from '../../../Components/Common/ConfirmationModel';
 
 export default function OrderStatus() {
     const {token} = useSelector((state) => state.auth);
-    const {user_details} = useSelector((state) => state.profile)
+    const {user_details} = useSelector((state) => state.profile);
     const[loading,set_loading] = useState(false);
     const[details,set_details] = useState(null);
+    const [confirmation_model, set_confirmation_model] = useState(null);
     const [searched_order, set_searched_order] = useState(null);
     const {register,handleSubmit,formState:{errors}} = useForm();
 
@@ -50,7 +52,9 @@ export default function OrderStatus() {
             {
                 searched_order && (
                     <div>
-                        <UnderWashingCard data={searched_order}/>
+                        <UnderWashingCard data={searched_order} set_confirmation_model={set_confirmation_model}
+                            set_loading={set_loading}
+                        />
                     </div>
                 )
             }
@@ -65,8 +69,13 @@ export default function OrderStatus() {
             <h1>All under washing orders</h1>
             {
                 details.map((item, index) => (
-                    <UnderWashingCard key={index} data={item}/>
+                    <UnderWashingCard key={index} data={item} set_confirmation_model={set_confirmation_model}
+                            set_loading={set_loading}/>
                 ))
+            }
+
+            {
+                confirmation_model && <ConfirmationModel confirmation_model={confirmation_model}/>
             }
         </div>
     )

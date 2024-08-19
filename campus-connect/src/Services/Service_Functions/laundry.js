@@ -100,7 +100,7 @@ export async function fetch_ready_to_collect_orders(laundry_account, token){
 export async function fetch_completed_orders(laundry_account, token){
     let result;
     try{
-        const response = await api_connector("POST", laundry.FETCH_COMPLETED_ORDERS, {laundry_account: laundry_account} ,{Authorization: `Bearer ${token}`} );
+        const response = await api_connector("POST", laundry.FETCH_COMPLETED_ORDERS,{laundry_account: laundry_account} ,{Authorization: `Bearer ${token}`} );
 
         if(!response.data.success)
             throw new Error(response.data.message);
@@ -118,6 +118,26 @@ export async function fetch_completed_orders(laundry_account, token){
     }
     finally{
         return result;
+    }
+}
+
+export async function make_ready_to_collect(laundry_account, order_id , token, navigate){
+    try{
+        const response = await api_connector("POST", laundry.MAKE_READY_TO_COLLECT, {laundry_account: laundry_account, order_id: order_id} ,{Authorization: `Bearer ${token}`} );
+
+        if(!response.data.success)
+            throw new Error(response.data.message);
+
+        toast.success(response.data.message);
+        navigate("/Laundry/Ready_to_Collect")
+    }
+    catch(error){
+        console.log(error);
+
+        if(error.response.data)
+            toast.error(error.response.data.message);
+        else
+            toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
     }
 }
 

@@ -5,6 +5,7 @@ const { auth, is_laundry } = require("../Middlewares/Auth");
 const {create_order} = require("../Controllers/Laundry/CreateOrder");
 const {fetch_order_number} = require("../Controllers/Laundry/FetchOrderNumber");
 const {fetch_under_washing_orders, fetch_ready_to_collect_orders, fetch_completed_orders} = require("../Controllers/Laundry/FechingOrders");
+const {make_ready_to_collect} = require("../Controllers/Laundry/UpdateStatus")
 
 router.post("/create_order",auth, is_laundry, create_order);
 router.get("/fetch_order_number",auth, is_laundry, fetch_order_number);
@@ -12,5 +13,7 @@ router.get("/fetch_order_number",auth, is_laundry, fetch_order_number);
 router.post("/fetch_under_washing_orders",auth, is_laundry, fetch_under_washing_orders);
 router.post("/fetch_ready_to_collect_orders",auth, fetch_ready_to_collect_orders);
 router.post("/fetch_completed_orders",auth, is_laundry, fetch_completed_orders);
+
+router.post("/make_ready_to_collect",auth, is_laundry, make_ready_to_collect);
 
 module.exports = router;

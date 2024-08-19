@@ -1,6 +1,21 @@
 import React from 'react'
-//import ConfirmationModel from '../../../Components/Common/ConfirmationModel';
-export default function UnderWashingCard({data}) {
+import { make_ready_to_collect } from '../../../Services/Service_Functions/laundry';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+export default function UnderWashingCard({data, set_confirmation_model, set_loading}) {
+
+    const {token} = useSelector((state) => state.auth);
+    const {user_details} = useSelector((state) => state.profile);
+    const navigate = useNavigate();
+
+    const on_submit = async () => {
+        set_loading(true);
+        await make_ready_to_collect(user_details.laundry_account ,data._id, token, navigate);
+        set_confirmation_model(null);
+        set_loading(false);
+    }
+
   return (
     <div>
         <div>
@@ -29,16 +44,16 @@ export default function UnderWashingCard({data}) {
         </div>
 
         <button
-            // {
-            //     set_confirmation_model({
-            //         data_1: "Confirm Order ???",
-            //         data_2: "Please note that order details can not be changed later.",
-            //         btn1_text: "Confirm",
-            //         btn2_text: "Cancel",
-            //         btn1_fun: handleSubmit(on_submit),
-            //         btn2_fun: () => set_confirmation_model(null)
-            //     })
-            // }
+            onClick={() => {
+                set_confirmation_model({
+                    data_1: "Confirm It???",
+                    data_2: "Please note that the change can not be altered.",
+                    btn1_text: "Confirm",
+                    btn2_text: "Cancel",
+                    btn1_fun: () => on_submit(),
+                    btn2_fun: () => set_confirmation_model(null)
+                })
+            }}
         >Ready To Collect</button>
     </div>
   )
