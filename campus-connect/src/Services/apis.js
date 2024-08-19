@@ -14,4 +14,7 @@ export const laundry = {
     FETCH_READY_TO_COLLECT_ORDERS : BASE_URL + '/laundry/fetch_ready_to_collect_orders',
     FETCH_COMPLETED_ORDERS : BASE_URL + '/laundry/fetch_completed_orders',
     MAKE_READY_TO_COLLECT : BASE_URL + "/laundry/make_ready_to_collect",
+    FETCH_STUDENT_ACTIVE_ORDERS : BASE_URL + "/laundry/fetch_student_active_orders",
+    FETCH_STUDENT_COMPLETED_ORDERS : BASE_URL + "/laundry/fetch_student_completed_orders",
+    
 }

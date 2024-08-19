@@ -121,6 +121,53 @@ export async function fetch_completed_orders(laundry_account, token){
     }
 }
 
+export async function fetch_student_completed_orders( token){
+    let result;
+    try{
+        const response = await api_connector("GET", laundry.FETCH_STUDENT_COMPLETED_ORDERS,{} ,{Authorization: `Bearer ${token}`} );
+
+        if(!response.data.success)
+            throw new Error(response.data.message);
+
+        toast.success(response.data.message);
+        result = response.data.completed_orders;
+    }
+    catch(error){
+        console.log(error);
+
+        if(error.response.data)
+            toast.error(error.response.data.message);
+        else
+            toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
+    }
+    finally{
+        return result;
+    }
+}
+export async function fetch_student_active_orders( token){
+    let result;
+    try{
+        const response = await api_connector("GET", laundry.FETCH_STUDENT_ACTIVE_ORDERS,{} ,{Authorization: `Bearer ${token}`} );
+
+        if(!response.data.success)
+            throw new Error(response.data.message);
+
+        toast.success(response.data.message);
+        result = response.data.completed_orders;
+    }
+    catch(error){
+        console.log(error);
+
+        if(error.response.data)
+            toast.error(error.response.data.message);
+        else
+            toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
+    }
+    finally{
+        return result;
+    }
+}
+
 export async function make_ready_to_collect(laundry_account, order_id , token, navigate){
     try{
         const response = await api_connector("POST", laundry.MAKE_READY_TO_COLLECT, {laundry_account: laundry_account, order_id: order_id} ,{Authorization: `Bearer ${token}`} );

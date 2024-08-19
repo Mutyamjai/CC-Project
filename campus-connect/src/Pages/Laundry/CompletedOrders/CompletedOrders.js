@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import Spinner from '../../../Components/Common/Spinner';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import ConfirmationModel from '../../../Components/Common/ConfirmationModel';
+
 import CompletedOrdersCard from '../CompletedOrders/CompletedOrdersCard';
 
 export default function CompletedOrders() {
@@ -14,7 +14,7 @@ export default function CompletedOrders() {
     const[details,set_details] = useState(null)
     const [searched_order, set_searched_order] = useState(null);
     const {register,handleSubmit,formState:{errors}} = useForm();
-    const [confirmation_model, set_confirmation_model] = useState(null);
+    
     useEffect(()=>{
         const fetchCompletedOrders = async () =>{
             try{
@@ -51,8 +51,7 @@ export default function CompletedOrders() {
             {
                 searched_order && (
                     <div>
-                        <CompletedOrdersCard data={searched_order} set_confirmation_model={set_confirmation_model}
-                            set_loading={set_loading}
+                        <CompletedOrdersCard data={searched_order} 
                         />
                     </div>
                 )
@@ -67,12 +66,9 @@ export default function CompletedOrders() {
             <h1>All Ready to collect items</h1>
             {
                 details.map((item, index) => (
-                    <CompletedOrdersCard key={index} data={item} set_confirmation_model={set_confirmation_model}
-                            set_loading={set_loading}/>
+                    <CompletedOrdersCard key={index} data={item} 
+                            />
                 ))
-            }
-            {
-                confirmation_model && <ConfirmationModel confirmation_model={confirmation_model}/>
             }
         </div>
     )
