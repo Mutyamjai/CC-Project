@@ -55,19 +55,19 @@ export default function Create_Order() {
                                 placeholder='Enter Customer Username'
                                 name='user_name'
                                 {...register('user_name', {required: true})}
-                                className="w-full p-2 mt-1 border border-blue-700 rounded bg-gray-700 text-white">
+                                className="w-full p-2 mt-1 border border-blue-700 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
                                 </input>
                                 {errors.user_name && <p className="text-red-500 text-sm">User name is required</p>}
                             </div>
 
                             <div className="flex justify-between mt-4">
-                            <button type='button' onClick={() => set_x(true)} className="bg-blue-500 text-white py-2 px-4 rounded flex items-center hover:bg-blue-600 hover:scale-105 transition-transform duration-300" title="Add Washing Service">
+                            <button type='button' onClick={() => set_x(true)} className="bg-blue-500 text-white py-2 px-4 rounded flex items-center hover:bg-blue-600 hover:scale-105 hover:shadow-lg transition-transform duration-300" title="Add Washing Service">
                             <GiWashingMachine  className="mr-2" />Washing
                             </button>
-                            <button type='button' onClick={() => set_xx(true)} className="bg-blue-500 text-white py-2 px-4 rounded flex items-center hover:bg-blue-600 hover:scale-105 transition-transform duration-300" title="Add Dry Cleaning Service">
+                            <button type='button' onClick={() => set_xx(true)} className="bg-blue-500 text-white py-2 px-4 rounded flex items-center hover:bg-blue-600 hover:scale-105 hover:shadow-lg transition-transform duration-300" title="Add Dry Cleaning Service">
                               <MdDryCleaning  className="mr-2" />Dry Cleaning
                             </button>
-                            <button type='button' onClick={() => set_xxx(true)} className="bg-blue-500 text-white py-2 px-4 rounded flex items-center hover:bg-blue-600 hover:scale-105 transition-transform duration-300" title="Add Iron Service">
+                            <button type='button' onClick={() => set_xxx(true)} className="bg-blue-500 text-white py-2 px-4 rounded flex items-center hover:bg-blue-600 hover:scale-105 hover:shadow-lg transition-transform duration-300" title="Add Iron Service">
                             <TbIroningSteam className="mr-2" />Iron
                             </button>
                             </div>
@@ -93,10 +93,9 @@ export default function Create_Order() {
                             )
                         }
 
-                        {/* Separate Boxes for Total Amount and Total Items */}
-                        <div className='flex justify-between mb-4'>
-                            {/* Box for Total Amount */}
-                            <div className='bg-blue-500 text-white p-2 rounded w-1/2 sm-w-1/2 sm:mr-2 mb-4 sm:mb-0 hover:bg-blue-600 hover:scale-105 transition-transform duration-300'>
+                        
+                        <div className='flex justify-between sm:flex-row gap-4 mb-4'>
+                            <div className='bg-blue-500 text-white p-2 rounded-lg w-1/2 sm:w-1/2 hover:bg-blue-600 hover:scale-105  transition-transform duration-300'>
                                 <div className='text-lg font-semibold text-center'>
                                     Total Amount
                                 </div>
@@ -104,8 +103,7 @@ export default function Create_Order() {
                                     <span>&#8377;</span>{y + yy + yyy}
                                 </div>
                             </div>
-                            {/* Box for Total Items */}
-                            <div className='bg-blue-500 text-white p-2 rounded w-1/2 sm:w-1/2 sm:mr-2 mb-4 sm:mb-0 hover:bg-blue-600 hover:scale-105 transition-transform duration-300'>
+                            <div className='bg-blue-500 text-white p-2 rounded-lg w-1/2 sm:w-1/2 hover:bg-blue-600 hover:scale-105 transition-transform duration-300'>
                                 <div className='text-lg font-semibold text-center'>
                                     Total Items
                                 </div>
