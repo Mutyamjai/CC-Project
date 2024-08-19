@@ -17,44 +17,51 @@ export default function UnderWashingCard({data, set_confirmation_model, set_load
     }
 
   return (
-    <div>
-        <div>
-            order no : {data.order_number}
-        </div>
-        <div>
-            user name : {data.user_name}
-        </div>
-        <div>
-            date : {data.created_at}
-        </div>
-        <div>
-            total washing clothes : {data.total_washing}
-        </div>
-        <div>
-            total dry cleaning clothes : {data.total_dry_cleaning}
-        </div>
-        <div>
-            total iron clothes : {data.total_iron}
-        </div>
-        <div>
-            total pieces : {data.total_pieces}
-        </div>
-        <div>
-            total cost : {data.total_price}
-        </div>
+    <div className='bg-gray-800 px-10 py-8 w-full border border-blue-700 rounded-lg max-w-md mx-auto flex flex-col mb-5'>
+            <div className='mb-4'>
+                <div className=' text-xl font-bold mb-2 text-white'>
+                Order No : {data.order_number}
+                </div>
+                <div className='flex justify-between text-lg font-medium text-white mb-2'>
+                <div className='flex-1'>Username :</div>
+                <div className='flex-2 text-right'>{data.user_name}</div>
+                </div>
+                <div className='flex justify-between text-lg font-medium text-white mb-2'>
+                <div className='flex-1'>Date :</div>
+                <div className='flex-2 text-right'>{data.created_at}</div>
+                </div>
+                <div className='flex justify-between text-lg font-medium text-white mb-2'>
+                Total Washing Clothes : <span className='font-normal'>{data.total_washing}</span>
+                </div>
+                <div className='flex justify-between text-lg font-medium text-white mb-2'>
+                Total Dry Cleaning Clothes : <span className='font-normal'>{data.total_dry_cleaning}</span>
+                </div>
+                <div className='flex justify-between text-lg font-medium text-white mb-2'>
+                Total Iron Clothes : <span className='font-normal'>{data.total_iron}</span>
+                </div>
+                <div className='flex justify-between text-lg font-medium text-white mb-2'>
+                Total Pieces : <span className='font-normal'>{data.total_pieces}</span>
+                </div>
+                <div className='flex justify-between text-lg font-medium text-white mb-2'>
+                Total Cost : <span className='font-normal'>{data.total_price}</span>
+                </div>
 
-        <button
-            onClick={() => {
-                set_confirmation_model({
-                    data_1: "Confirm It???",
-                    data_2: "Please note that the change can not be altered.",
-                    btn1_text: "Confirm",
-                    btn2_text: "Cancel",
-                    btn1_fun: () => on_submit(),
-                    btn2_fun: () => set_confirmation_model(null)
-                })
-            }}
-        >Ready To Collect</button>
+                <div className='mt-8 text-center'>
+                <button
+                    onClick={() => {
+                        set_confirmation_model({
+                            data_1: "Confirm It???",
+                            data_2: "Please note that the change can not be altered.",
+                            btn1_text: "Confirm",
+                            btn2_text: "Cancel",
+                            btn1_fun: () => on_submit(),
+                            btn2_fun: () => set_confirmation_model(null)
+                        })
+                    }}
+                    className='bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 '
+                >Ready To Collect</button>
+                </div>
+        </div>        
     </div>
   )
 }
