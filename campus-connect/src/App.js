@@ -14,6 +14,7 @@ import Create_Order from './Pages/Laundry/CreateOrder/CreateOrder'
 import OrderStatus from './Pages/Laundry/UnderWashing/UnderWashing'
 import ReadyToCollect from './Pages/Laundry/ReadyToCollect/ReadyToCollect'
 import CompletedOrders from './Pages/Laundry/CompletedOrders/CompletedOrders'
+import StudentActiveOrders from './Pages/Laundry/StudentActiveOrders/StudentActiveOrders'
 
 function App() {
   const {user_details} = useSelector((state) => state.profile)
@@ -41,7 +42,16 @@ function App() {
                   <Route path = '/Laundry/Under_Washing' element=<OrderStatus/>/>
                   <Route path = '/Laundry/Ready_to_Collect' element=<ReadyToCollect/>/>
                   <Route path = '/Laundry/Completed_Orders' element=<CompletedOrders/>/>
+                 
+                  <Route path = '/Laundry/' element=<CompletedOrders/>/>
 
+              </>
+          )
+        }
+        {
+          user_details?.account_type === "Student" && (
+              <>
+              <Route path = '/Laundry/Student_Active_Orders' element=<StudentActiveOrders/>/>
               </>
           )
         }
