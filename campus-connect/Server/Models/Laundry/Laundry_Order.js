@@ -48,6 +48,10 @@ const laundry_order_schema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Iron"
     },
+    created_at: {
+        type: Date,
+        default: Date.now()
+    }
 })
 
 module.exports = mongoose.model("Laundry_Order", laundry_order_schema);
