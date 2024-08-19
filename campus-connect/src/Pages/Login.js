@@ -89,11 +89,9 @@ export default function Login() {
                                             </div>
                                             {errors.password && <p className='text-[#FF0000] text-[15px]'>{errors.password.message}</p>}
                                                 
-                                            <div>
-                                            <Link to="/Reset_Password">Forgot Password???</Link>
-                                            </div>
+                                            
                                         </div>
-                                        <button type='submit' className='bg-green-500 w-full p-2 text-bold text-xl rounded-lg'>
+                                        <button type='submit' className='bg-green-500 w-full p-2 text-bold text-xl rounded-lg mt-5'>
                                            <p className='font-semibold'>Login</p>
                                         </button>
                                     </form>

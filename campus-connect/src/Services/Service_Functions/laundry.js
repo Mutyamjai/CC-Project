@@ -153,7 +153,7 @@ export async function fetch_student_active_orders( token){
             throw new Error(response.data.message);
 
         toast.success(response.data.message);
-        result = response.data.completed_orders;
+        result = response.data.active_orders;
     }
     catch(error){
         console.log(error);
@@ -216,6 +216,7 @@ export async function paid_in_cash(order_id, token, navigate){
             throw new Error(response.data.message);
 
         toast.success(response.data.message);
+        navigate("Laundry/Student_Completed_Orders");
     }
     catch(error){
         console.log(error);
@@ -235,6 +236,7 @@ export async function paid_in_online(order_id, token, navigate){
             throw new Error(response.data.message);
 
         toast.success(response.data.message);
+        navigate("Laundry/Student_Completed_Orders");
     }
     catch(error){
         console.log(error);

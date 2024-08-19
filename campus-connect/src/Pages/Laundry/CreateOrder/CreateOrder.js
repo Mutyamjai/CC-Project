@@ -77,10 +77,10 @@ export default function Create_Order() {
   return (
     <div className='w-full h-screen bg-black flex items-center justify-center'>
         <div className='bg-spotify-dark-gray p-8 rounded-lg border border-blue-700 shadow-lg w-full max-w-md'>
-            <h1 className='text-4xl text-blue-300 font-bold mb-6 text-center'>Create New Order</h1>
+            <h1 className='text-4xl text-blue-300 font-bold mb-2 text-center'>Create New Order</h1>
 
-            <div>
-                Order No : {order_number}
+            <div className='text-green-700 font-bold text-xl flex justify-center mb-2'>
+                Order No # {order_number}  
             </div>
 
             <form> 
@@ -152,7 +152,7 @@ export default function Create_Order() {
                     </div>
                 </div>
 
-                <div>
+                <div className="flex justify-center">
                     <div className='hover:cursor-pointer bg-blue-500 text-white py-2 px-4 
                         rounded hover:bg-green-600 hover:scale-105 transition-transform duration-300 ' onClick={() =>
                         set_confirmation_model({
