@@ -2,6 +2,7 @@ import React from 'react'
 import { make_ready_to_collect } from '../../../Services/Service_Functions/laundry';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import convert_date from '../../../Utility/dateConvertor';
 
 export default function UnderWashingCard({data, set_confirmation_model, set_loading}) {
 
@@ -25,7 +26,7 @@ export default function UnderWashingCard({data, set_confirmation_model, set_load
             user name : {data.user_name}
         </div>
         <div>
-            date : {data.created_at}
+            date : {convert_date(data.created_at)}
         </div>
         <div>
             total washing clothes : {data.total_washing}

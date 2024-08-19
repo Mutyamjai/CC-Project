@@ -19,4 +19,5 @@ export const laundry = {
     FETCH_STUDENT_COMPLETED_ORDERS : BASE_URL + "/laundry/fetch_student_completed_orders",
     PAID_IN_CASH : BASE_URL + "/laundry/paid_in_cash",
     PAID_IN_ONLINE : BASE_URL + "/laundry/paid_in_online",
+    FETCH_ORDER_DETAILS : BASE_URL + "/laundry/fetch_order_details"
 }

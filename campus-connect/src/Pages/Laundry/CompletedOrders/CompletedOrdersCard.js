@@ -1,4 +1,5 @@
 import React from 'react'
+import convert_date from '../../../Utility/dateConvertor'
 
 export default function CompletedOrdersCard({data}) {
   
@@ -11,7 +12,7 @@ return (
             user name : {data.user_name}
         </div>
         <div>
-            date : {data.created_at}
+            date : {convert_date(data.created_at)}
         </div>
         <div>
             total pieces : {data.total_pieces}

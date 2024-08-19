@@ -248,4 +248,27 @@ export async function paid_in_online(order_id, token, navigate){
     }
 }
 
+export async function view_order_details( order_id , token){
+    let result;
+    try{
+        const response = await api_connector("POST", laundry.FETCH_ORDER_DETAILS, { order_id: order_id} ,{Authorization: `Bearer ${token}`} );
+
+        if(!response.data.success)
+            throw new Error(response.data.message);
+
+        
+         result = response.data.order_details
+    }
+    catch(error){
+        console.log(error);
+
+        if(error.response.data?.message)
+            toast.error(error.response.data.message);
+        else
+            toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
+    }
+    finally{
+        return result;
+    }
+}
 
