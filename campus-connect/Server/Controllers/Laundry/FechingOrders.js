@@ -5,8 +5,9 @@ exports.fetch_under_washing_orders = async (req, res) => {
 
         const laundry_account_id = req.body.laundry_account;
 
-        const under_washing_orders = await Laundry_account.findById({laundry_account_id}).populate("under_washing").exec();
-        
+        const laundry_account = await Laundry_account.findById(laundry_account_id).populate("under_washing").exec();
+        const under_washing_orders = laundry_account.under_washing;
+
         return res.status(200).json({
             success: true,
             under_washing_orders: under_washing_orders,
@@ -27,8 +28,10 @@ exports.fetch_ready_to_collect_orders = async (req, res) => {
     try{
 
         const laundry_account_id = req.body.laundry_account;
-        const ready_to_collect_orders = await Laundry_account.findById({laundry_account_id}).populate("ready_to_collect").exec();
         
+        const laundry_account = await Laundry_account.findById(laundry_account_id).populate("ready_to_collect").exec();
+        const ready_to_collect_orders = laundry_account.ready_to_collect;
+
         return res.status(200).json({
             success: true,
             ready_to_collect_orders: ready_to_collect_orders,
@@ -49,7 +52,8 @@ exports.fetch_completed_orders = async (req, res) => {
     try{
 
         const laundry_account_id = req.body.laundry_account;
-        const completed_orders = await Laundry_account.findById({laundry_account_id}).populate("completed_orders").exec();
+        const laundry_account = await Laundry_account.findById(laundry_account_id).populate("completed_orders").exec();
+        const completed_orders = laundry_account.completed_orders;
         
         return res.status(200).json({
             success: true,

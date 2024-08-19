@@ -41,7 +41,7 @@ export default function Create_Order() {
         set_loading(true);
         const details = {
             user_name: data.user_name,
-            order_number: 0,
+            order_number: order_number,
             washing: StringtoNumber(washing_data),
             iron: StringtoNumber(iron_data),
             dry_cleaning: StringtoNumber(dry_cleaning_data),

@@ -9,5 +9,8 @@ export const auth = {
 }
 export const laundry = {
     CREATE_ORDER : BASE_URL + '/laundry/create_order',
-    FETCH_ORDER_NUMBER :  BASE_URL + '/laundry/fetch_order_number'
+    FETCH_ORDER_NUMBER :  BASE_URL + '/laundry/fetch_order_number',
+    FETCH_UNDER_WASHING_ORDERS : BASE_URL + '/laundry/fetch_under_washing_orders',
+    FETCH_READY_TO_COLLECT_ORDERS : BASE_URL + '/laundry/fetch_ready_to_collect_orders',
+    FETCH_COMPLETED_ORDERS : BASE_URL + '/laundry/fetch_completed_orders'
 }

@@ -22,6 +22,7 @@ export async function create_laundry_order(details, token,navigate){
             toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
     }
 }
+
 export async function fetch_order_number(token ,navigate){
     let result = -1;
     try{
@@ -47,3 +48,76 @@ export async function fetch_order_number(token ,navigate){
         return result;
     }
 }
+
+export async function fetch_under_washing_orders(laundry_account, token){
+    let result;
+    try{
+        const response = await api_connector("POST", laundry.FETCH_UNDER_WASHING_ORDERS,{laundry_account: laundry_account} ,{Authorization: `Bearer ${token}`} );
+
+        if(!response.data.success)
+            throw new Error(response.data.message);
+
+        toast.success(response.data.message);
+        result = response.data.under_washing_orders;
+    }
+    catch(error){
+        console.log(error);
+
+        if(error.response.data)
+            toast.error(error.response.data.message);
+        else
+            toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
+    }
+    finally{
+        return result;
+    }
+}
+
+export async function fetch_ready_to_collect_orders(laundry_account, token){
+    let result;
+    try{
+        const response = await api_connector("POST", laundry.FETCH_READY_TO_COLLECT_ORDERS,{laundry_account: laundry_account} ,{Authorization: `Bearer ${token}`} );
+
+        if(!response.data.success)
+            throw new Error(response.data.message);
+
+        toast.success(response.data.message);
+        result = response.data.ready_to_collect_orders;
+    }
+    catch(error){
+        console.log(error);
+
+        if(error.response.data)
+            toast.error(error.response.data.message);
+        else
+            toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
+    }
+    finally{
+        return result;
+    }
+}
+
+export async function fetch_completed_orders(laundry_account, token){
+    let result;
+    try{
+        const response = await api_connector("POST", laundry.FETCH_COMPLETED_ORDERS, {laundry_account: laundry_account} ,{Authorization: `Bearer ${token}`} );
+
+        if(!response.data.success)
+            throw new Error(response.data.message);
+
+        toast.success(response.data.message);
+        result = response.data.completed_orders;
+    }
+    catch(error){
+        console.log(error);
+
+        if(error.response.data)
+            toast.error(error.response.data.message);
+        else
+            toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
+    }
+    finally{
+        return result;
+    }
+}
+

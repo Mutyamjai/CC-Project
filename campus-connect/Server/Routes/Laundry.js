@@ -9,8 +9,8 @@ const {fetch_under_washing_orders, fetch_ready_to_collect_orders, fetch_complete
 router.post("/create_order",auth, is_laundry, create_order);
 router.get("/fetch_order_number",auth, is_laundry, fetch_order_number);
 
-router.get("/fetch_under_washing_orders",auth, is_laundry, fetch_under_washing_orders);
-router.get("/fetch_ready_to_collect_orders",auth, fetch_ready_to_collect_orders);
-router.get("/fetch_completed_orders",auth, is_laundry, fetch_completed_orders);
+router.post("/fetch_under_washing_orders",auth, is_laundry, fetch_under_washing_orders);
+router.post("/fetch_ready_to_collect_orders",auth, fetch_ready_to_collect_orders);
+router.post("/fetch_completed_orders",auth, is_laundry, fetch_completed_orders);
 
 module.exports = router;
