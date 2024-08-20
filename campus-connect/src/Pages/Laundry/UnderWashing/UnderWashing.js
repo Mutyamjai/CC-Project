@@ -39,44 +39,50 @@ export default function OrderStatus() {
         return(<Spinner/>)
     }
     return (
-        <div>
-            <form onSubmit={handleSubmit(on_submit)}>
-                <input type = 'number' placeholder='Search'
-                {...register('order_number',{required:true})}></input>
-                <button type='submit'>search</button>
-                {
-                    errors.order_number && (<p>Order Number can not be empty</p>)
-                }
-            </form>
-            <h1>Searched Order</h1>
-            {
-                searched_order && (
-                    <div>
-                        <UnderWashingCard data={searched_order} set_confirmation_model={set_confirmation_model}
-                            set_loading={set_loading}
-                        />
+        <div className="bg-black bg-opacity-90 min-h-screen p-8 overflow-x-hidden w-full">
+                    <div className="w-full mb-8 flex justify-center">
+                    <form onSubmit={handleSubmit(on_submit)}>
+                        <input type = 'number' placeholder='Search By Order No'
+                        {...register('order_number',{required:true})}
+                        className="bg-gray-800 text-white py-4 px-6 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                         </input>
+                        <button type='submit' className="bg-blue-500 text-white ml-5 py-4 px-6 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Search</button>
+                        {
+                            errors.order_number && (<p className="text-red-500 mt-2">Order Number is Required</p>)
+                        }  
+                    </form>
                     </div>
-                )
-            }
-            {
-                searched_order === undefined && (
-                    <div>
-                        Order Number not found
+                    <h1 className='text-blue-300 font-bold text-center mb-3 text-2xl'>Searched Order</h1>
+                    {
+                        searched_order && (
+                            <div className="mb-8 flex justify-center">
+                                <UnderWashingCard data={searched_order} set_confirmation_model={set_confirmation_model}
+                                    set_loading={set_loading}
+                                />
+                            </div>
+                        )
+                    }
+                    {
+                        searched_order === undefined && (
+                            <div className="mb-8 text-center text-xl font-bold mt-4 text-white" >
+                                ORDER NOT FOUND !!
+                            </div>
+                        )
+                    }
+
+                    <h1 className="text-blue-300 font-bold text-center mb-5 text-2xl"> UNDER WASHING ORDERS</h1>
+                    <div className={`grid ${details.length > 1 ? 'grid-cols-1 md:grid-cols-2' : 'flex justify-center'}`}>
+                    {
+                        details.map((item, index) => (
+                            <UnderWashingCard key={index} data={item} set_confirmation_model={set_confirmation_model}
+                                    set_loading={set_loading}/>
+                        ))
+                    }
                     </div>
-                )
-            }
 
-            <h1>All under washing orders</h1>
-            {
-                details.map((item, index) => (
-                    <UnderWashingCard key={index} data={item} set_confirmation_model={set_confirmation_model}
-                            set_loading={set_loading}/>
-                ))
-            }
-
-            {
-                confirmation_model && <ConfirmationModel confirmation_model={confirmation_model}/>
-            }
+                    {
+                        confirmation_model && <ConfirmationModel confirmation_model={confirmation_model}/>
+                    }
         </div>
     )
 }
