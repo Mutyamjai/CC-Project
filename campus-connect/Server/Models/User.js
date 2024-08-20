@@ -23,7 +23,7 @@ const user_schema = new mongoose.Schema({
     account_type: {
         type: String,
         required: true,
-        enum: ["Student", "Laundry"]
+        enum: ["Student", "Laundry", "Cycle_admin"]
     },
     token: {
         type: String,
