@@ -22,9 +22,11 @@ db_connect();
 
 const user_routes = require("./Routes/User");
 const laundry_routes = require("./Routes/Laundry");
+const cycle_routes = require("./Routes/Bicycle");
 
 app.use("/api/v1/auth", user_routes);
 app.use("/api/v1/laundry", laundry_routes);
+app.use("/api/v1/cycle", cycle_routes);
 
 app.get("/", (req, res) => {
     res.json({
