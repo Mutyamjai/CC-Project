@@ -25,8 +25,8 @@ export default function ManageBooking() {
         set_loading(false);
     }
     useEffect(() => {
-
-    })
+        
+    },[])
     return (
         <div>
             <div>
@@ -46,6 +46,17 @@ export default function ManageBooking() {
                     })
                     
                 }}>Add cycle</button>
+            </div>
+
+            <div>
+
+                <div>
+                    Search Cycle
+                </div>
+
+                <div>
+                    <h1>ALL CYCLES DETAILS</h1>
+                </div>
             </div>
             
             {

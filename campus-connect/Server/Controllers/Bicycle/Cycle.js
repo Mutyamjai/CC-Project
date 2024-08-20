@@ -116,3 +116,25 @@ exports.update_cycle_status_to_repair = async (req, res) => {
         })
     }
 }
+
+exports.get_cycles_details = async (req, res) => {
+
+    try {
+
+        const cycle_details = await Cycle.find();
+
+        return res.status(200).json({
+            success: true,
+            cycle_details: cycle_details,
+            message: `CYCLE DETAILS FETCHED SUCCESFULLY.`,
+        })
+        
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            details: error.message,
+            message: "ERROR OCCURED WHILE FETCHING ALL CYCLES DETAILS.",
+        })
+    }
+}
+

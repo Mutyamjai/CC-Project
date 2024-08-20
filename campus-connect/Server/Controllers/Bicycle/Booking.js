@@ -138,3 +138,34 @@ exports.collect_booking = async (req, res) => {
         })
     }
 }
+
+exports.get_today_booking_details = async (req, res) => {
+
+    try {
+        const data = req.body;
+        const booking_details = await Booking.find({date: data.date});
+
+        return res.status(200).json({
+            success: true,
+            booking_details: booking_details,
+            message: `BOOKING DETAILS FETCHED SUCCESFULLY.`,
+        })
+        
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            details: error.message,
+            message: "ERROR OCCURED WHILE FETCHING BOOKING DETAILS.",
+        })
+    }
+}
+
+exports.get_details = async (req, res) => {
+
+    try{
+
+    }
+    catch(error){
+        
+    }
+}
