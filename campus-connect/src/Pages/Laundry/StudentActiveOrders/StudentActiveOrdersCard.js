@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { paid_in_cash, paid_in_online } from '../../../Services/Service_Functions/laundry';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+import convert_date from '../../../Utility/dateConvertor';
+import ViewDetails from '../ViewDetails';
+import { Link } from 'react-router-dom';
 export default function StudentActiveOrdersCard({data, set_confirmation_model, set_loading}) {
     const navigate = useNavigate();
     const{token} = useSelector((state)=>state.auth);
@@ -19,10 +21,11 @@ export default function StudentActiveOrdersCard({data, set_confirmation_model, s
         set_confirmation_model(null);
         set_loading(false);
     }
+    
   return (
-        <div>
+        <div onClick={() => navigate(`/Laundry/View_Details/${data._id}`)} className="hover:cursor-pointer">
             <div>{data.order_number}</div>
-            <div>{data.created_at}</div>
+            <div>{convert_date(data.created_at)}</div>
             <div>{data.total_pieces}</div>
             <div>{data.total_price}</div>
             {
