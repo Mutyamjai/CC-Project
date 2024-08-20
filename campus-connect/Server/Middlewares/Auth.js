@@ -84,7 +84,6 @@ exports.is_cycle_admin = async(req, res, next) => {
                 message: "THIS IS A PROTECTED ROUTE FOR CYCLE ADMIN ONLY"
             })
         }
-
         next();
     }
     catch(error){

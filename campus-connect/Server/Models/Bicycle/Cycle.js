@@ -7,7 +7,6 @@ const cycle_schema=mongoose.Schema({
     },
     cycle_number : {
         type : Number,
-        required : true,
     },
     status:{
         type : String,

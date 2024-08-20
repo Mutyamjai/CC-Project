@@ -3,8 +3,8 @@ const Booking = require("../../Models/Bicycle/Booking");
 
 exports.add_cycle = async (req, res) => {
     try{
-        
-        const {id} = req.body.id;
+
+        const id = req.body.id;
 
         const cycle_exist = await Cycle.findOne({id : id});
 

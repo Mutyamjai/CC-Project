@@ -21,3 +21,6 @@ export const laundry = {
     PAID_IN_ONLINE : BASE_URL + "/laundry/paid_in_online",
     FETCH_ORDER_DETAILS : BASE_URL + "/laundry/fetch_order_details"
 }
+export const cycle = {
+    ADD_CYCLE : BASE_URL + "/cycle/add_cycle",
+}
