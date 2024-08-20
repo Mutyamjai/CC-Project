@@ -57,7 +57,13 @@ function App() {
           )
         }
           <Route path='/Laundry/View_Details/:id' element=<ViewDetails/>/>
-
+        {
+          user_details?.account_type === "Cycle_admin" && (
+            <>
+            <Route path = '/Cycle/Cycles_Booking' element=<StudentActiveOrders/>/>
+            </>
+          ) 
+        }
         </Route>
         
 

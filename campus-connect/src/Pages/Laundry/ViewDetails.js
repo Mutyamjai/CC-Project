@@ -31,7 +31,7 @@ export default function ViewDetails() {
                 <h1>Order Details</h1>
                     <div>{details.user_name}</div>
                     <div>{details.order_number}</div>
-                    <div>{details.created_at}</div>
+                    <div>{convert_date(details.created_at)}</div>
                     <div>{details.user_name}</div>
                     <div>{details.user_name}</div>
                     <div>{details.user_name}</div>

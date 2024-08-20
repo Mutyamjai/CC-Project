@@ -77,7 +77,7 @@ export default function Signup()
                             <option value="Student">Student</option>
                             <option value="Laundry">Dhobi</option>
                             <option value="Saloon">Saloon</option>
-                            <option value="Cycle">Cycle</option>
+                            <option value="Cycle_admin">Cycle</option>
                             <option value="Magaram">Magaram</option>
                         </select>
                     </div>
