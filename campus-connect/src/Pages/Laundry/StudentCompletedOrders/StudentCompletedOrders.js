@@ -29,20 +29,29 @@ export default function StudentCompletedOrders() {
       return <Spinner/>
     }
     return (
-          <div>
-              <h1>All Completed Orders</h1>
-              { 
-                  details.map((item,index) =>(
-                      
-                      <StudentCompletedOrdersCard data={item} key={index} />
-                  ))
-              }
-              <div>hello</div>
-              {
-                  details.length === 0 && (
-                      <p>No Completed Orders are there</p>
-                  )
-              }
-          </div>
-    )
+        <div className="bg-black bg-opacity-90 min-h-screen p-8 w-full">
+            <h1 className="text-blue-300 font-bold text-center text-2xl mb-8">
+                All Completed Orders
+            </h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {details.length > 0 ? (
+                    
+                    details.map((item, index) => (
+                       <div className="w-full md:w-5/6 mx-auto p-4  text-white rounded-lg">
+                        <StudentCompletedOrdersCard data={item} key={index} 
+                            
+                        />
+                       </div> 
+                         
+                    )
+                    )
+                    
+                ) : (
+                    <div className="text-center text-xl font-bold text-white col-span-full">
+                        No Completed Orders are there
+                    </div>
+                )}
+            </div>
+        </div>
+    );
 }

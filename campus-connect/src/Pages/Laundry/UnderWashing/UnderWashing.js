@@ -46,13 +46,13 @@ export default function OrderStatus() {
                         {...register('order_number',{required:true})}
                         className="bg-gray-800 text-white py-4 px-6 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                          </input>
-                        <button type='submit' className="bg-blue-500 text-white ml-5 py-4 px-6 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Search</button>
+                        <button type='submit' className="bg-blue-500 text-white ml-5 py-4 px-6 rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500">Search</button>
                         {
                             errors.order_number && (<p className="text-red-500 mt-2">Order Number is Required</p>)
                         }  
                     </form>
                     </div>
-                    <h1 className='text-blue-300 font-bold text-center mb-3 text-2xl'>Searched Order</h1>
+                    <h1 className='text-blue-300 font-bold text-center mb-3 text-2xl'>SEARCHED ORDER</h1>
                     {
                         searched_order && (
                             <div className="mb-8 flex justify-center">
@@ -69,7 +69,8 @@ export default function OrderStatus() {
                             </div>
                         )
                     }
-
+                    
+                    <div className="border-b border-blue-600 mb-5"></div>
                     <h1 className="text-blue-300 font-bold text-center mb-5 text-2xl"> UNDER WASHING ORDERS</h1>
                     <div className={`grid ${details.length > 1 ? 'grid-cols-1 md:grid-cols-2' : 'flex justify-center'}`}>
                     {
@@ -77,6 +78,14 @@ export default function OrderStatus() {
                             <UnderWashingCard key={index} data={item} set_confirmation_model={set_confirmation_model}
                                     set_loading={set_loading}/>
                         ))
+                    }   
+                    </div>
+
+                    <div className='flex justify-center'>
+                    {
+                        details.length === 0 && (
+                            <p className=' text-white text-xl font-bold'>NO ORDERS ARE UNDER WASHING STAGE !!</p>
+                        )
                     }
                     </div>
 

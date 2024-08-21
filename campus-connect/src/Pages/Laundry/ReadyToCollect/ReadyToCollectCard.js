@@ -18,48 +18,54 @@ export default function ReadyToCollectCard({data, set_confirmation_model, set_lo
         set_loading(false);
     }
     return (
-        <div onClick={() => navigate(`/Laundry/View_Details/${data._id}`)} className="hover:cursor-pointer">
-            <div>
-                order no : {data.order_number}
-            </div>
-            <div>
-                user name : {data.user_name}
-            </div>
-            <div>
-                date : {convert_date(data.created_at)}
-            </div>
-            <div>
-                total pieces : {data.total_pieces}
-            </div>
-            <div>
-                total cost : {data.total_price}
-            </div>
-
-           
-            {
-                data.status === "Ready_to_collect" && (
-                    <div>Payment pending!!!</div>
-                )
-            }
-            {
-                data.status === 'Payment_done' && (
-                    <div>
-                        <div>Payment done through {data.paid_in}</div>
-                        <button
-                            onClick={() => {
-                                set_confirmation_model({
-                                    data_1: "Confirm Payment???",
-                                    btn1_text: "Confirm",
-                                    btn2_text: "Cancel",
-                                    btn1_fun: () => on_submit(),
-                                    btn2_fun: () => set_confirmation_model(null)
-                                })
-                            }}
-                        >Confirm Payment</button>
+        <div className='bg-gray-800 px-10 py-8 w-full border border-blue-700 rounded-lg max-w-md mx-auto flex flex-col mb-10 hover:shadow-lg hover:shadow-blue-300' >
+             <div className='mb-4'>
+                <div onClick={() => navigate(`/Laundry/View_Details/${data._id}`)} className="hover:cursor-pointer">
+                    <div className=' text-2xl font-bold mb-2 text-white'>
+                    Order No # {data.order_number}
                     </div>
-                )
-            }
-            
-        </div>
+                    <div className='flex justify-between text-lg font-medium text-white mb-2'>
+                    Username : <span className='font-normal'>{data.user_name}</span>
+                    </div>
+                    <div className='flex justify-between text-lg font-medium text-white mb-2'>
+                    Date : <span className='font-normal'>{convert_date(data.created_at)}</span>
+                    </div>
+                    <div className='flex justify-between text-lg font-medium text-white mb-2'>
+                    Total Pieces :  <span className='font-normal'>{data.total_pieces}</span>
+                    </div>
+                    <div className='flex justify-between text-lg font-medium text-white mb-2'>
+                    Total Cost : <span className='font-normal'>{data.total_price}</span>
+                    </div>
+                </div>
+                <div className='flex justify-center'>
+                    {
+                        data.status === "Ready_to_collect" && (
+                            <div className='text-blue-300 text-xl font-bold mt-8'>Payment Pending!!!</div>
+                        )
+                    }
+                </div>    
+                    {
+                        data.status === 'Payment_done' && 
+                        (
+                            <div className='mt-8 text-center'>
+                                <div className='text-white font-semibold mb-2 '>Payment done through {data.paid_in}</div>
+                                <button
+                                    onClick={() => {
+                                        set_confirmation_model({
+                                            data_1: "Confirm Payment???",
+                                            btn1_text: "Confirm",
+                                            btn2_text: "Cancel",
+                                            btn1_fun: () => on_submit(),
+                                            btn2_fun: () => set_confirmation_model(null)
+                                        })
+                                    }}
+                            className='bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 '>Confirm Payment</button>
+                            </div>
+                        )
+                    }
+                    
+                    
+                </div>
+        </div>    
   )
 }

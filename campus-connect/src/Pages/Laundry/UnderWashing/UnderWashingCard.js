@@ -47,7 +47,7 @@ export default function UnderWashingCard({data, set_confirmation_model, set_load
                     <div className='flex justify-between text-lg font-medium text-white mb-2'>
                     Total Cost : <span className='font-normal'>{data.total_price}</span>
                     </div>
-
+            </div> 
                     <div className='mt-8 text-center'>
                     <button
                         onClick={() => {
@@ -63,7 +63,7 @@ export default function UnderWashingCard({data, set_confirmation_model, set_load
                         className='bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 '
                     >Ready To Collect</button>
                     </div>
-            </div>    
+               
         </div>        
     </div>
   )
