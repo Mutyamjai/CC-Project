@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { washingData } from '../../../Data/LaundryData';
 import { useForm } from 'react-hook-form';
 import LaundryInput from './LaundryInput';
@@ -6,9 +6,11 @@ import StringtoNumber from '../../../Utility/StringtoNumber';
 import calculateTotalPrice from '../../../Utility/priceCaluclator';
 import getTotalQuantity from '../../../Utility/quantityCounter';
 
-export default function Washing_form({set_x, set_washing_data, set_total, order_data,set_total_quantity}) {
 
-    const {register, handleSubmit, formState: {errors}} = useForm();
+export default function Washing_form({set_x, set_washing_data, set_total, order_data,set_total_quantity}) {
+   
+
+    const {register, handleSubmit} = useForm();
 
     const on_submit = async (data) => {
 
@@ -20,6 +22,7 @@ export default function Washing_form({set_x, set_washing_data, set_total, order_
         await set_total_quantity(totalQuantity);
         await set_x(false);
     }
+    
   return (
     <div className='absolute inset-0 z-60 bg-black bg-opacity-50 flex items-center justify-center'>
         <div className='bg-spotify-dark-gray border-2 border-blue-700 rounded-lg shadow-xl w-11/12 max-w-lg p-8 relative mt-8'>
@@ -38,7 +41,8 @@ export default function Washing_form({set_x, set_washing_data, set_total, order_
             {
                 
                     washingData.map((item, index) => (
-                        <LaundryInput key={index} register={register} item={item} initial={order_data ? order_data[item.name] : 0}/>
+                        <LaundryInput key={index} register={register} item={item} initial={order_data ? order_data[item.name] : 0} />
+                        
                     ))
                 
             }  

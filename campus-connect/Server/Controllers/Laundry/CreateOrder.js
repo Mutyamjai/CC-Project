@@ -24,11 +24,10 @@ exports.create_order = async (req, res) => {
         const washing = await Washing.create(details.washing);
         const dry_cleaning = await Dry_cleaning.create(details.dry_cleaning);
         const iron = await Iron.create(details.iron);
-        console.log(details);
+   
         details.washing = washing._id;
         details.dry_cleaning = dry_cleaning._id;
         details.iron = iron._id;
-        console.log(details);
 
         const created_order = await Laundry_Order.create(details);
 

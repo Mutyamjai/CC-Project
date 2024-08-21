@@ -75,16 +75,15 @@ exports.is_laundry = async(req, res, next) => {
     }
 }
 
-//VALIDATING WHETHER THE USER IS A ADMIN
-exports.is_admin = async(req, res, next) => {
+//VALIDATING WHETHER THE USER IS A CYCLE ADMIN
+exports.is_cycle_admin = async(req, res, next) => {
     try{
-        if(req.user.account_type !== "Admin"){
+        if(req.user.account_type !== "Cycle_admin"){
             return res.status(401).json({
                 success: true, 
-                message: "THIS IS A PROTECTED ROUTE FOR ADMIN ONLY"
+                message: "THIS IS A PROTECTED ROUTE FOR CYCLE ADMIN ONLY"
             })
         }
-
         next();
     }
     catch(error){

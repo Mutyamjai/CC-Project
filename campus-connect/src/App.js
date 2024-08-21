@@ -17,6 +17,11 @@ import CompletedOrders from './Pages/Laundry/CompletedOrders/CompletedOrders'
 import StudentActiveOrders from './Pages/Laundry/StudentActiveOrders/StudentActiveOrders'
 import StudentCompletedOrders from './Pages/Laundry/StudentCompletedOrders/StudentCompletedOrders'
 import ViewDetails from './Pages/Laundry/ViewDetails'
+import CycleBooking from './Pages/Cycles/CycleBooking/CycleBooking'
+import CyclesHome from './Pages/Cycles/CyclesHome'
+import ManageCycle from './Pages/Cycles/ManageCycles/ManageCycle'
+import ManageBooking from './Pages/Cycles/ManageBooking/ManageBooking'
+import MyBookings from './Pages/Cycles/MyBookings'
 
 function App() {
   const {user_details} = useSelector((state) => state.profile)
@@ -44,7 +49,7 @@ function App() {
                   <Route path = '/Laundry/Under_Washing' element=<OrderStatus/>/>
                   <Route path = '/Laundry/Ready_to_Collect' element=<ReadyToCollect/>/>
                   <Route path = '/Laundry/Completed_Orders' element=<CompletedOrders/>/>
-
+                  
               </>
           )
         }
@@ -53,13 +58,36 @@ function App() {
               <>
               <Route path = '/Laundry/Student_Active_Orders' element=<StudentActiveOrders/>/>
               <Route path = '/Laundry/Student_Completed_Orders' element=<StudentCompletedOrders/>/>
+              
               </>
           )
         }
           <Route path='/Laundry/View_Details/:id' element=<ViewDetails/>/>
-
-        </Route>
         
+        </Route>
+        <Route element = {
+            <ProtectedRoute>
+                <CyclesHome/>
+            </ProtectedRoute>
+        }>
+        {
+          user_details?.account_type === "Student" && (
+              <>
+                <Route path='/Cycle/Cycle_Booking' element=<CycleBooking/>/>
+                <Route path='/Cycle/My_Booking' element=<MyBookings/>/>
+              </>
+          )
+        }
+        {
+          user_details?.account_type === "Cycle_admin" && (
+            <>
+              <Route path='/Cycle/Manage_Cycle' element=<ManageCycle/>/>
+              <Route path='/Cycle/Manage_Booking' element=<ManageBooking/>/>
+              
+            </>
+          ) 
+        }
+        </Route>
 
       </Routes>
     </div>

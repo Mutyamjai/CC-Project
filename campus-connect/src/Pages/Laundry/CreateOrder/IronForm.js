@@ -6,8 +6,9 @@ import StringtoNumber from '../../../Utility/StringtoNumber';
 import calculateTotalPrice from '../../../Utility/priceCaluclator';
 import getTotalQuantity from '../../../Utility/quantityCounter';
 
-export default function Dry_Cleaning_form({set_xxx, set_iron_data, set_total, order_data,set_total_quantity}) {
 
+export default function Dry_Cleaning_form({set_xxx, set_iron_data, set_total, order_data,set_total_quantity}) {
+    
     const {register, handleSubmit} = useForm();
 
     const on_submit = async (data) => {
@@ -19,6 +20,7 @@ export default function Dry_Cleaning_form({set_xxx, set_iron_data, set_total, or
         await set_iron_data(data);
         await set_xxx(false);
     }
+    
   return (
     <div className='absolute inset-0 z-60 bg-black bg-opacity-50 flex items-center justify-center'>
         <div className='bg-spotify-dark-gray border-2 border-blue-700 rounded-lg shadow-xl w-11/12 max-w-lg p-8 relative mt-20'>
@@ -32,7 +34,7 @@ export default function Dry_Cleaning_form({set_xxx, set_iron_data, set_total, or
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-x-14 gap-y-4'>
             {
                 ironData.map((item, index) => (
-                    <LaundryInput key={index} register={register} item={item} initial={order_data ? order_data[item.name] : 0}/>
+                    <LaundryInput key={index} register={register} item={item} initial={order_data ? order_data[item.name] : 0} />
                 ))
             }
             </div>
