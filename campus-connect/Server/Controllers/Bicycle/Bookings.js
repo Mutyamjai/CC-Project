@@ -36,9 +36,8 @@ async function find_intersection_bookings(start_time, end_time, date) {
 exports.find_available_cycle = async (req , res) => {
 
     try{
-        const data = req.body;
-        
-        const existing_booking = await Booking.findOne({user_name : user_name});
+        const data = req.body.details;
+        const existing_booking = await Booking.findOne({user_name : data.user_name});
 
         if(existing_booking){
             return res.status(400).json({
@@ -52,11 +51,11 @@ exports.find_available_cycle = async (req , res) => {
 
         const intersecting_bookings = await find_intersection_bookings(data.start_time, data.end_time, data.date);
         const booked_cycles_id = intersecting_bookings.map(booking => booking._id);
-
         const available_cycle_id = working_cycles_id.find(cycle_id => !booked_cycles_id.includes(cycle_id.toString()));
 
         if(available_cycle_id){
-            const cycle = await Cycle.findById(available_cycle_id._id);
+            
+            const cycle = await Cycle.findById(available_cycle_id);
 
             const new_booking_details = {
                 user_name: data.user_name,
@@ -65,17 +64,15 @@ exports.find_available_cycle = async (req , res) => {
                 start_time: data.start_time,
                 end_time: data.end_time,
                 date: data.date,
-                cycle_id: cycle.id,
+                cycle_id: cycle._id,
+                id: cycle.id,
                 status: "Not_issued"
             }
-
             const result = await Booking.create(new_booking_details);
-
             return res.status(200).json({
                 success: true,
                 message: "BOOKING SUCCESSFUL",
             })
-
         }
         else{
             return res.status(400).json({
@@ -96,16 +93,18 @@ exports.find_available_cycle = async (req , res) => {
 exports.issue_booking = async (req, res) => {
     try{
         const data = req.body;
-
-        await Booking.findByIdAndUpdate(
-            data._id,
+        console.log(data);
+        const change = await Booking.findByIdAndUpdate(
+            data.id,
             {
-                status: "Not_issued"
-            }
+                status: "Issued"
+            },
+            {new: true}
         )
-        
+        console.log(change);
         return res.status(200).json({
             success: true,
+            updated_booking: change,
             message: "CYCLE ISSUED SUCCESSFULLY.",
         })
     }
@@ -122,7 +121,7 @@ exports.issue_booking = async (req, res) => {
 exports.collect_booking = async (req, res) => {
     try{
         const data = req.body;
-        await Booking.findByIdAndDelete(data._id);
+        await Booking.findByIdAndDelete(data.id);
 
         return res.status(200).json({
             success: true,
@@ -143,7 +142,7 @@ exports.get_today_booking_details = async (req, res) => {
 
     try {
         const data = req.body;
-        const booking_details = await Booking.find({date: data.date});
+        const booking_details = await Booking.find({date: data.date}).sort({ start_time: 1 });
 
         return res.status(200).json({
             success: true,
@@ -160,12 +159,22 @@ exports.get_today_booking_details = async (req, res) => {
     }
 }
 
-exports.get_details = async (req, res) => {
+exports.get_student_booking_details = async (req, res) => {
 
-    try{
-
-    }
-    catch(error){
+    try {
+        const data = req.body;
+        const booking_details = await Booking.findOne({user_name: data.user_name});
+        return res.status(200).json({
+            success: true,
+            booking_details: booking_details,
+            message: `BOOKING DETAILS FETCHED SUCCESFULLY.`,
+        })
         
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            details: error.message,
+            message: "ERROR OCCURED WHILE FETCHING BOOKING DETAILS.",
+        })
     }
 }

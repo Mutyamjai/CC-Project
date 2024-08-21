@@ -1,3 +1,4 @@
+const { type } = require("@testing-library/user-event/dist/type");
 const mongoose = require("mongoose");
 
 const bookingSchema = mongoose.Schema({
@@ -28,6 +29,10 @@ const bookingSchema = mongoose.Schema({
     cycle_id: {
         type : mongoose.Schema.Types.ObjectId,
         required :true
+    },
+    id : {
+        type : String,
+        required : true,
     },
     status:{
         type:String,

@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import Spinner from '../../Components/Common/Spinner';
 import convert_date from '../../Utility/dateConvertor';
+import { washingData } from '../../Data/LaundryData';
 
 export default function ViewDetails() {
     const {id} = useParams();
@@ -35,6 +36,15 @@ export default function ViewDetails() {
                     <div>{details.user_name}</div>
                     <div>{details.user_name}</div>
                     <div>{details.user_name}</div>
+
+                    {/* {
+                        washingData.map((item) => (
+                            <div>
+                                {item.name}: {details.washing[item.name]}
+                            </div>
+                        ))
+                    } */}
+                    <div>{details.washing[washingData[0].name]}</div>
             </div>
     )
 }

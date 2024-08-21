@@ -23,4 +23,12 @@ export const laundry = {
 }
 export const cycle = {
     ADD_CYCLE : BASE_URL + "/cycle/add_cycle",
+    GET_CYCLE_DETAILS : BASE_URL + "/cycle/get_cycles_details",
+    UPDATE_CYCLE_STATUS_TO_REPAIR : BASE_URL + "/cycle/update_cycle_status_to_repair",
+    UPDATE_CYCLE_STATUS_TO_WORKING : BASE_URL + "/cycle/update_cycle_status_to_working",
+    FIND_AVAILABLE_CYCLE : BASE_URL + "/cycle/find_available_cycle",
+    GET_TODAY_BOOKING_DETAILS : BASE_URL + "/cycle/get_today_booking_details",
+    GET_STUDENT_BOOKING_DETAILS : BASE_URL + "/cycle/get_student_booking_details",
+    ISSUE_BOOKING : BASE_URL + "/cycle/issue_booking",
+    COLLECT_BOOKING : BASE_URL + "/cycle/collect_booking"
 }

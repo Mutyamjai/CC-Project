@@ -24,6 +24,7 @@ exports.add_cycle = async (req, res) => {
         
         return res.status(200).json({
             success: true,
+            new_cycle: new_cycle,
             message: `NEW CYCLE WITH CYCLE NUMBER ${new_cycle.cycle_number} IS ADDED.`,
         })
     }
@@ -49,13 +50,14 @@ exports.update_cycle_status_to_working = async (req, res) => {
         }
        
         const update_cycle = await Cycle.findOneAndUpdate(
-            {id : id},
+            {_id : id},
             {
                 status : "Under_working"
-            }
+            },
+            {new: true}
         );
 
-        if(update_cycle){
+        if(!update_cycle){
             return res.status(401).json({
                 success: false,
                 message: "INVALID CYCLE ID.",
@@ -64,6 +66,7 @@ exports.update_cycle_status_to_working = async (req, res) => {
         else{
             return res.status(200).json({
                 success: true,
+                updated_cycle: update_cycle,
                 message: `THE CYCLE STATUS IS UPDATED TO UNDER WORKING.`,
             })
         }
@@ -90,13 +93,16 @@ exports.update_cycle_status_to_repair = async (req, res) => {
         }
        
         const update_cycle = await Cycle.findOneAndUpdate(
-            {id : id},
+            {_id : id},
             {
                 status : "Under_repair"
-            }
+            }, 
+            {new: true}
         );
 
-        if(update_cycle){
+        console.log(update_cycle);
+
+        if(!update_cycle){
             return res.status(401).json({
                 success: false,
                 message: "INVALID CYCLE ID.",
@@ -105,6 +111,7 @@ exports.update_cycle_status_to_repair = async (req, res) => {
         else{
             return res.status(200).json({
                 success: true,
+                updated_cycle: update_cycle,
                 message: `THE CYCLE STATUS IS UPDATED TO UNDER REPAIRING.`,
             })
         }
