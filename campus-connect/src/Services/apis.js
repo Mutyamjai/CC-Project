@@ -32,3 +32,7 @@ export const cycle = {
     ISSUE_BOOKING : BASE_URL + "/cycle/issue_booking",
     COLLECT_BOOKING : BASE_URL + "/cycle/collect_booking"
 }
+
+export const canteen = {
+    CREATE_ITEM : BASE_URL + "/canteen/create_item",
+}
