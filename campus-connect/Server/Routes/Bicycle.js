@@ -10,7 +10,6 @@ router.post("/update_cycle_status_to_repair", auth, is_cycle_admin, update_cycle
 router.post("/update_cycle_status_to_working", auth, is_cycle_admin, update_cycle_status_to_working);
 router.post("/get_cycles_details", auth, is_cycle_admin, get_cycles_details);
 
-
 router.post("/find_available_cycle", auth, is_student, find_available_cycle);
 router.post("/issue_booking", auth, is_cycle_admin, issue_booking);
 router.post("/collect_booking", auth, is_cycle_admin, collect_booking);
