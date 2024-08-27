@@ -27,7 +27,7 @@ function App() {
   const {user_details} = useSelector((state) => state.profile)
   return (
     <div className="App">
-    <Navbar/>
+    <Navbar/> 
     <div className='h-[3.5rem] z-50 w-full'></div>
       <Routes>
         <Route path = '/' element = {<Home/>}/>
