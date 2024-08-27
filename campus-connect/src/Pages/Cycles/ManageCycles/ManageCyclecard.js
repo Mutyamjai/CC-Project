@@ -19,25 +19,28 @@ export default function ManageCyclecard({data, set_confirmation_model, change_st
         })
     }
   return (
-    <div>
-        <div>Cycle Id : {data.id}</div>
-        <div>Cycle No : {data.cycle_number}</div>
-        <div>
+    <div className='bg-gray-800 px-10 py-8 w-full border border-blue-700 rounded-lg max-w-md mx-auto flex flex-col mb-10 hover:shadow-lg hover:shadow-blue-300'>
+        <div className=' text-2xl font-bold mb-2 text-white'>Cycle Id : {data.id}</div>
+        <div className='flex justify-between text-lg font-medium text-white mb-2'>Cycle No : {data.cycle_number}</div>
+        <div className='flex justify-between text-lg font-medium text-white mb-2'>
             Cycle status : {data.status}
         </div>
-
+        <div className='flex justify-center'>
         {
             data.status === "Under_working" && 
-            <button onClick={handle_click}> 
+            <button onClick={handle_click} className='bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 '> 
                 Change state to under repair
             </button>
         }
+        </div>
+        <div className='flex justify-center'>
         {
             data.status === "Under_repair" && 
-            <button onClick={handle_click}>
-                change state to under working
+            <button onClick={handle_click} className='bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 '>
+                Change state to under working
             </button>
         }
+        </div>
     </div>
   )
 }

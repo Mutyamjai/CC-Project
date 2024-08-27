@@ -94,3 +94,23 @@ exports.is_cycle_admin = async(req, res, next) => {
         })
     }
 }
+
+exports.is_canteen_admin = async(req, res, next) => {
+    try{
+        if(req.user.account_type !== "Canteen_admin"){
+            return res.status(401).json({
+                success: true, 
+                message: "THIS IS A PROTECTED ROUTE FOR CANTEEN ADMIN ONLY"
+            })
+        }
+
+        next();
+    }
+    catch(error){
+        return res.status(500).json({
+            success: true,
+            details: error.message,
+            message: "ERROR OCCURED WHILE VALIDATING THE ROLE OF THE USER"
+        })
+    }
+}

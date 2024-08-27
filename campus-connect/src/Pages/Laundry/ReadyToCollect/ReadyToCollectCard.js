@@ -21,7 +21,7 @@ export default function ReadyToCollectCard({data, set_confirmation_model, set_lo
         <div className='bg-gray-800 px-10 py-8 w-full border border-blue-700 rounded-lg max-w-md mx-auto flex flex-col mb-10 hover:shadow-lg hover:shadow-blue-300' >
              <div className='mb-4'>
                 <div onClick={() => navigate(`/Laundry/View_Details/${data._id}`)} className="hover:cursor-pointer">
-                    <div className=' text-2xl font-bold mb-2 text-white'>
+                    <div c >
                     Order No # {data.order_number}
                     </div>
                     <div className='flex justify-between text-lg font-medium text-white mb-2'>

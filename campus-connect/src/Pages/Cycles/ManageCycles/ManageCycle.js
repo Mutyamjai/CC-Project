@@ -93,13 +93,14 @@ export default function ManageCycle() {
     }
 
     return (
-        <div>
-            <div>
-                <h1>Add a Bicycle</h1>
-                <label>Cycle Id:</label>
-                <input type='text' placeholder='Enter Company Name' 
-                {...register("id", {required : true})} ></input>
-                {errors.id && (<p className='text-red-600'>Company Name is Required</p>)}
+        <div className="bg-black bg-opacity-90 min-h-screen p-8 overflow-x-hidden w-full">
+            <div className="w-full mb-8 flex justify-center">
+                <h1 className='text-blue-300 font-bold text-center flex items-center justify-center ml-10 text-2xl'>Add a Bicycle</h1>
+                
+                <label className='text-blue-300 font-bold ml-3 mr-3 text-2xl flex justify-center items-center'>Cycle Id:</label>
+                <input type='text' placeholder='Enter Cycle Id' 
+                {...register("id", {required : true})} className="bg-gray-800 text-white py-4 px-6 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></input>
+                {errors.id && (<p className="text-red-500 mt-2">Company Name is Required</p>)}
 
                 <button onClick={() => {
                     set_confirmation_model({
@@ -110,24 +111,24 @@ export default function ManageCycle() {
                         btn2_fun: () => set_confirmation_model(null)
                     })
                     
-                }}>Add cycle</button>
+                }} className="bg-blue-500 text-white ml-5 py-4 px-6 rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500">Add cycle</button>
             </div>
 
             <div>
 
                 <div>
-                    <div >
+                    <div className='flex items-center justify-center mb-5' >
                     <input type = 'text' placeholder='Search'
-                    {...register('id1',{required:true})}></input>
-                    <button onClick={on_submit}>search</button>
+                    {...register('id1',{required:true})} className="bg-gray-800 text-white py-4 px-6 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></input>
+                    <button onClick={on_submit} className="bg-blue-500 text-white ml-5 py-4 px-6 rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500">search</button>
                     {
-                        errors.order_number && (<p>Order Number can not be empty</p>)
+                        errors.order_number && (<p className="text-red-500 mt-2">Order Number can not be empty</p>)
                     }
                     </div>   
-                    <h1>Searched Order</h1>
+                    <h1 className='text-blue-300 font-bold text-center mb-3 text-2xl'>Searched Order</h1>
                     {
                         searched_order && (
-                            <div>
+                            <div className="mb-8 flex justify-center">
                                 <ManageCyclecard data={searched_order} set_confirmation_model={set_confirmation_model}
                                 change_status_to_under_repair_button={change_status_to_under_repair_button}
                                 change_status_to_under_working_button={change_status_to_under_working_button}
@@ -138,18 +139,17 @@ export default function ManageCycle() {
                     }
                     {
                         searched_order === undefined && (
-                            <div>
+                            <div className="mb-8 text-center text-xl font-bold mt-4 text-white">
                                 Order Number not found
                             </div>
                         )
                     } 
                 
                 </div>
+                <div className="border-b border-blue-600 mb-5"></div>
+                    <h1 className="text-blue-300 font-bold text-center mb-5 text-2xl">ALL CYCLES DETAILS</h1>
 
-                <div>
-                    <h1>ALL CYCLES DETAILS</h1>
-
-                    <div>
+                    <div className={`grid ${details.length > 1 ? 'grid-cols-1 md:grid-cols-2' : 'flex justify-center'}`}>
                         {
                             details.map((item, index) => (
                                 <ManageCyclecard key={index} data={item} set_confirmation_model={set_confirmation_model}
@@ -161,12 +161,12 @@ export default function ManageCycle() {
 
                         {
                             details.length === 0 && (
-                                <p>No cycles are present</p>
+                                <p className=' text-white text-xl font-bold'>No cycles are present</p>
                             )
                         }
                     </div>
 
-                </div>
+               \
             </div>
             
             {
