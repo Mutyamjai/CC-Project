@@ -1,10 +1,10 @@
 import { api_connector } from "../apiConnector";
 import { canteen } from "../apis";
-
-export async function create_item(item_name, category, token){
+import toast from "react-hot-toast";
+export async function create_item(item_name, category, price, token){
 
     try{
-        const response = await api_connector("POST", canteen.CREATE_ITEM, {item_name: item_name, category: category},{Authorization: `Bearer ${token}`} );
+        const response = await api_connector("POST", canteen.CREATE_ITEM, {item_name: item_name, category: category, price:price},{Authorization: `Bearer ${token}`} );
 
         if(!response.data.success)
             throw new Error(response.data.message);

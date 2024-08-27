@@ -4,7 +4,7 @@ exports.create_item = async (req, res) => {
 
     try{
 
-        const {item_name, category} = req.body;
+        const {item_name, category,price} = req.body;
 
         const old_item = await Item.findOne({item_name: item_name});
 
@@ -17,7 +17,8 @@ exports.create_item = async (req, res) => {
 
         const new_item = await Item.create({
             item_name: item_name,
-            category: category
+            category: category,
+            price: price
         });
 
         return res.status(200).json({
