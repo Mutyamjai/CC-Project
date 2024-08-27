@@ -29,26 +29,34 @@ export default function StudentActiveOrders() {
         return <Spinner/>
     }
   return (
-        <div>
-            <h1>All Active Orders</h1>
-            {
-                details.map((item,index) =>(
+    <div className="bg-black bg-opacity-90 min-h-screen p-8 overflow-x-hidden w-full justify-center">
+             <div className="w-full mb-8 flex justify-center">
+            <h1 className="text-blue-300 font-bold text-center mb-3 text-2xl">All Active Orders</h1>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
+                    {
+                        details.map((item,index) =>(
+                            <div key={index}
+                            className="flex items-center justify-center w-full lg:w-5/6 mx-auto">
+                            <StudentActiveOrdersCard data={item}  key={index} set_confirmation_model={set_confirmation_model} set_loading={set_loading}/>
+                             </div>
+                        ))
+                    }
+                    {
+                        details.length === 0 && (
+                            <div className="mt-8 text-center text-xl font-bold text-white">
+                            <p>No Active Orders are there</p>
+                            </div>
+                        )
+                    }
+                </div>        
+                    {
+                        confirmation_model && (
+                            <ConfirmationModel confirmation_model={confirmation_model}/>
+                        )
+                        
+                    }
                     
-                    <StudentActiveOrdersCard data={item} key={index} set_confirmation_model={set_confirmation_model} set_loading={set_loading}/>
-                ))
-            }
-            {
-                details.length === 0 && (
-                    <p>No Active Orders are there</p>
-                )
-            }
-            {
-                confirmation_model && (
-                    <ConfirmationModel confirmation_model={confirmation_model}/>
-                )
-                
-            }
-            
         </div>
   )
 }

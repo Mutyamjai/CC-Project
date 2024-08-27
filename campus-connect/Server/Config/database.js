@@ -1,14 +1,23 @@
-const mongoose = require("mongoose");
-require("dotenv").config();
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 const db_connect = () => {
+    const dbURI = process.env.DATABASE_URL;
 
-    mongoose.connect(process.env.DATABASE_URL)
-    .then(() => console.log("DATABASE CONNECTION SUCCESSFUL"))
-    .catch((error) => {
-        console.log("DATABASE CONNECTION FAILED")
-        console.log(error);
+    if (!dbURI) {
+        console.error('DATABASE_URL environment variable is not set.');
+        return;
+    }
+
+    mongoose.connect(dbURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
     })
+    .then(() => console.log('DATABASE CONNECTION SUCCESSFUL'))
+    .catch((error) => {
+        console.error('DATABASE CONNECTION FAILED');
+        console.error(error);
+    });
 }
 
 module.exports = db_connect;
