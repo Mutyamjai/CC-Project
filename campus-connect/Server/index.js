@@ -20,6 +20,9 @@ app.listen(PORT, () => {
 const db_connect = require("./Config/database");
 db_connect();
 
+const cloudinary_connect = require("./Config/cloudinary");
+cloudinary_connect();
+
 const user_routes = require("./Routes/User");
 const laundry_routes = require("./Routes/Laundry");
 const cycle_routes = require("./Routes/Bicycle");
