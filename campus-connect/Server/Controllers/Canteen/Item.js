@@ -1,11 +1,12 @@
 const Item = require("../../Models/Canteen/Item");
+const {upload_image} = require("../../Utils/upload_image");
 
 exports.create_item = async (req, res) => {
 
     try{
 
-        const {item_name, category,price} = req.body;
-
+        const {item_name, category, price} = req.body;
+        console.log(req.body);
         const old_item = await Item.findOne({item_name: item_name});
 
         if(old_item){
@@ -14,11 +15,14 @@ exports.create_item = async (req, res) => {
                 message: "ITEM IS ALREADY EXISTING.",
             })
         }
-
+        console.log(item_name);
+        const image = await upload_image(req.files.image , process.env.IMAGE_FOLDER_NAME, 1000, 1000);
+        console.log(image.secure_url);
         const new_item = await Item.create({
             item_name: item_name,
             category: category,
-            price: price
+            price: price,
+            image: image.secure_url
         });
 
         return res.status(200).json({
@@ -31,6 +35,54 @@ exports.create_item = async (req, res) => {
             success: false,
             details: error.message,
             message: "ERROR OCCURED WHILE CREATING AN ITEM.",
+        })
+    }
+}
+
+exports.get_all_items = async (req, res) => {
+
+    try{
+        const all_items = await Item.find({});
+
+        return res.status(200).json({
+            success: true,
+            all_items: all_items,
+            message: "ALL ITEMS FETCHED SUCCESSFULLY.",
+        })
+    }
+    catch(error){
+        return res.status(500).json({
+            success: false,
+            details: error.message,
+            message: "ERROR OCCURED WHILE FETCHING ALL ITEMS.",
+        })
+    }
+}
+
+exports.alter_item_status = async (req, res) => {
+
+    try{
+        const {new_status, item_id} = req.body;
+
+        const updated_item = await Item.findByIdAndUpdate(
+            item_id,
+            {
+                status: new_status
+            },
+            {new: true}
+        )
+
+        return res.status(200).json({
+            success: true,
+            updated_item: updated_item,
+            message: "STATUS UPDATED SUCCESSFULLY.",
+        })
+    }
+    catch(error){
+        return res.status(500).json({
+            success: false,
+            details: error.message,
+            message: "ERROR OCCURED WHILE UPDATING THE STATUS OF AN ITEM.",
         })
     }
 }

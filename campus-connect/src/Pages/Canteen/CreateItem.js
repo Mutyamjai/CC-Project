@@ -20,12 +20,12 @@ export default function CreateItem() {
             return;
         }
         set_loading(true);
-        const formData = new formData()
+        const formData = new FormData()
         formData.append("image",img_file)
         formData.append("item_name",data.item_name)
         formData.append("category",data.category)
         formData.append("price",data.price)
-        create_item(formData,token)
+        await create_item(formData,token)
         set_loading(false);
     }
     function handleFileChange(event){
@@ -49,7 +49,7 @@ export default function CreateItem() {
         fileInputRef.current.click();
     }
     if(loading){
-        <Spinner/>
+       return (<Spinner/>) 
     }
   return (
         <div>

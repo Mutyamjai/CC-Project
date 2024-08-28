@@ -24,6 +24,7 @@ import ManageBooking from './Pages/Cycles/ManageBooking/ManageBooking'
 import MyBookings from './Pages/Cycles/MyBookings'
 import CanteenHome from './Pages/Canteen/CanteenHome'
 import CreateItem from './Pages/Canteen/CreateItem'
+import ManageItems from './Pages/Canteen/ManageItem/ManageItems'
 
 function App() {
   const {user_details} = useSelector((state) => state.profile)
@@ -99,6 +100,7 @@ function App() {
               user_details?.account_type === "Canteen_admin" && (
                 <>
                   <Route path='/Canteen/Create_Item' element=<CreateItem/>/>
+                  <Route path='/Canteen/Manage_Item' element=<ManageItems/>/>
                   
                 </>
               )

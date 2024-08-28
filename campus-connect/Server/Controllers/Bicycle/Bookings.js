@@ -93,7 +93,7 @@ exports.find_available_cycle = async (req , res) => {
 exports.issue_booking = async (req, res) => {
     try{
         const data = req.body;
-        console.log(data);
+        
         const change = await Booking.findByIdAndUpdate(
             data.id,
             {
@@ -101,7 +101,7 @@ exports.issue_booking = async (req, res) => {
             },
             {new: true}
         )
-        console.log(change);
+       
         return res.status(200).json({
             success: true,
             updated_booking: change,
