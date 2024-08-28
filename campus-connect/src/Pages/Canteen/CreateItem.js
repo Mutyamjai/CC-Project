@@ -9,7 +9,7 @@ import Spinner from '../../Components/Common/Spinner';
 
 export default function CreateItem() {
     const {register,handleSubmit,formState:{errors}} = useForm();
-    const [loading,set_loading] = useState("false");
+    const [loading,set_loading] = useState(false);
     const fileInputRef = useRef();
     const [img_file,set_img_file] = useState(null);
     const [preview_img,set_preview_img] = useState(null);
@@ -49,7 +49,7 @@ export default function CreateItem() {
         fileInputRef.current.click();
     }
     if(loading){
-       return (<Spinner/>) 
+       return <Spinner/>
     }
   return (
         <div>
