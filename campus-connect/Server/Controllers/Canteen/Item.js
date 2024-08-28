@@ -86,3 +86,22 @@ exports.alter_item_status = async (req, res) => {
         })
     }
 }
+
+exports.get_menu = async (req, res) => {
+    try{
+        const menu = await Item.find({});
+
+        return res.status(200).json({
+            success: true,
+            menu: menu,
+            message: "MENU FETCHED SUCCESSFULLY."
+        })
+    }
+    catch(error){
+        return res.status(500).json({
+            success: false,
+            details: error.message,
+            message: "ERROR OCCURED WHILE FETCHING MENU.",
+        })
+    }
+}
