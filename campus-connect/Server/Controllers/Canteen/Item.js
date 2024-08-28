@@ -6,7 +6,7 @@ exports.create_item = async (req, res) => {
     try{
 
         const {item_name, category, price} = req.body;
-
+        console.log(req.body);
         const old_item = await Item.findOne({item_name: item_name});
 
         if(old_item){
@@ -15,9 +15,9 @@ exports.create_item = async (req, res) => {
                 message: "ITEM IS ALREADY EXISTING.",
             })
         }
-        
+        console.log(item_name);
         const image = await upload_image(req.files.image , process.env.IMAGE_FOLDER_NAME, 1000, 1000);
-
+        console.log(image.secure_url);
         const new_item = await Item.create({
             item_name: item_name,
             category: category,
@@ -62,7 +62,7 @@ exports.get_all_items = async (req, res) => {
 exports.alter_item_status = async (req, res) => {
 
     try{
-        const {new_status, item_id} = req.body.item_id;
+        const {new_status, item_id} = req.body;
 
         const updated_item = await Item.findByIdAndUpdate(
             item_id,

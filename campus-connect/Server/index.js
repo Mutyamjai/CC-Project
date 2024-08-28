@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const file_upload = require("express-fileupload");
 
 require("dotenv").config();
 const PORT = process.env.PORT || 4000;
@@ -12,6 +13,11 @@ app.use(
         credentials: true,
     })
 )
+
+app.use(file_upload({
+    useTempFiles: true,
+    tempFileDir: "/tmp"
+}))
 
 app.listen(PORT, () => {
     console.log("SERVER SUCCESSFULL");

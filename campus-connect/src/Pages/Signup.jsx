@@ -75,10 +75,10 @@ export default function Signup()
                         <label htmlFor="role" className='block text-white-700'>Select your role <sup className="text-red-500">*</sup>  </label>
                         <select id="account_type" {...register('account_type')} defaultValue="Student" className='"block w-full mt-1 p-1 border rounded text-black rounded"'>
                             <option value="Student">Student</option>
-                            <option value="Laundry">Dhobi</option>
+                            <option value="Laundry">Laundry</option>
                             <option value="Saloon">Saloon</option>
                             <option value="Cycle_admin">Cycle</option>
-                            <option value="Magaram">Magaram</option>
+                            <option value="Canteen_admin">Canteen</option>
                         </select>
                     </div>
                             <div className='mt-2'>

@@ -100,7 +100,6 @@ export default function Login() {
                                     <p className="mb-2">Forgot your password? <Link to="/Reset_Password" className='text-blue-300 underline'>Reset it Here</Link>.</p>
                                     <p className="mb-2">Need help? <a href="mailto: lnmiitcampusconnect@gmail.com" className='text-blue-300 underline'>Contact support</a>.</p>
                                     </div>
-
                         </div>            
                     </div>                
                 </div>                    

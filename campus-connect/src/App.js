@@ -22,12 +22,15 @@ import CyclesHome from './Pages/Cycles/CyclesHome'
 import ManageCycle from './Pages/Cycles/ManageCycles/ManageCycle'
 import ManageBooking from './Pages/Cycles/ManageBooking/ManageBooking'
 import MyBookings from './Pages/Cycles/MyBookings'
+import CanteenHome from './Pages/Canteen/CanteenHome'
+import CreateItem from './Pages/Canteen/CreateItem'
+import ManageItems from './Pages/Canteen/ManageItem/ManageItems'
 
 function App() {
   const {user_details} = useSelector((state) => state.profile)
   return (
     <div className="App">
-    <Navbar/>
+    <Navbar/> 
     <div className='h-[3.5rem] z-50 w-full'></div>
       <Routes>
         <Route path = '/' element = {<Home/>}/>
@@ -88,7 +91,22 @@ function App() {
           ) 
         }
         </Route>
+        <Route element={
+            <ProtectedRoute>
+                <CanteenHome/>
+            </ProtectedRoute>
+        }>
+          {
+              user_details?.account_type === "Canteen_admin" && (
+                <>
+                  <Route path='/Canteen/Create_Item' element=<CreateItem/>/>
+                  <Route path='/Canteen/Manage_Item' element=<ManageItems/>/>
+                  
+                </>
+              )
+            }
 
+        </Route>
       </Routes>
     </div>
   );
