@@ -19,7 +19,6 @@ export default function ManageItems() {
     const alter_availability = async (id, new_status) => {
         set_loading(true);
         const result = await alter_item_status(id, new_status, token);
-        console.log(result);
         if(result){
             const new_data = data.map((item) => item._id === result._id ? result : item);
             set_data(new_data);

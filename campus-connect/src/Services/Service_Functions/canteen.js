@@ -20,6 +20,7 @@ export async function create_item(formData , token){
             toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
     }
 }
+
 export async function get_all_items( token){
     let result;
     try{
@@ -52,6 +53,29 @@ export async function alter_item_status(item_id, new_status, token){
             throw new Error(response.data.message);
         
         result =  response.data.updated_item
+    }
+    catch(error){
+        console.log(error);
+
+        if(error.response.data?.message)
+            toast.error(error.response.data.message);
+        else
+            toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
+    }
+    finally{
+        return result;
+    }
+}
+
+export async function get_menu(token){
+    let result;
+    try{
+        const response = await api_connector("GET", canteen.GET_MENU, {} ,{ Authorization: `Bearer ${token}`} );
+
+        if(!response.data.success)
+            throw new Error(response.data.message);
+        
+        result =  response.data.menu
     }
     catch(error){
         console.log(error);
