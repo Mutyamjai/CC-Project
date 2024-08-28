@@ -36,5 +36,6 @@ export const cycle = {
 export const canteen = {
     CREATE_ITEM : BASE_URL + "/canteen/create_item",
     GET_ALL_ITEMS : BASE_URL + "/canteen/get_all_items",
-    ALTER_ITEM_STATUS : BASE_URL +  "/canteen/alter_item_status"
+    ALTER_ITEM_STATUS : BASE_URL +  "/canteen/alter_item_status",
+    GET_MENU : BASE_URL + "/canteen/get_menu"
 }
