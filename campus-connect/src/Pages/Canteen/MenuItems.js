@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { add_item, remove_item } from '../../../Slices/cartSlice';
+import { add_item, remove_item } from '../../Slices/cartSlice';
 
 export default function MenuItems({data}) {
 
@@ -12,10 +12,11 @@ export default function MenuItems({data}) {
     const increase_item = () => {
         dispatch(add_item(data));
         set_count(count + 1);
+        console.log(cart);
     }
 
     const decrease_item = () => {
-        if(count == 0)
+        if(count === 0)
             return;
         dispatch(remove_item(data));
         set_count(count - 1);
@@ -25,13 +26,13 @@ export default function MenuItems({data}) {
             <div>{data.item_name}</div>
             <div>{data.price}</div>
             <div>{data.status}</div>
-            <img>{data.image}</img>
+            <img src={data.image} width={100} height={100}></img>
             <div>{data.status}</div>
 
             <div>
                 {
-                    data.status === "Availabilty" && (
-                        <div>
+                    data.status === "Available" && (
+                        <div className='flex'>
                             <button onClick={increase_item}>+</button>
                             <p>{count}</p>
                             <button onClick={decrease_item}>-</button>

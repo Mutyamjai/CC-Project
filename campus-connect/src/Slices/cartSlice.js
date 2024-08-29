@@ -23,8 +23,8 @@ const cartSlice = createSlice({
             const new_item = value.payload;
             const existing_item = state.cart.find(item => item._id === new_item._id);
 
-            if(existing_item > 1)
-                existing_item.count++;
+            if(existing_item.count > 1)
+                existing_item.count--;
             else
                 state.cart = state.cart.filter(item => item._id !== new_item._id);
 
