@@ -25,6 +25,8 @@ import MyBookings from './Pages/Cycles/MyBookings'
 import CanteenHome from './Pages/Canteen/CanteenHome'
 import CreateItem from './Pages/Canteen/CreateItem'
 import ManageItems from './Pages/Canteen/ManageItem/ManageItems'
+import Menu from './Pages/Canteen/Menu/Menu'
+import Cart from './Pages/Canteen/Cart'
 
 function App() {
   const {user_details} = useSelector((state) => state.profile)
@@ -105,6 +107,14 @@ function App() {
                 </>
               )
             }
+            {
+          user_details?.account_type === "Student" && (
+              <>
+                <Route path='/Canteen/Menu' element=<Menu/>/>
+                <Route path='/Canteen/Cart' element=<Cart/>/>
+              </>
+          )
+        }
 
         </Route>
       </Routes>

@@ -16,7 +16,7 @@ export default function ManageItems() {
     const {token} = useSelector((state) => state.auth);
     const {register,handleSubmit,formState:{errors},watch} = useForm();
 
-    const alter_availabilty = async (id, new_status) => {
+    const alter_availability = async (id, new_status) => {
         set_loading(true);
         const result = await alter_item_status(id, new_status, token);
         if(result){
@@ -64,7 +64,7 @@ export default function ManageItems() {
             {
                 search_item && (
                     search_item.map((item, index) => (
-                        <ManageItemCard data={item} key={index}
+                        <ManageItemCard data={item} key={index} alter_availability={alter_availability}
                         />
                     ))
                 )
@@ -81,7 +81,7 @@ export default function ManageItems() {
                 categoryData.map((category, index) => (
                     <ManageCategory name={category.displayName} key={index}
                         items={data.filter((item) => item.category === category.name)}
-                        alter_availabilty={alter_availabilty}
+                        alter_availabilty={alter_availability}
                     />
                 ))
             }

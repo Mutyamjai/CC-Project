@@ -1,5 +1,6 @@
 import React from 'react'
-import MenuItems from './MenuItems'
+import MenuItems from '../MenuItems';
+import { useState } from 'react';
 
 export default function MenuCategory({category, items}) {
 
@@ -8,7 +9,7 @@ export default function MenuCategory({category, items}) {
     return (
         <div>
             <div>
-                <h1>category</h1>
+                <h1>{category}</h1>
                 <button onClick={()=> {
                     if(status === 'display')
                         set_status("hidden");
