@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { get_all_delivering_orders, make_it_under_delivering } from '../../../Services/Service_Functions/canteen';
+import { get_all_delivering_orders, get_all_under_cooking_orders, make_it_under_delivering } from '../../../Services/Service_Functions/canteen';
 import OrderCard from './OrderCard';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Spinner from '../../../Components/Common/Spinner';
 
 export default function AllCookingOrders() {
 
@@ -15,7 +16,7 @@ export default function AllCookingOrders() {
 
         const get_all_under_cooking_orders_fun = async () => {
             set_loading(true);
-            const result = await get_all_delivering_orders(token);
+            const result = await get_all_under_cooking_orders(token);
             
             if(result)
                 set_all_orders(result);

@@ -108,7 +108,7 @@ export async function create_order(user_details, cart, total_amount, token, navi
 
         toast.success(response.data.message);
         result = true;
-        navigate("/Cateen/My_Order")
+        navigate("/Canteen/My_Orders")
     }
     catch(error){
         console.log(error);
@@ -216,7 +216,7 @@ export async function make_it_delivered(order_id, token){
     }
 }
 
-export async function make_it_under_delivering(order_id, token, naviagte){
+export async function make_it_under_delivering(order_id, token, navigate){
 
     try{
         const response = await api_connector("POST", canteen.MAKE_IT_UNDER_DELIVERING, {order_id: order_id} ,{ Authorization: `Bearer ${token}`} );

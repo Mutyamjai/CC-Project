@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { get_my_order_details, order_received } from '../../Services/Service_Functions/canteen';
 import { useSelector } from 'react-redux';
 import ConfirmationModel from '../../Components/Common/ConfirmationModel';
+import Spinner from '../../Components/Common/Spinner';
 
 export default function MyOrder() {
 
@@ -87,7 +88,7 @@ export default function MyOrder() {
                         <button onClick={() => {
                             set_confirmation_model({
                                 data_1: `Received Order.`,
-                                date_2: "Note that, on confirmation it will be stored that the order is received.",
+                                data_2: "Note that, on confirmation it will be stored that the order is received.",
                                 btn1_text: "Confirm",
                                 btn2_text: "Cancel",
                                 btn1_fun: () => order_received_fun(),

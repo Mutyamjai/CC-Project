@@ -3,6 +3,7 @@ import Spinner from '../../../Components/Common/Spinner';
 import { complete_order, get_all_delivering_orders, make_it_delivered } from '../../../Services/Service_Functions/canteen';
 import ConfirmationModel from '../../../Components/Common/ConfirmationModel';
 import OrderCard from './OrderCard';
+import { useSelector } from 'react-redux';
 
 export default function AllDelivaryOrders() {
 
