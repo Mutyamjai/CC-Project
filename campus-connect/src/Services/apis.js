@@ -44,5 +44,6 @@ export const canteen = {
     MAKE_IT_DELIVERED: BASE_URL + "/canteen/make_it_delivered",
     CREATE_ORDER: BASE_URL + "/canteen/create_order",
     GET_MY_ORDER_DETAILS: BASE_URL + "/canteen/get_my_order_details",
-    ORDER_RECEIVED: BASE_URL+ "/canteen/order_received"
+    ORDER_RECEIVED: BASE_URL+ "/canteen/order_received",
+    COMPLETE_ORDER: BASE_URL + "/canteen/complete_order"
 }

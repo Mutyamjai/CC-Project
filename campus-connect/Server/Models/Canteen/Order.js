@@ -25,7 +25,11 @@ const orderSchema = mongoose.Schema({
     status: {
         type: String,
         required: true,
-        enum: ["Under_cooking", "Under_delivering" ,"Delivered"]
+        enum: ["Under_cooking", "Under_delivering" ,"Delivered", "Student_received"]
+    },
+    total_amount: {
+        type: Number,
+        required: true
     },
     cart: [
         {
@@ -34,10 +38,6 @@ const orderSchema = mongoose.Schema({
                 required: true
             },
             count: {
-                type: Number,
-                required: true
-            },
-            price: {
                 type: Number,
                 required: true
             }

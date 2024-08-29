@@ -76,7 +76,8 @@ exports.get_all_delivering_orders = async (req, res) => {
 exports.get_my_order_details = async (req, res) => {
 
     try{
-        const my_orders = await Order.find({user_name: user_name});
+        const user_name = req.body.user_name;
+        const my_orders = await Order.findOne({user_name: user_name});
 
         return res.status(200).json({
             success: true,
@@ -146,7 +147,7 @@ exports.make_it_delivered = async (req, res) => {
     }
 }
 
-exports.order_received = async (req, res) => {
+exports.complete_order = async (req, res) => {
 
     try{
         const {order_id} = req.body.order_id;
@@ -154,6 +155,33 @@ exports.order_received = async (req, res) => {
 
         return res.status(200).json({
             success: true,
+            message: "ORDER COMPLETED SUCCESSFULLY.",
+        })
+    }
+    catch(error){
+        return res.status(500).json({
+            success: false,
+            details: error.message,
+            message: "ERROR OCCURED WHILE UPDATING THE ORDER STATUS.",
+        })
+    }
+}
+
+exports.order_received = async (req, res) => {
+
+    try{
+        const {order_id} = req.body.order_id;
+        const updated_order = await Order.findByIdAndUpdate(
+            order_id,
+            {
+                status: "Student_received"
+            },
+            {new: true}
+        )
+
+        return res.status(200).json({
+            success: true,
+            updated_order: updated_order,
             message: "ORDER STATUS UPDATED SUCCESSFULLY.",
         })
     }
