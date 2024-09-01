@@ -22,6 +22,14 @@ import CyclesHome from './Pages/Cycles/CyclesHome'
 import ManageCycle from './Pages/Cycles/ManageCycles/ManageCycle'
 import ManageBooking from './Pages/Cycles/ManageBooking/ManageBooking'
 import MyBookings from './Pages/Cycles/MyBookings'
+import CanteenHome from './Pages/Canteen/CanteenHome'
+import CreateItem from './Pages/Canteen/CreateItem'
+import ManageItems from './Pages/Canteen/ManageItem/ManageItems'
+import Menu from './Pages/Canteen/Menu/Menu'
+import Cart from './Pages/Canteen/Cart'
+import MyOrder from './Pages/Canteen/MyOrder'
+import AllCookingOrders from './Pages/Canteen/AllCookingOrders/AllCookingOrders'
+import AllDelivaryOrders from './Pages/Canteen/AllDelivaryOrders/AllDelivaryOrders'
 
 function App() {
   const {user_details} = useSelector((state) => state.profile)
@@ -88,7 +96,32 @@ function App() {
           ) 
         }
         </Route>
+        <Route element={
+            <ProtectedRoute>
+                <CanteenHome/>
+            </ProtectedRoute>
+        }>
+          {
+              user_details?.account_type === "Canteen_admin" && (
+                <>
+                  <Route path='/Canteen/Create_Item' element=<CreateItem/>/>
+                  <Route path='/Canteen/Manage_Item' element=<ManageItems/>/>
+                  <Route path='/Canteen/AllCookingOrders' element=<AllCookingOrders/>/>
+                  <Route path='/Canteen/AllDelivaryOrders' element=<AllDelivaryOrders/>/>
+                </>
+              )
+            }
+            {
+          user_details?.account_type === "Student" && (
+              <>
+                <Route path='/Canteen/Menu' element=<Menu/>/>
+                <Route path='/Canteen/Cart' element=<Cart/>/>
+                <Route path='/Canteen/My_Orders' element=<MyOrder/>/>
+              </>
+          )
+        }
 
+        </Route>
       </Routes>
     </div>
   );

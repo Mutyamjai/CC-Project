@@ -9,10 +9,7 @@ const db_connect = () => {
         return;
     }
 
-    mongoose.connect(dbURI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
+    mongoose.connect(dbURI)
     .then(() => console.log('DATABASE CONNECTION SUCCESSFUL'))
     .catch((error) => {
         console.error('DATABASE CONNECTION FAILED');
