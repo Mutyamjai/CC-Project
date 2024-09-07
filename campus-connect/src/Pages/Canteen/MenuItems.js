@@ -7,6 +7,7 @@ export default function MenuItems({data}) {
     const {cart} = useSelector((state) => state.cart);
     const item_in_cart = cart.find(item => item._id === data._id);
     const [count, set_count] = useState(item_in_cart ? item_in_cart.count : 0);
+    
     const dispatch = useDispatch();
 
     const increase_item = () => {

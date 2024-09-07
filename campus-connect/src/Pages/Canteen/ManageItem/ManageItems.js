@@ -22,6 +22,9 @@ export default function ManageItems() {
         if(result){
             const new_data = data.map((item) => item._id === result._id ? result : item);
             set_data(new_data);
+
+            const new_search_data = search_item.map((item) => item._id === result._id ? result : item);
+            set_search_item(new_search_data);
         }
         set_loading(false);
     }
@@ -81,7 +84,7 @@ export default function ManageItems() {
                 categoryData.map((category, index) => (
                     <ManageCategory name={category.displayName} key={index}
                         items={data.filter((item) => item.category === category.name)}
-                        alter_availabilty={alter_availability}
+                        alter_availability={alter_availability}
                     />
                 ))
             }

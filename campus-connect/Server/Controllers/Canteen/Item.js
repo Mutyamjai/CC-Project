@@ -1,11 +1,10 @@
 const Item = require("../../Models/Canteen/Item");
+const {upload_image} = require("../../Utils/upload_image");
 
 exports.create_item = async (req, res) => {
 
     try{
-
         const {item_name, category, price} = req.body;
-        console.log(req.body);
         const old_item = await Item.findOne({item_name: item_name});
 
         if(old_item){
@@ -14,8 +13,8 @@ exports.create_item = async (req, res) => {
                 message: "ITEM IS ALREADY EXISTING.",
             })
         }
-
-        const image = await upload_image(req.files.image , process.env.IMAGE_FOLDER_NAME, 1000, 1000);
+        
+        const image = await upload_image(req.files.image , process.env.IMAGE_FOLDER_NAME, 100, 100);
 
         const new_item = await Item.create({
             item_name: item_name,

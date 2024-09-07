@@ -24,8 +24,8 @@ const orderSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        required: true,
-        enum: ["Under_cooking", "Under_delivering" ,"Delivered", "Student_received"]
+        enum: ["Under_cooking", "Under_delivering" ,"Delivered", "Student_received"],
+        default: "Under_cooking"
     },
     total_amount: {
         type: Number,
@@ -47,14 +47,14 @@ const orderSchema = mongoose.Schema({
 
 orderSchema.pre("save", async function(next) {
     const order = this;
-    
+
     if (!order.isNew) {
         return next();
     }
 
     try {
-        const counter = await Counter.findByIdAndUpdate(
-            { _id: "order_number" },
+        const counter = await Counter.findOneAndUpdate(
+            { name: "order_number" },
             { $inc: { seq: 1 } },
             { new: true, upsert: true } 
         );

@@ -1,10 +1,9 @@
 const Order = require("../../Models/Canteen/Order");
-const {upload_image} = require("../../Utils/upload_image");
 
 exports.create_order = async (req, res) => {
 
     try{
-
+        //console.log(req.body);
         const details = req.body;
         const user_name = details.user_name;
 
@@ -36,7 +35,8 @@ exports.create_order = async (req, res) => {
 exports.get_all_under_cooking_orders = async (req, res) => {
 
     try{
-        const under_cooking_orders = await Order.find({staus: "Under_cooking"});
+
+        const under_cooking_orders = await Order.find({status: "Under_cooking"});
 
         return res.status(200).json({
             success: true,
@@ -97,7 +97,8 @@ exports.get_my_order_details = async (req, res) => {
 exports.make_it_under_delivering = async (req, res) => {
 
     try{
-        const {order_id} = req.body.order_id;
+        const order_id = req.body.order_id;
+        console.log(order_id);
         const updated_order = await Order.findByIdAndUpdate(
             order_id,
             {
@@ -123,7 +124,7 @@ exports.make_it_under_delivering = async (req, res) => {
 exports.make_it_delivered = async (req, res) => {
 
     try{
-        const {order_id} = req.body.order_id;
+        const order_id = req.body.order_id;
         const updated_order = await Order.findByIdAndUpdate(
             order_id,
             {
@@ -150,7 +151,7 @@ exports.make_it_delivered = async (req, res) => {
 exports.complete_order = async (req, res) => {
 
     try{
-        const {order_id} = req.body.order_id;
+        const order_id = req.body.order_id;
         await Order.findByIdAndDelete(order_id);
 
         return res.status(200).json({
@@ -170,7 +171,7 @@ exports.complete_order = async (req, res) => {
 exports.order_received = async (req, res) => {
 
     try{
-        const {order_id} = req.body.order_id;
+        const order_id = req.body.order_id;
         const updated_order = await Order.findByIdAndUpdate(
             order_id,
             {

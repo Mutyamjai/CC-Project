@@ -4,6 +4,7 @@ import { complete_order, get_all_delivering_orders, make_it_delivered } from '..
 import ConfirmationModel from '../../../Components/Common/ConfirmationModel';
 import OrderCard from './OrderCard';
 import { useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
 
 export default function AllDelivaryOrders() {
 
@@ -11,6 +12,8 @@ export default function AllDelivaryOrders() {
     const {token} = useSelector(state => state.auth);
     const [orders, set_orders] = useState([]);
     const [confirmation_model, set_confirmation_model] = useState(null);
+    const [search_item,set_search_item] = useState(null);
+    const {register,handleSubmit,formState:{errors},watch} = useForm();
 
     useEffect(()=> {
         const get_all_delivaring_orders_fun = async () => {
@@ -24,6 +27,14 @@ export default function AllDelivaryOrders() {
         }
         get_all_delivaring_orders_fun();
     }, [])
+
+    const on_submit = () => {
+        set_loading(true);
+        const searchTerm = watch('item_no'); 
+        const order = orders.find(d => d.order_number === Number(searchTerm));
+        set_search_item(order);
+        set_loading(false);
+    }
 
     const order_delivered_fun = async (order_id) => {
         set_loading(true);
@@ -42,7 +53,7 @@ export default function AllDelivaryOrders() {
         const result = await complete_order(order_id, token);
 
         if(result)
-            set_orders(orders.filter(order => order._id != order_id));
+            set_orders(orders.filter(order => order._id !== order_id));
 
         set_confirmation_model(null);
         set_loading(false);
@@ -61,9 +72,33 @@ export default function AllDelivaryOrders() {
     return (
         <div>
             <h1>ALL DELIVARABLE ORDERS</h1>
+            <form onSubmit={handleSubmit(on_submit)}>
             <div>
-                <h1> Searched orders</h1>
+                <label>Search</label>
+                <input type='number'
+                {...register('item_no',{required:true})}></input>
+                <button type='submit'>Search</button>
+                {
+                    errors.item_no && (<p className="text-red-500 mt-2">Item Name Is Required</p>)
+                }
             </div>
+        </form>
+        <h1 className='text-blue-300 font-bold text-center mb-3 text-2xl'>SEARCHED ORDER</h1>
+            {
+                search_item && (
+                   
+                        <OrderCard order={search_item} set_confirmation_model={set_confirmation_model} 
+                            order_delivered_fun={order_delivered_fun} complete_order_fun={complete_order_fun}/>
+                )
+            }
+            {
+                search_item === undefined && (
+                    <div className="mb-8 text-center text-xl font-bold mt-4 text-red-500" >
+                                ITEM NOT FOUND !!
+                    </div>
+                )
+            }
+
 
             <div>
                 {

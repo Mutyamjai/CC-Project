@@ -4,6 +4,7 @@ import OrderCard from './OrderCard';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Spinner from '../../../Components/Common/Spinner';
+import { useForm } from 'react-hook-form';
 
 export default function AllCookingOrders() {
 
@@ -11,6 +12,8 @@ export default function AllCookingOrders() {
     const [all_orders, set_all_orders] = useState([]);
     const navigate = useNavigate();
     const {token} = useSelector(state => state.auth);
+    const [search_item,set_search_item] = useState(null);
+    const {register,handleSubmit,formState:{errors},watch} = useForm();
 
     useEffect(() => {
 
@@ -26,6 +29,14 @@ export default function AllCookingOrders() {
 
         get_all_under_cooking_orders_fun()
     }, [])
+
+    const on_submit = () => {
+        set_loading(true);
+        const searchTerm = watch('item_no'); 
+        const order = all_orders.find(d => d.order_number === Number(searchTerm));
+        set_search_item(order);
+        set_loading(false);
+    }
 
     const make_it_under_delivering_fun = async (id) => {
         set_loading(true);
@@ -47,9 +58,31 @@ export default function AllCookingOrders() {
         <div>
             <h1>ALL ACTIVE ORDERS</h1>
 
+            <form onSubmit={handleSubmit(on_submit)}>
             <div>
-                <h1>SEARCHED ORDER</h1>
+                <label>Search</label>
+                <input type='number'
+                {...register('item_no',{required:true})}></input>
+                <button type='submit'>Search</button>
+                {
+                    errors.item_no && (<p className="text-red-500 mt-2">Item Name Is Required</p>)
+                }
             </div>
+        </form>
+        <h1 className='text-blue-300 font-bold text-center mb-3 text-2xl'>SEARCHED ORDER</h1>
+            {
+                search_item && (
+                   
+                        <OrderCard order={search_item} make_it_under_delivering_fun={make_it_under_delivering_fun}/>
+                )
+            }
+            {
+                search_item === undefined && (
+                    <div className="mb-8 text-center text-xl font-bold mt-4 text-red-500" >
+                                ITEM NOT FOUND !!
+                    </div>
+                )
+            }
 
             <div>
                 {
