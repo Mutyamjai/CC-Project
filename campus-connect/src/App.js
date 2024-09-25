@@ -30,13 +30,21 @@ import Cart from './Pages/Canteen/Cart'
 import MyOrder from './Pages/Canteen/MyOrder'
 import AllCookingOrders from './Pages/Canteen/AllCookingOrders/AllCookingOrders'
 import AllDelivaryOrders from './Pages/Canteen/AllDelivaryOrders/AllDelivaryOrders'
+import OutpassHome from './Pages/Outpass/OutpassHome'
+import ApplyOutpass from './Pages/Outpass/ApplyOutpass'
+import DownBar from './Components/Common/DownBar'
 
 function App() {
   const {user_details} = useSelector((state) => state.profile)
   return (
     <div className="App">
-    <Navbar/> 
-    <div className='h-[3.5rem] z-50 w-full'></div>
+      <Navbar/> 
+      <div className='h-[3.5rem] z-50 w-full'></div>
+
+      <div className='fixed w-full z-50 bottom-0'>
+        <DownBar/>
+      </div>
+
       <Routes>
         <Route path = '/' element = {<Home/>}/>
         <Route path = '/Signup' element = {<Signup/>}/>
@@ -122,6 +130,30 @@ function App() {
         }
 
         </Route>
+
+        <Route element={
+            <ProtectedRoute>
+                <OutpassHome/>
+            </ProtectedRoute>
+        }>
+          {
+              user_details?.account_type === "Canteen_admin" && (
+                <>
+                
+                </>
+              )
+            }
+            {
+          user_details?.account_type === "Student" && (
+              <>
+                <Route path='/Outpass/ApplyOutpass' element=<ApplyOutpass/>/>
+              </>
+          )
+        }
+
+        </Route>
+
+        
       </Routes>
     </div>
   );

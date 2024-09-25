@@ -34,7 +34,7 @@ const CycleBooking = () => {
       setError('End time must be in between morning 5AM to night 10PM');
       return;
     }
-    if (start_time < current_time) {
+    if (start_time < current_time && highlight === 'today') {
         setError('Start time must be at least 10 minutes from the current time.');
         return;
     }
