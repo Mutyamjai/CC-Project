@@ -90,7 +90,7 @@ function App() {
           user_details?.account_type === "Student" && (
               <>
                 <Route path='/Cycle/Cycle_Booking' element=<CycleBooking/>/>
-                <Route path='/Cycle/My_Booking' element=<MyBookings/>/>
+                <Route path='/Cycle/MyBookings' element=<MyBookings/>/>
               </>
           )
         }

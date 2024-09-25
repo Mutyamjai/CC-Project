@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const db_connect = () => {
-    const dbURI = process.env.DATABASE_URL;
+    const dbURI = "mongodb+srv://lnmiitcampusconnect:Oeeb1sqD2H2LvVX7@campusconnect.o27we.mongodb.net/";
 
     if (!dbURI) {
         console.error('DATABASE_URL environment variable is not set.');
