@@ -73,10 +73,9 @@ export default function Signup()
                 <form onSubmit={handleSubmit(on_submit)}>
                     <div className='form-group mt-4'>
                         <label htmlFor="role" className='block text-white-700'>Select your role <sup className="text-red-500">*</sup>  </label>
-                        <select id="account_type" {...register('account_type')} defaultValue="Student" className='"block w-full mt-1 p-1 border rounded text-black rounded"'>
+                        <select id="account_type" {...register('account_type')} defaultValue="Student" className="block w-full mt-1 p-1 border rounded text-black ">
                             <option value="Student">Student</option>
                             <option value="Laundry">Laundry</option>
-                            <option value="Saloon">Saloon</option>
                             <option value="Cycle_admin">Cycle</option>
                             <option value="Canteen_admin">Canteen</option>
                         </select>
