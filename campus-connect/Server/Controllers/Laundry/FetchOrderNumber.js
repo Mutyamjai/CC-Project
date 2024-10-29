@@ -1,19 +1,17 @@
 const User = require("../../Models/User");
 const Laundry_account = require("../../Models/Laundry/Laundry_account");
 const Laundry_Order = require("../../Models/Laundry/Laundry_Order");
+const Counter = require("../../Models/Counter");
 
 exports.fetch_order_number = async (req, res) => {
     try{
 
-        const laundry_id = req.user.id;
-        const user = await User.findOne({_id: laundry_id});
-        const laundry_account_id = user.laundry_account;
-
-        const laundry_account = await Laundry_account.findById(laundry_account_id);
+        const order_number = await Counter.findOne({name : "laundry_order_number"});
+        console.log(order_number);
         
         return res.status(200).json({
             success: true,
-            order_number: laundry_account.order_number,
+            order_number: order_number.seq,
             message: "ORDER NUMBER FETCHED SUCCESSFULLY",
         })
     }

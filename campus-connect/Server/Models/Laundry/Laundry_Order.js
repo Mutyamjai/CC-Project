@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Counter = require("../Counter");
 
 const laundry_order_schema = new mongoose.Schema({
     user_name : {
@@ -57,5 +58,25 @@ const laundry_order_schema = new mongoose.Schema({
         default: Date.now()
     }
 })
+
+laundry_order_schema.pre("save", async function(next) {
+    const order = this;
+
+    if (!order.isNew) {
+        return next();
+    }
+
+    try {
+        const counter = await Counter.findOneAndUpdate(
+            { name: "laundry_order_number" },
+            { $inc: { seq: 1 } },
+            { new: true, upsert: true } 
+        );
+
+        next();
+    } catch (err) {
+        next(err);
+    }
+});
 
 module.exports = mongoose.model("Laundry_Order", laundry_order_schema);

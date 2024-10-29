@@ -57,7 +57,8 @@ export default function UnderWashingCard({data, set_confirmation_model, set_load
                                 btn1_text: "Confirm",
                                 btn2_text: "Cancel",
                                 btn1_fun: () => on_submit(),
-                                btn2_fun: () => set_confirmation_model(null)
+                                btn2_fun: () => set_confirmation_model(null),
+                                color: "00FF00"
                             })
                         }}
                         className='bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 '

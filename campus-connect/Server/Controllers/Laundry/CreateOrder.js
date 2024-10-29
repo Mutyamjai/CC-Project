@@ -28,7 +28,8 @@ exports.create_order = async (req, res) => {
         details.washing = washing._id;
         details.dry_cleaning = dry_cleaning._id;
         details.iron = iron._id;
-
+        details.created_at = Date.now();
+        
         const created_order = await Laundry_Order.create(details);
 
         const updated_laundry_account = await Laundry_account.findByIdAndUpdate(
@@ -37,9 +38,6 @@ exports.create_order = async (req, res) => {
                 $push: {
                     under_washing: created_order._id
                 },
-                $inc: { 
-                    order_number: 1 
-                }
             },
             {new: true}
         ).exec();

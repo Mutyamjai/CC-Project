@@ -25,7 +25,7 @@ export const DownBarData = {
             },
             {
                 name: "Completed Orders",
-                address: "/Laundry/Completed Orders",
+                address: "/Laundry/Completed_Orders",
             },
         ]
     },
@@ -39,6 +39,10 @@ export const DownBarData = {
                 name: "My Booking",
                 address: "/Cycle/My_Booking",
             },
+            {
+                name: "Availability",
+                address: "/Cycle/Availability"
+            }
         ],
         Cycle_admin: [
             {
@@ -85,12 +89,5 @@ export const DownBarData = {
             },
         ]
     },
-    Outpass:{
-        Student: [
-            {
-                name: "Create Item",
-                address: "/Canteen/Create_Item",
-            },
-        ]
-    }
+
 };

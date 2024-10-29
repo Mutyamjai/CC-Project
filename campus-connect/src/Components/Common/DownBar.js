@@ -27,17 +27,18 @@ export default function DownBar() {
         set_position(new_pos);
         set_pathname(pathName);
 
-        if(new_pos === 'Laundry' || new_pos === 'Cycle' || new_pos === 'Canteen' || new_pos === 'Outpass')
+        if(new_pos === 'Laundry' || new_pos === 'Cycle' || new_pos === 'Canteen')
             set_state('block');
         else
             set_state('hidden');
 
     }, [location.pathname])
-
+    console.log(user_details);
+    
     return (
         <div className={`w-full h-[3rem] bg-red-400 absolute bottom-0 ${state}`}>
             {
-                state === 'block' && 
+                state === 'block' && user_details &&
                 <div className='flex'>
                     {
                         DownBarData[position][user_details.account_type].map((item, index) => (

@@ -1,12 +1,37 @@
 import React from 'react';
-
-import salonIcon from '../Assets/salon-icon.png';
 import laundryIcon from '../Assets/laundry-icon.png';
 import canteenIcon from '../Assets/canteen-icon.png';
 import cycleIcon from '../Assets/cycle-icon.png';
 import backgroundImage from '../Assets/backg-img.jpg'; // Ensure this image is high quality
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 export default function Home() {
+
+  const {user_details} = useSelector(state => state.profile);
+  const navigate = useNavigate();
+  
+  const card_navigate = (student_link, admin_link, admin_name) => {
+
+      if(!user_details){
+        toast.error("PLEASE LOGIN FIRST");
+        return;
+      }
+
+      if(user_details.account_type === "Student"){
+        navigate(student_link);
+        return;
+      }
+
+      if(user_details.account_type === admin_name){
+        navigate(admin_link);
+        return;
+      }
+
+      toast.error("YOU CAN NOT ACCESS THIS AREA.")
+  }
+
   return (
     <div 
       className="relative min-h-screen bg-cover bg-center text-white"
@@ -24,11 +49,11 @@ export default function Home() {
         </header>
 
         {/* Main Content */}
-        <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Laundry Box */}
           <div 
             className="flex flex-col items-center bg-white bg-opacity-80 rounded-lg p-6 cursor-pointer transition-transform transform hover:scale-105 hover:shadow-xl duration-300 hover:bg-opacity-90"
-            onClick={() => window.location.href = 'laundry-website-url'}
+            onClick={() => card_navigate("/Laundry/Student_Active_Orders", '/Laundry/Create_Order', "Laundry")}
           >
             <img src={laundryIcon} alt="Laundry" className="w-24 h-24 mb-4 transition-transform transform hover:rotate-6 duration-300" />
             <h2 className="text-xl font-semibold mb-2 text-gray-800">Laundry</h2>
@@ -39,7 +64,7 @@ export default function Home() {
           {/* Canteen Box */}
           <div 
             className="flex flex-col items-center bg-white bg-opacity-80 rounded-lg p-6 cursor-pointer transition-transform transform hover:scale-105 hover:shadow-xl duration-300 hover:bg-opacity-90"
-            onClick={() => window.location.href = 'canteen-website-url'}
+            onClick={() => card_navigate("/Canteen/Menu", '/Canteen/Manage_Item', "Canteen_admin")}
           >
             <img src={canteenIcon} alt="Canteen" className="w-24 h-24 mb-4 transition-transform transform hover:rotate-6 duration-300" />
             <h2 className="text-xl font-semibold mb-2 text-gray-800">Canteen</h2>
@@ -48,20 +73,11 @@ export default function Home() {
             </p>
           </div>
           {/* Salon Box */}
-          <div 
-            className="flex flex-col items-center bg-white bg-opacity-80 rounded-lg p-6 cursor-pointer transition-transform transform hover:scale-105 hover:shadow-xl duration-300 hover:bg-opacity-90"
-            onClick={() => window.location.href = 'salon-website-url'}
-          >
-            <img src={salonIcon} alt="Salon" className="w-24 h-24 mb-4 transition-transform transform hover:rotate-6 duration-300" />
-            <h2 className="text-xl font-semibold mb-2 text-gray-800">Saloon</h2>
-            <p className="text-sm text-gray-900 text-center">
-              Get a fresh look at our campus salon.
-            </p>
-          </div>
+          
           {/* Cycle Booking Box */}
           <div 
             className="flex flex-col items-center bg-white bg-opacity-80 rounded-lg p-6 cursor-pointer transition-transform transform hover:scale-105 hover:shadow-xl duration-300 hover:bg-opacity-90"
-            onClick={() => window.location.href = 'cycle-booking-website-url'}
+            onClick={() => card_navigate("/Cycle/Cycle_Booking", '/Cycle/Manage_Cycle', "Cycle_admin")}
           >
             <img src={cycleIcon} alt="Cycle Booking" className="w-24 h-24 mb-4 transition-transform transform hover:rotate-6 duration-300" />
             <h2 className="text-xl font-semibold mb-2 text-gray-800">Cycle Booking</h2>

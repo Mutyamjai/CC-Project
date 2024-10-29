@@ -24,7 +24,8 @@ export default function ManageBooking() {
         const getDetails = async () => {
             setLoading(true);
             const response = await fetch_today_booking_details(formattedDate, token);
-            if (response) setResult(response);
+            if (response) 
+                setResult(response);
             setLoading(false);
         };
         getDetails();
@@ -115,7 +116,7 @@ export default function ManageBooking() {
                 </div>
 
                 {/* Confirmation Model */}
-                {confirmationModel && <ConfirmationModel confirmationModel={confirmationModel} />}
+                {confirmationModel && <ConfirmationModel confirmation_model={confirmationModel} />}
             </div>
         </div>
     );
