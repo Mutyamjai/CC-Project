@@ -1,6 +1,6 @@
 const User = require("../Models/User");
 const Otp = require("../Models/Otp");
-
+const Laundry_account = require("../Models/Laundry/Laundry_account");
 const otp_generator = require("otp-generator");
 const bcrypt = require("bcryptjs");
 
@@ -8,6 +8,7 @@ exports.send_otp = async (req, res) => {
     try{
 
         const email = req.body.email;
+        const user_name = req.body.user_name;
 
         const user = await User.findOne({email: email});
 
@@ -15,6 +16,15 @@ exports.send_otp = async (req, res) => {
             return res.status(401).json({
                 success: false,
                 message: "USER IS ALREADY REGISTERED WITH EMAIL ADDRESS",
+            })
+        }
+
+        const user2 = await User.findOne({user_name: user_name});
+
+        if(user2){
+            return res.status(401).json({
+                success: false,
+                message: "USER NAME IS ALREADY TAKEN. PLEASE TRY OTHER USER NAME.",
             })
         }
         
@@ -61,7 +71,9 @@ exports.sign_up = async (req, res) => {
     try{
         
         const { user_name, email, password, confirm_password, contact_number, account_type, otp } = req.body;
-
+        
+        console.log(user_name, email, password, confirm_password, contact_number, account_type);
+        
         if(!user_name || !email || !password || !contact_number || !confirm_password || !otp){
             return res.status(403).json({
                 success: false,
@@ -104,6 +116,12 @@ exports.sign_up = async (req, res) => {
             account_type: account_type,
             image: `https://api.dicebear.com/5.x/initials/svg?seed=${user_name}`,
         })
+
+        if(account_type === "Laundry"){
+            const laundry = await Laundry_account.create({});
+            user.laundry_account = laundry._id;
+            await user.save();
+        }
 
         return res.status(200).json({
             success: true,

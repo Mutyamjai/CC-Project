@@ -1,14 +1,20 @@
-const mongoose = require("mongoose");
-require("dotenv").config();
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 const db_connect = () => {
+    const dbURI = "mongodb+srv://lnmiitcampusconnect:Oeeb1sqD2H2LvVX7@campusconnect.o27we.mongodb.net/";
 
-    mongoose.connect(process.env.DATABASE_URL)
-    .then(() => console.log("DATABASE CONNECTION SUCCESSFUL"))
+    if (!dbURI) {
+        console.error('DATABASE_URL environment variable is not set.');
+        return;
+    }
+
+    mongoose.connect(dbURI)
+    .then(() => console.log('DATABASE CONNECTION SUCCESSFUL'))
     .catch((error) => {
-        console.log("DATABASE CONNECTION FAILED")
-        console.log(error);
-    })
+        console.error('DATABASE CONNECTION FAILED');
+        console.error(error);
+    });
 }
 
 module.exports = db_connect;

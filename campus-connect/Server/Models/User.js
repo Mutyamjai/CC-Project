@@ -23,13 +23,23 @@ const user_schema = new mongoose.Schema({
     account_type: {
         type: String,
         required: true,
-        enum: ["Student", "Laundry"]
+        enum: ["Student", "Laundry", "Cycle_admin", "Canteen_admin"]
     },
     token: {
         type: String,
     },
     reset_password_expiry_time: {
         type: Date,
+    },
+    laundry_orders: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Laundry_Order"
+        }
+    ],
+    laundry_account: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Laundry_account"
     }
 })
 
