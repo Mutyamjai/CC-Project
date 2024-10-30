@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import MenuItems from './MenuItems';
 import Spinner from '../../Components/Common/Spinner';
 import { useNavigate } from 'react-router-dom';
@@ -7,9 +7,9 @@ import { create_order } from '../../Services/Service_Functions/canteen';
 import { clear_cart } from '../../Slices/cartSlice';
 
 export default function Cart() {
-    const {cart} = useSelector((state) => state.cart);
-    const {token} = useSelector(state => state.auth);
-    const {user_details} = useSelector(state => state.profile);
+    const { cart } = useSelector((state) => state.cart);
+    const { token } = useSelector((state) => state.auth);
+    const { user_details } = useSelector((state) => state.profile);
     const dispatch = useDispatch();
     const [loading, set_loading] = useState(false);
     const navigate = useNavigate();
@@ -17,47 +17,59 @@ export default function Cart() {
     const total_quantity = cart.reduce((acc, item) => acc + item.count, 0);
     const total_price = cart.reduce((acc, item) => acc + (item.count * item.price), 0);
 
-    const place_order = async (req, res) => {
-
+    const place_order = async () => {
         set_loading(true);
         const result = await create_order(user_details, cart, total_price, token, navigate);
-
-        if(result){
+        if (result) {
             dispatch(clear_cart());
         }
         set_loading(false);
-    }
+    };
 
-    if(loading)
-        return <Spinner/>
+    if (loading) return <Spinner />;
 
-    if(cart.length === 0){
-        return (<div>
-            Your Cart is empty
-        </div>)
+    if (cart.length === 0) {
+        return (
+            <div className="bg-black min-h-screen p-8 text-white flex flex-col items-center justify-center">
+                <div className="bg-gray-900 p-6 rounded-lg shadow-md w-full max-w-lg text-center">
+                    <h2 className="text-red-500 text-2xl font-semibold mb-4">Your Cart is Empty</h2>
+                    <p className="mb-4">It seems you haven't added anything to your cart yet.</p>
+                    <button
+                        onClick={() => navigate('/Canteen/Menu')}
+                        className="bg-red-500 text-black font-bold py-3 px-8 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-200"
+                    >
+                        Go to Menu
+                    </button>
+                </div>
+            </div>
+        );
     }
 
     return (
-        <div>
-            <div>
-                total quantity : {total_quantity}
+        <div className="bg-black min-h-screen p-8 text-white flex flex-col items-center">
+            <div className="bg-gray-900 p-6 rounded-lg shadow-md w-full max-w-lg mb-4">
+                <div className="flex justify-between border-b border-gray-700 pb-2 mb-4">
+                    <span className="text-red-500 font-semibold">Total Quantity:</span>
+                    <span>{total_quantity}</span>
+                </div>
+                <div className="flex justify-between border-b border-gray-700 pb-2 mb-4">
+                    <span className="text-red-500 font-semibold">Total Price:</span>
+                    <span>${total_price.toFixed(2)}</span>
+                </div>
             </div>
 
-            <div>
-                total price : {total_price}
+            <div className="bg-gray-900 p-6 rounded-lg shadow-md w-full max-w-lg mb-4 space-y-4">
+                {cart.map((item, index) => (
+                    <MenuItems data={item} key={index} />
+                ))}
             </div>
 
-            <div>
-                {
-                    cart.map((item, index) => (
-                        <MenuItems data={item} key={index}/>
-                    ))
-                }
-            </div>
-
-            <div>
-                <button onClick={place_order}>BUY NOW</button>
-            </div>
+            <button
+                onClick={place_order}
+                className="bg-red-500 text-black font-bold py-3 px-8 rounded-lg w-full max-w-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-200"
+            >
+                BUY NOW
+            </button>
         </div>
-    )
+    );
 }
