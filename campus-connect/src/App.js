@@ -32,6 +32,7 @@ import AllDelivaryOrders from './Pages/Canteen/AllDelivaryOrders/AllDelivaryOrde
 import DownBar from './Components/Common/DownBar'
 import Availability from './Pages/Cycles/Availability/Availability'
 import AllActiveOrders from './Pages/Canteen/AllActiveOrders/AllActiveOrders'
+import Profile from './Pages/Profile'
 
 function App() {
   const {user_details} = useSelector((state) => state.profile)
@@ -51,6 +52,7 @@ function App() {
         <Route path = '/Verify_Otp' element = {<VerifyOtp/>}/>
         <Route path = '/Update_Password/:id' element = {<UpdatePassword/>}/>
         <Route path = '/Reset_Password' element = {<ResetPassword/>}/>
+        <Route path = '/Profile' element = {<Profile/>}/>
         <Route path = '*' element = {<Universal/>}/>
         <Route element = {
             <ProtectedRoute>

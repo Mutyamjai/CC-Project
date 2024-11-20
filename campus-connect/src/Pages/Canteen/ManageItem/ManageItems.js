@@ -49,10 +49,7 @@ export default function ManageItems() {
             set_loading(false);
         };
 
-        set_loading(true);
         getItems();
-        set_loading(false);
-
         // eslint-disable-next-line
     }, []);
 

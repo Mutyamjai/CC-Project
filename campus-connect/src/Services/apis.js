@@ -5,7 +5,9 @@ export const auth = {
     SIGN_UP : BASE_URL + '/auth/sign_up',
     LOG_IN : BASE_URL + '/auth/login',
     RESET_PASSWORD_TOKEN : BASE_URL + "/auth/reset_password_token",
-    RESET_PASSWORD : BASE_URL + "/auth/reset_password"
+    RESET_PASSWORD : BASE_URL + "/auth/reset_password",
+    CHANGE_PASSWORD : BASE_URL + "/auth/change_password",
+    UPDATE_PROFILE : BASE_URL + "/auth/update_profile"
 }
 export const laundry = {
     CREATE_ORDER : BASE_URL + '/laundry/create_order',
