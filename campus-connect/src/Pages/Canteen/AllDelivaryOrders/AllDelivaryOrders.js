@@ -67,53 +67,54 @@ export default function AllDelivaryOrders() {
 
     return (
         <div className="bg-black text-white min-h-screen p-8">
-            <h1 className="text-3xl font-bold text-center mb-6 text-red-500">ALL DELIVERABLE ORDERS</h1>
-            <form onSubmit={handleSubmit(on_submit)} className="flex justify-center mb-6">
-                <div className="flex items-center">
-                    <label className="mr-2 text-lg">Search:</label>
-                    <input
-                        type='number'
-                        placeholder="Enter order number"
-                        {...register('item_no', { required: true })}
-                        className="bg-gray-700 text-white py-2 px-4 border border-gray-600 rounded-lg mr-2 focus:outline-none focus:ring-2 focus:ring-red-500"
-                    />
-                    <button
-                        type='submit'
-                        className="bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-600 transition-all duration-200 ease-in-out"
-                    >
-                        Search
-                    </button>
-                </div>
-                {errors.item_no && (<p className="text-red-500 mt-2">Item Number Is Required</p>)}
-            </form>
+            <div className='w-5/6 mx-auto'>
+                <h1 className="text-3xl font-bold text-center mb-6 text-red-500">ALL DELIVERABLE ORDERS</h1>
+                <form onSubmit={handleSubmit(on_submit)} className="flex justify-center mb-6">
+                    <div className="flex items-center">
+                        <label className="mr-2 text-lg">Search:</label>
+                        <input
+                            type='number'
+                            placeholder="Enter order number"
+                            {...register('item_no', { required: true })}
+                            className="bg-gray-700 text-white py-2 px-4 border border-gray-600 rounded-lg mr-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                        />
+                        <button
+                            type='submit'
+                            className="bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-600 transition-all duration-200 ease-in-out"
+                        >
+                            Search
+                        </button>
+                    </div>
+                    {errors.item_no && (<p className="text-red-500 mt-2">Item Number Is Required</p>)}
+                </form>
 
-            <h1 className='text-blue-300 font-bold text-center mb-3 text-2xl'>SEARCHED ORDER</h1>
-            {search_item && (
-                <OrderCard
-                    order={search_item}
-                    set_confirmation_model={set_confirmation_model}
-                    order_delivered_fun={order_delivered_fun}
-                    complete_order_fun={complete_order_fun}
-                />
-            )}
-            {search_item === undefined && (
-                <div className="mb-8 text-center text-xl font-bold mt-4 text-red-500">
-                    ITEM NOT FOUND !!
-                </div>
-            )}
-
-            <div>
-                {orders.map((order, index) => (
+                <h1 className='text-blue-300 font-bold text-center mb-3 text-2xl'>SEARCHED ORDER</h1>
+                {search_item && (
                     <OrderCard
-                        key={index}
-                        order={order}
+                        order={search_item}
                         set_confirmation_model={set_confirmation_model}
                         order_delivered_fun={order_delivered_fun}
                         complete_order_fun={complete_order_fun}
                     />
-                ))}
-            </div>
+                )}
+                {search_item === undefined && (
+                    <div className="mb-8 text-center text-xl font-bold mt-4 text-red-500">
+                        ITEM NOT FOUND !!
+                    </div>
+                )}
 
+                <div>
+                    {orders.map((order, index) => (
+                        <OrderCard
+                            key={index}
+                            order={order}
+                            set_confirmation_model={set_confirmation_model}
+                            order_delivered_fun={order_delivered_fun}
+                            complete_order_fun={complete_order_fun}
+                        />
+                    ))}
+                </div>
+            </div>
             {confirmation_model && <ConfirmationModel confirmation_model={confirmation_model} />}
         </div>
     );

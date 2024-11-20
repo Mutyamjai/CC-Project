@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { add_item, remove_item } from '../../Slices/cartSlice';
+import { add_item, remove_item } from '../../../Slices/cartSlice';
 import { FaIndianRupeeSign } from "react-icons/fa6";
 
 export default function MenuItems({ data }) {
@@ -16,7 +16,8 @@ export default function MenuItems({ data }) {
   };
 
   const decrease_item = () => {
-    if (count === 0) return;
+    if (count === 0) 
+      return;
     dispatch(remove_item(data));
     set_count(count - 1);
   };

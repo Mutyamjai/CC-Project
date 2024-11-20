@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FiChevronUp, FiChevronDown } from 'react-icons/fi';
-import MenuItems from '../MenuItems';
+import MenuItems from './MenuItems';
 
 export default function MenuCategory({ category, items }) {
   const [status, set_status] = useState("display");

@@ -123,15 +123,15 @@ export async function create_order(user_details, cart, total_amount, token, navi
     }
 }
 
-export async function get_all_under_cooking_orders(token){
+export async function get_all_active_orders(token){
     let result;
     try{
-        const response = await api_connector("GET", canteen.GET_ALL_UNDER_COOKING_ORDERS, {} ,{ Authorization: `Bearer ${token}`} );
+        const response = await api_connector("GET", canteen.GET_ALL_ACTIVE_ORDERS, {} ,{ Authorization: `Bearer ${token}`} );
 
         if(!response.data.success)
             throw new Error(response.data.message);
         
-        result =  response.data.under_cooking_orders
+        result =  response.data;
     }
     catch(error){
         console.log(error);
@@ -225,6 +225,7 @@ export async function make_it_under_delivering(order_id, token, navigate){
             throw new Error(response.data.message);
 
         toast.success(response.data.message);
+        navigate("/Canteen/AllDelivaryOrders");
     }
     catch(error){
         console.log(error);
@@ -267,6 +268,56 @@ export async function complete_order(order_id, token){
     let result;
     try{
         const response = await api_connector("POST", canteen.COMPLETE_ORDER, {order_id: order_id} ,{ Authorization: `Bearer ${token}`} );
+
+        if(!response.data.success)
+            throw new Error(response.data.message);
+        
+        toast.success(response.data.message);
+        result = true;
+    }
+    catch(error){
+        console.log(error);
+
+        if(error.response.data?.message)
+            toast.error(error.response.data.message);
+        else
+            toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
+    }
+    finally{
+        return result;
+    }
+}
+
+export async function accept_order(order_id, token){
+
+    let result;
+    try{
+        const response = await api_connector("POST", canteen.ACCEPT_ORDER, {order_id: order_id} ,{ Authorization: `Bearer ${token}`} );
+
+        if(!response.data.success)
+            throw new Error(response.data.message);
+        
+        toast.success(response.data.message);
+        result = response.data.updated_order;
+    }
+    catch(error){
+        console.log(error);
+
+        if(error.response.data?.message)
+            toast.error(error.response.data.message);
+        else
+            toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
+    }
+    finally{
+        return result;
+    }
+}
+
+export async function decline_order(order_id, order_no, user_id, token){
+
+    let result;
+    try{
+        const response = await api_connector("POST", canteen.DECLINE_ORDER, {order_id: order_id, order_no: order_no, user_id: user_id} ,{ Authorization: `Bearer ${token}`} );
 
         if(!response.data.success)
             throw new Error(response.data.message);
