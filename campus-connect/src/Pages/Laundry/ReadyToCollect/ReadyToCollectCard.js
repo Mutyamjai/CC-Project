@@ -3,10 +3,6 @@ import { make_it_completed_order } from '../../../Services/Service_Functions/lau
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import convert_date from '../../../Utility/dateConvertor';
-<<<<<<< HEAD
-
-=======
->>>>>>> c06f91aa70eb3377348a9667cce443831cebd327
 
 export default function ReadyToCollectCard({data, set_confirmation_model, set_loading}) {
 

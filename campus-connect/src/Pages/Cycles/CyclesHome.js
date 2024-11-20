@@ -4,7 +4,8 @@ import { Outlet } from 'react-router-dom'
 export default function CyclesHome() {
   return (
     <div>
-        <Outlet/>
+      <Outlet />
     </div>
-  )
+  );
 }
+
