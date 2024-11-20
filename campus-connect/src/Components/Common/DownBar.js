@@ -42,7 +42,7 @@ export default function DownBar() {
 
     return (
         <div
-            className={`w-full fixed bottom-0 bg-gray-900 text-gray-100 shadow-lg ${state} z-50`}
+            className={`w-full fixed bottom-0 bg-gray-900 text-gray-100 shadow-lg ${state} z-20`}
         >
             {state === 'block' && user_details && (
                 <div className="flex justify-between items-center px-4 py-2">

@@ -27,7 +27,7 @@ const CycleBooking = () => {
     const minutes = String(current_time.getMinutes()).padStart(2, '0');
     const formattedCurrentTime = `${hours}:${minutes}`;
 
-    console.log('Current time:', formattedCurrentTime);
+    //console.log('Current time:', formattedCurrentTime);
 
     if (startTime < '05:00' || startTime > '22:00') {
       setError('Start time must be between 5 AM and 10 PM.');

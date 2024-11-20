@@ -5,23 +5,20 @@
 input[type="password"]::-ms-reveal,
 input[type="password"]::-ms-clear,
 input[type="password"]::-webkit-clear-button,
-input[type="password"]::-webkit-reveal-button
- {
+input[type="password"]::-webkit-reveal-button {
   display: none;
-
+}
 
 html, body {
   height: 100%;
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 input[type="number"] {
   -moz-appearance: textfield;
   -webkit-appearance: none;
   appearance: none;
-}
-
 }
 
 .animate-rotate-2s-ease-in-infinite {
@@ -36,4 +33,3 @@ input[type="number"] {
     transform: rotate(360deg);
   }
 }
-  
