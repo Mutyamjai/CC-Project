@@ -26,12 +26,13 @@ import CanteenHome from './Pages/Canteen/CanteenHome'
 import CreateItem from './Pages/Canteen/CreateItem'
 import ManageItems from './Pages/Canteen/ManageItem/ManageItems'
 import Menu from './Pages/Canteen/Menu/Menu'
-import Cart from './Pages/Canteen/Cart'
+import Cart from './Pages/Canteen/Cart/Cart'
 import MyOrder from './Pages/Canteen/MyOrder'
-import AllCookingOrders from './Pages/Canteen/AllCookingOrders/AllCookingOrders'
 import AllDelivaryOrders from './Pages/Canteen/AllDelivaryOrders/AllDelivaryOrders'
 import DownBar from './Components/Common/DownBar'
 import Availability from './Pages/Cycles/Availability/Availability'
+import AllActiveOrders from './Pages/Canteen/AllActiveOrders/AllActiveOrders'
+import Profile from './Pages/Profile'
 
 function App() {
   const {user_details} = useSelector((state) => state.profile)
@@ -51,6 +52,7 @@ function App() {
         <Route path = '/Verify_Otp' element = {<VerifyOtp/>}/>
         <Route path = '/Update_Password/:id' element = {<UpdatePassword/>}/>
         <Route path = '/Reset_Password' element = {<ResetPassword/>}/>
+        <Route path = '/Profile' element = {<Profile/>}/>
         <Route path = '*' element = {<Universal/>}/>
         <Route element = {
             <ProtectedRoute>
@@ -113,7 +115,7 @@ function App() {
                 <>
                   <Route path='/Canteen/Create_Item' element=<CreateItem/>/>
                   <Route path='/Canteen/Manage_Item' element=<ManageItems/>/>
-                  <Route path='/Canteen/AllCookingOrders' element=<AllCookingOrders/>/>
+                  <Route path='/Canteen/AllActiveOrders' element=<AllActiveOrders/>/>
                   <Route path='/Canteen/AllDelivaryOrders' element=<AllDelivaryOrders/>/>
                 </>
               )

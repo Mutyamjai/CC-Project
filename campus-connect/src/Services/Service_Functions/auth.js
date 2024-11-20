@@ -119,3 +119,48 @@ export async function reset_password(password, confirm_password, id, navigate){
             toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
     }
 }
+
+export async function change_password(old_password, new_password, token){
+
+    try{
+        const response = await api_connector("POST", auth.CHANGE_PASSWORD, {old_password: old_password, new_password: new_password}, { Authorization: `Bearer ${token}`} );
+
+        if(!response.data.success)
+            throw new Error(response.data.message);
+
+        toast.success(response.data.message);
+    }
+    catch(error){
+        console.log(error);
+
+        if(error.response.data?.message)
+            toast.error(error.response.data.message);
+        else
+            toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
+    }
+}
+
+export async function update_profile(user_name, email, contact_number, token){
+
+    let result;
+    try{
+        const response = await api_connector("POST", auth.UPDATE_PROFILE, {user_name:user_name, email:email, contact_number:contact_number}, { Authorization: `Bearer ${token}`} );
+
+        if(!response.data.success)
+            throw new Error(response.data.message);
+        
+        result = response.data.updated_user;
+        toast.success(response.data.message);
+    }
+    catch(error){
+        console.log(error);
+
+        if(error.response.data?.message)
+            toast.error(error.response.data.message);
+        else
+            toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
+    }
+    finally{
+        return result;
+    }
+}

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import MenuItems from './MenuItems';
-import Spinner from '../../Components/Common/Spinner';
+import Spinner from '../../../Components/Common/Spinner';
 import { useNavigate } from 'react-router-dom';
-import { create_order } from '../../Services/Service_Functions/canteen';
-import { clear_cart } from '../../Slices/cartSlice';
+import { create_order } from '../../../Services/Service_Functions/canteen';
+import { clear_cart } from '../../../Slices/cartSlice';
+import CartItems from './CartItem';
 
 export default function Cart() {
     const { cart } = useSelector((state) => state.cart);
@@ -12,6 +12,7 @@ export default function Cart() {
     const { user_details } = useSelector((state) => state.profile);
     const dispatch = useDispatch();
     const [loading, set_loading] = useState(false);
+    const [data, set_data] = useState(cart);
     const navigate = useNavigate();
 
     const total_quantity = cart.reduce((acc, item) => acc + item.count, 0);
@@ -26,7 +27,12 @@ export default function Cart() {
         set_loading(false);
     };
 
-    if (loading) return <Spinner />;
+    useEffect(() => {
+        set_data(cart);
+    }, [cart])
+
+    if (loading) 
+        return <Spinner />;
 
     if (cart.length === 0) {
         return (
@@ -59,8 +65,8 @@ export default function Cart() {
             </div>
 
             <div className="bg-gray-900 p-6 rounded-lg shadow-md w-full max-w-lg mb-4 space-y-4">
-                {cart.map((item, index) => (
-                    <MenuItems data={item} key={index} />
+                {data.map((item, index) => (
+                    <CartItems data={item} key={index} />
                 ))}
             </div>
 

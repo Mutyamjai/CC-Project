@@ -24,8 +24,8 @@ const orderSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ["Under_cooking", "Under_delivering" ,"Delivered", "Student_received"],
-        default: "Under_cooking"
+        enum: ["Order_placed", "Under_cooking", "Under_delivering" ,"Delivered", "Student_received"],
+        default: "Order_placed"
     },
     total_amount: {
         type: Number,

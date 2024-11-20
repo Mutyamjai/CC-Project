@@ -69,7 +69,7 @@ export default function MyOrder() {
                 <h3 className="text-red-500 font-bold text-xl mb-4">Order Status</h3>
                 <div className="space-y-2">
                     {order.status === "Under_cooking" && (
-                        <p className="text-yellow-500">Status: Under Cooking</p>
+                        <p className="text-yellow-500">Status:Order Accepted and Under Cooking</p>
                     )}
                     {order.status === "Under_delivering" && (
                         <p className="text-yellow-500">Status: Cooking done</p>
@@ -93,6 +93,9 @@ export default function MyOrder() {
                     )}
                     {order.status === "Student_received" && (
                         <p className="text-green-500">Order received successfully</p>
+                    )}
+                    {order.status === "Order_placed" && (
+                        <p className="text-yellow-500">Waiting For the Order Acceptance</p>
                     )}
                 </div>
             </div>

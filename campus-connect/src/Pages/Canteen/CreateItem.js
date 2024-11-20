@@ -55,7 +55,7 @@ export default function CreateItem() {
 
     return (
         <div className="bg-black p-6 min-h-screen">
-            <form onSubmit={handleSubmit(on_submit)} className="text-white">
+            <form onSubmit={handleSubmit(on_submit)} className="text-white w-5/6 mx-auto">
                 <h1 className="text-red-500 font-bold text-3xl text-center mb-4">Create Item</h1>
                 
                 <div className="mb-4">

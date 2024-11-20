@@ -1,9 +1,10 @@
 const Order = require("../../Models/Canteen/Order");
+const User = require("../../Models/User");
+const mail_sender = require("../../Utils/mail_sender");
 
 exports.create_order = async (req, res) => {
 
     try{
-        //console.log(req.body);
         const details = req.body;
         const user_name = details.user_name;
 
@@ -32,16 +33,18 @@ exports.create_order = async (req, res) => {
     }
 }
 
-exports.get_all_under_cooking_orders = async (req, res) => {
+exports.get_all_active_orders = async (req, res) => {
 
     try{
 
         const under_cooking_orders = await Order.find({status: "Under_cooking"});
+        const new_orders = await Order.find({status: "Order_placed"});
 
         return res.status(200).json({
             success: true,
             under_cooking_orders: under_cooking_orders,
-            message: "UNDER COOKING ORDERS FETCHED SUCCESSFULLY.",
+            new_orders: new_orders,
+            message: "ACTIVE ORDERS FETCHED SUCCESSFULLY.",
         })
     }
     catch(error){
@@ -56,7 +59,7 @@ exports.get_all_under_cooking_orders = async (req, res) => {
 exports.get_all_delivering_orders = async (req, res) => {
 
     try{
-        const under_delivering_orders = await Order.find({staus: {$ne: "Under_cooking"}});
+        const under_delivering_orders = await Order.find({status: {$nin: ["Under_cooking", "Order_placed"]}});
 
         return res.status(200).json({
             success: true,
@@ -98,7 +101,7 @@ exports.make_it_under_delivering = async (req, res) => {
 
     try{
         const order_id = req.body.order_id;
-        console.log(order_id);
+
         const updated_order = await Order.findByIdAndUpdate(
             order_id,
             {
@@ -191,6 +194,59 @@ exports.order_received = async (req, res) => {
             success: false,
             details: error.message,
             message: "ERROR OCCURED WHILE UPDATING THE ORDER STATUS.",
+        })
+    }
+}
+
+exports.accept_order = async (req, res) => {
+
+    try{
+        const order_id = req.body.order_id;
+        const updated_order = await Order.findByIdAndUpdate(
+            order_id,
+            {
+                status: "Under_cooking"
+            },
+            {new: true}
+        )
+
+        return res.status(200).json({
+            success: true,
+            updated_order: updated_order,
+            message: "ORDER STATUS UPDATED SUCCESSFULLY.",
+        })
+    }
+    catch(error){
+        return res.status(500).json({
+            success: false,
+            details: error.message,
+            message: "ERROR OCCURED WHILE UPDATING THE ORDER STATUS.",
+        })
+    }
+}
+
+exports.decline_order = async (req, res) => {
+
+    try{
+        const order_id = req.body.order_id;
+        const user_id = req.body.user_id;
+        const user = await User.findById(user_id)
+
+        const data = `Your Resent Order with Order No ${req.body.order_no} has been cancelled.`
+        await mail_sender(user.email, "Canteen Ordered Cancelled", data);
+        
+        await Order.findByIdAndDelete(order_id);
+
+        return res.status(200).json({
+            success: true,
+            message: "ORDER CANCELLED SUCCESSFULLY.",
+        })
+    }
+    catch(error){
+        return res.status(500).json({
+            success: false,
+            details: error.message,
+            message: "ERROR OCCURED WHILE CANCELLING THE ORDER.",
         })
     }
 }

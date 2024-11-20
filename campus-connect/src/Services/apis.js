@@ -5,7 +5,9 @@ export const auth = {
     SIGN_UP : BASE_URL + '/auth/sign_up',
     LOG_IN : BASE_URL + '/auth/login',
     RESET_PASSWORD_TOKEN : BASE_URL + "/auth/reset_password_token",
-    RESET_PASSWORD : BASE_URL + "/auth/reset_password"
+    RESET_PASSWORD : BASE_URL + "/auth/reset_password",
+    CHANGE_PASSWORD : BASE_URL + "/auth/change_password",
+    UPDATE_PROFILE : BASE_URL + "/auth/update_profile"
 }
 export const laundry = {
     CREATE_ORDER : BASE_URL + '/laundry/create_order',
@@ -39,12 +41,14 @@ export const canteen = {
     GET_ALL_ITEMS : BASE_URL + "/canteen/get_all_items",
     ALTER_ITEM_STATUS : BASE_URL +  "/canteen/alter_item_status",
     GET_MENU : BASE_URL + "/canteen/get_menu",
-    GET_ALL_UNDER_COOKING_ORDERS : BASE_URL + "/canteen/get_all_under_cooking_orders",
+    GET_ALL_ACTIVE_ORDERS : BASE_URL + "/canteen/get_all_active_orders",
     GET_ALL_DELIVERING_ORDERS: BASE_URL + "/canteen/get_all_delivering_orders",
     MAKE_IT_UNDER_DELIVERING: BASE_URL + "/canteen/make_it_under_delivering",
     MAKE_IT_DELIVERED: BASE_URL + "/canteen/make_it_delivered",
     CREATE_ORDER: BASE_URL + "/canteen/create_order",
     GET_MY_ORDER_DETAILS: BASE_URL + "/canteen/get_my_order_details",
     ORDER_RECEIVED: BASE_URL+ "/canteen/order_received",
-    COMPLETE_ORDER: BASE_URL + "/canteen/complete_order"
+    COMPLETE_ORDER: BASE_URL + "/canteen/complete_order",
+    ACCEPT_ORDER: BASE_URL + "/canteen/accept_order",
+    DECLINE_ORDER: BASE_URL + "/canteen/decline_order"
 }
