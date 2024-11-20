@@ -15,11 +15,6 @@ export const sideBarData = [
         account_type: "Student"
     },
     {
-        name:"OUTPASS",
-        address:"/Outpass/ApplyOutpass",
-        account_type: "Student"
-    },
-    {
         name:"LAUNDRY",
         address:"/Laundry/Create_Order",
         account_type: "Laundry"
