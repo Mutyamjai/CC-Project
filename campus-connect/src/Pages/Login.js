@@ -35,7 +35,7 @@ export default function Login() {
       if(result){
           dispatch(set_token(result.user.token));
           dispatch(set_user_details(result.user));
-
+            console.log(result.user);
           localStorage.setItem("token", JSON.stringify(result.user.token));
           localStorage.setItem("user_details", JSON.stringify(result.user));
 

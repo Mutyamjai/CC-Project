@@ -11,7 +11,7 @@ export default function ReadyToCollect() {
     const {token} = useSelector((state) => state.auth);
     const {user_details} = useSelector((state) => state.profile)
     const[loading,set_loading] = useState(false)
-    const[details,set_details] = useState(null)
+    const[details,set_details] = useState([])
     const [searched_order, set_searched_order] = useState(null);
     const {register,handleSubmit,formState:{errors}} = useForm();
     const [confirmation_model, set_confirmation_model] = useState(null);
@@ -20,22 +20,31 @@ export default function ReadyToCollect() {
         const fetchReadyToCollectOrders = async () =>{
             try{
                 const result = await fetch_ready_to_collect_orders(user_details.laundry_account,token)
-                set_details(result)
-                console.log(result);
+
+                if(result)
+                    set_details(result);
             }
             catch(error){
                 console.error("Error in fetching details",error)
             }
         }
+
+        set_loading(true);
         fetchReadyToCollectOrders();
+        set_loading(false);
+        // eslint-disable-next-line
     },[])
+
+
     function on_submit(data){
+        set_loading(true);
         const number = parseInt(data.order_number, 10)
         const order = details.find(o => o.order_number === number);
-        //console.log(order);
         set_searched_order(order);
+        set_loading(false);
     }
-    if(loading||!details){
+
+    if(loading){
         return(<Spinner/>)
     }
     return (
@@ -50,6 +59,7 @@ export default function ReadyToCollect() {
                     errors.order_number && (<p className="text-red-500 mt-2">Order Number Is Required</p>)
                 }
             </form>
+
             </div>
             <h1 className='text-blue-300 font-bold text-center mb-3 text-2xl'>SEARCHED ORDER</h1>
             {

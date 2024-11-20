@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { find_available_cycle } from '../../../Services/Service_Functions/cycle';
 import { useNavigate } from 'react-router-dom';
+import Spinner from '../../../Components/Common/Spinner';
 
 const CycleBooking = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -32,6 +33,10 @@ const CycleBooking = () => {
       setError('Start time must be between 5 AM and 10 PM.');
       setLoading(false);
       return;
+    }
+    if (startTime < current_time && highlight === 'today') {
+        setError('Start time must be at least 10 minutes from the current time.');
+        return;
     }
 
     if (endTime < '05:00' || endTime > '22:00') {
@@ -86,6 +91,9 @@ const CycleBooking = () => {
     setSelectedDate(tomorrow);
     setHighlight('tomorrow');
   };
+
+  if(loading)
+    return (<Spinner/>)
 
   return (
     <div className="bg-black text-white min-h-screen p-8 flex items-center justify-center">

@@ -2,9 +2,10 @@
 import React from 'react'
 
 export default function ConfirmationModel({confirmation_model}) {
+
     return (
-        <div className="fixed w-screen h-screen inset-0 right-0 z-[1000] !mt-0 grid place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm ">
-            <div className=' bg-richblack-800 h-fit max-w-[300px] flex flex-col gap-3 p-4 rounded-md border-4 border-richblack-600'>
+        <div className="fixed w-screen h-screen inset-0 right-0 z-[1000] !mt-0 grid place-items-center overflow-auto bg-red-white bg-opacity-10 backdrop-blur-sm ">
+            <div className={`bg-richblack-800 h-fit max-w-[300px] flex flex-col gap-3 p-4 rounded-md border-4 border-[#${confirmation_model.color}]`}>
                 <h1 className='text-2xl font-bold text-black'>{confirmation_model.data_1}</h1>
 
                 <p className='text-pure-greys-300 font-semibold'>{confirmation_model.data_2}</p>

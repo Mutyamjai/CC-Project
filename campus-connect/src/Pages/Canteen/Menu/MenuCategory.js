@@ -1,34 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { FiChevronUp, FiChevronDown } from 'react-icons/fi';
 import MenuItems from '../MenuItems';
-import { useState } from 'react';
 
-export default function MenuCategory({category, items}) {
-    const toggleStatus = () => {
-        set_status(prevStatus => prevStatus === 'display' ? 'hidden' : 'display');
-    }
+export default function MenuCategory({ category, items }) {
+  const [status, set_status] = useState("display");
 
-    const [status, set_status] = useState("display");
+  return (
+    <div className="bg-gray-800 rounded-lg shadow-lg mb-4 border border-gray-600 overflow-hidden">
+      <div 
+        className="flex justify-between items-center p-4 cursor-pointer hover:bg-gray-700 transition duration-200" 
+        onClick={() => set_status(status === 'display' ? 'hidden' : 'display')}
+      >
+        <h1 className="text-red-500 text-xl font-semibold">{category}</h1>
+        <div className="text-red-500 text-2xl">
+          {status === 'display' ? <FiChevronUp /> : <FiChevronDown />}
+        </div>
+      </div>
 
-    return (
-        <div className='bg-gray-800 px-4 py-4 w-full border border-blue-700 rounded-lg max-w-3xl mx-auto flex flex-col mb-6 transition-all duration-300 ease-in-out'>
-    <div className='flex justify-between items-center mb-3'>
-        <h1 className='text-white text-xl font-bold'>{category}</h1>
-        <button 
-            onClick={toggleStatus}
-            className="text-blue-300 hover:text-blue-500 transition-colors"
-        >
-            {status === 'display' ? 'Hide' : 'Show'} Menu
-        </button>
+      <div className={`${status === 'display' ? 'block' : 'hidden'} bg-gray-900 p-4 space-y-3`}>
+        {items.map((item, index) => (
+          <MenuItems key={index} data={item} />
+        ))}
+      </div>
     </div>
-
-    <div className={`${status} transition-all duration-500 ease-in-out`}>
-        {
-            items.map((item, index) => (
-                <MenuItems key={index} data={item} className="hover:cursor-pointer text-white mb-6 w-full px-4"/>
-            ))
-        }
-    </div>
-</div>
-
-    )
+  );
 }

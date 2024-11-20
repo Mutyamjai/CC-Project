@@ -111,7 +111,7 @@ export async function find_available_cycle(details, token, navigate){
             throw new Error(response.data.message);
         
         toast.success(response.data.message);
-        navigate("/Cycle/My_Bookings");
+        navigate("/Cycle/My_Booking");
     }
     catch(error){
         console.log(error);
@@ -207,6 +207,30 @@ export async function collect_booking(id, token){
             throw new Error(response.data.message);
 
         result = true;
+    }
+    catch(error){
+        console.log(error);
+
+        if(error.response.data?.message)
+            toast.error(error.response.data.message);
+        else
+            toast.error("SOME TECHNICAL ISSUE HAS BEEN TAKEN PLACE");
+    }
+    finally{
+        return result;
+    }
+}
+
+export async function get_availabiity_details(today, tmr, token){
+
+    let result;
+    try{
+        const response = await api_connector("POST", cycle.GET_AVAILABILITY_DETAILS , {today: today, tmr: tmr},{Authorization: `Bearer ${token}`} );
+
+        if(!response.data.success)
+            throw new Error(response.data.message);
+
+        result = response.data;
     }
     catch(error){
         console.log(error);

@@ -13,13 +13,17 @@ export default function MyBookings() {
     const getMyBookingDetails = async () => {
       setLoading(true);
       const res = await fetch_student_booking_details(user_details.user_name, token);
-      setData(res);
+
+      if(res)
+        setData(res);
       setLoading(false);
     }
     getMyBookingDetails();
-  }, [user_details.user_name, token]);
+    // eslint-disable-next-line
+  }, []);
 
-  if (loading) return <Spinner />;
+  if (loading) 
+    return <Spinner />;
 
   return (
     <div className="bg-black text-white min-h-screen p-8 flex items-center justify-center">

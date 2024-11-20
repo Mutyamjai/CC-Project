@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { paid_in_cash, paid_in_online } from '../../../Services/Service_Functions/laundry';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import convert_date from '../../../Utility/dateConvertor';
-import ViewDetails from '../ViewDetails';
-import { Link } from 'react-router-dom';
+
+
 export default function StudentActiveOrdersCard({data, set_confirmation_model, set_loading}) {
     const navigate = useNavigate();
     const{token} = useSelector((state)=>state.auth);
@@ -25,23 +25,25 @@ export default function StudentActiveOrdersCard({data, set_confirmation_model, s
   return (
     <div className="hover:cursor-pointer w-5/6 flex flex-col justify-between bg-gray-800 p-4 rounded-lg min-h-full border border-blue-600 hover:shadow-lg hover:shadow-blue-300">
         
-                <div onClick={() => navigate(`/Laundry/View_Details/${data._id}`)} className="hover:cursor-pointer">
-                <div className=" text-white text-xl font-bold">
-                    <span>Order Number #</span>
-                    {data.order_number}
+                <div onClick={() => navigate(`/Laundry/View_Details/${data._id}`)}  className="hover:cursor-pointer">
+                    <div className=" text-white text-xl font-bold">
+                        <span>Order Number #</span>
+                        {data.order_number}
+                    </div>
+                    <div className="flex justify-between text-white">
+                        <span>Date:</span>
+                        <span>{convert_date(data.created_at)}</span>
+                    </div>
+                    <div className="flex justify-between text-white">
+                        <span>Total Pieces:</span>
+                        <span>{data.total_pieces}</span>
+                    </div>
+                    <div className="flex justify-between text-white">
+                        <span>Total Price:</span>
+                        <span>{data.total_price}</span>
+                    </div>
                 </div>
-                <div className="flex justify-between text-white">
-                    <span>Date:</span>
-                    <span>{convert_date(data.created_at)}</span>
-                </div>
-                <div className="flex justify-between text-white">
-                    <span>Total Pieces:</span>
-                    <span>{data.total_pieces}</span>
-                </div>
-                <div className="flex justify-between text-white">
-                    <span>Total Price:</span>
-                    <span>{data.total_price}</span>
-                </div>
+                <div>
                     {
                         data.status === "Under_washing" && (
                             <p className="mt-4 text-yellow-400">Under Washing</p>
@@ -60,7 +62,8 @@ export default function StudentActiveOrdersCard({data, set_confirmation_model, s
                                             btn1_text: "Confirm",
                                             btn2_text: "Cancel",
                                             btn1_fun: () => pay_with_cash(),
-                                            btn2_fun: () => set_confirmation_model(null)
+                                            btn2_fun: () => set_confirmation_model(null),
+                                            color: "00FF00"
                                         })
                                     }}
                                     className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
@@ -74,7 +77,8 @@ export default function StudentActiveOrdersCard({data, set_confirmation_model, s
                                             btn1_text: "Confirm",
                                             btn2_text: "Cancel",
                                             btn1_fun: () => pay_with_upi(),
-                                            btn2_fun: () => set_confirmation_model(null)
+                                            btn2_fun: () => set_confirmation_model(null),
+                                            color: "00FF00"
                                         })
                                     }}
                                     className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Pay with UPI</button>

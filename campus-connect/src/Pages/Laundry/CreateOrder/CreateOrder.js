@@ -13,10 +13,11 @@ import ConfirmationModel from '../../../Components/Common/ConfirmationModel';
 import { GiWashingMachine } from "react-icons/gi";
 import { MdDryCleaning } from "react-icons/md";
 import { TbIroningSteam } from "react-icons/tb";
+import toast from 'react-hot-toast';
 
 export default function Create_Order() {
 
-    const {register,handleSubmit,formState:{errors}} = useForm();
+    const {register,handleSubmit,formState:{errors}, getValues} = useForm();
     const [washing_data, set_washing_data] = useState({});
     const [iron_data, set_iron_data] = useState({});
     const [dry_cleaning_data, set_dry_cleaning_data] = useState({});
@@ -66,8 +67,12 @@ export default function Create_Order() {
                 console.error("Error fetching order number:", error);
             }
         };
-    
+        
+        set_loading(true);
         fetchOrderNumber();
+        set_loading(false);
+
+        // eslint-disable-next-line
     }, []);
     
 
@@ -154,15 +159,23 @@ export default function Create_Order() {
 
                 <div className="flex justify-center">
                     <div className='hover:cursor-pointer bg-blue-500 text-white py-2 px-4 
-                        rounded hover:bg-green-600 hover:scale-105 transition-transform duration-300 ' onClick={() =>
-                        set_confirmation_model({
-                            data_1: "Confirm Order ???",
-                            data_2: "Please note that order details can not be changed later.",
-                            btn1_text: "Confirm",
-                            btn2_text: "Cancel",
-                            btn1_fun: handleSubmit(on_submit),
-                            btn2_fun: () => set_confirmation_model(null)
-                        })
+                        rounded hover:bg-green-600 hover:scale-105 transition-transform duration-300 ' onClick={() => {
+
+                            if(!getValues("user_name") || getValues("user_name") === ""){
+                                toast.error("USERNAME CAN NOT BE EMPTY.")
+                                return;
+                            }
+
+                            set_confirmation_model({
+                                data_1: "Confirm Order ???",
+                                data_2: "Please note that order details can not be changed later.",
+                                btn1_text: "Confirm",
+                                btn2_text: "Cancel",
+                                btn1_fun: handleSubmit(on_submit),
+                                btn2_fun: () => set_confirmation_model(null),
+                                color: "00FF00"
+                            })
+                        }
                         }
                         >Create Order</div>
                 </div>

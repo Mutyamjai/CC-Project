@@ -145,3 +145,57 @@ exports.get_cycles_details = async (req, res) => {
     }
 }
 
+exports.get_availabiity_details = async (req, res) => {
+
+    try{
+        const {today, tmr} = req.body;
+        const cycle_details = await Cycle.find({status: "Under_working"});
+        const bookings = await Booking.find();
+
+        const today_bookings = bookings.filter(item => item.date === today);
+        const tmr_bookings = bookings.filter(item => item.date === tmr);
+
+        const today_cycle_bookings = cycle_details.map(cycle => {
+
+            const bookings = today_bookings
+                        .filter(booking => booking.id === cycle.id)
+                        .map(booking => ({
+                            start_time: booking.start_time,
+                            end_time: booking.end_time,
+                        }));;
+            return {
+                cycle,
+                bookings,
+            };
+        });
+
+        const tmr_cycle_bookings = cycle_details.map(cycle => {
+            const bookings = tmr_bookings
+                        .filter(booking => booking.cycle_id === cycle._id)
+                        .map(booking => ({
+                            start_time: booking.start_time,
+                            end_time: booking.end_time,
+                        }));;
+            return {
+                cycle,
+                bookings,
+            };
+        });
+
+        return res.status(200).json({
+            success: true,
+            today_cycle_bookings: today_cycle_bookings,
+            tmr_cycle_bookings: tmr_cycle_bookings,
+            message: `CYCLE AVAILABILITY DETAILS FETCHED SUCCESFULLY.`,
+        })
+        
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            details: error.message,
+            message: "ERROR OCCURED WHILE FETCHING AVAILABILITY DETAILS.",
+        })
+    }
+
+}
+

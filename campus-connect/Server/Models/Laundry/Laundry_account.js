@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 
 const laundry_account_schema = new mongoose.Schema({
     
-    order_number: {
-        type: Number,
-        default: 27
-    },
     completed_orders: [
         {
             type: mongoose.Schema.Types.ObjectId,

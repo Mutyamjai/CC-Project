@@ -30,13 +30,20 @@ import Cart from './Pages/Canteen/Cart'
 import MyOrder from './Pages/Canteen/MyOrder'
 import AllCookingOrders from './Pages/Canteen/AllCookingOrders/AllCookingOrders'
 import AllDelivaryOrders from './Pages/Canteen/AllDelivaryOrders/AllDelivaryOrders'
+import DownBar from './Components/Common/DownBar'
+import Availability from './Pages/Cycles/Availability/Availability'
 
 function App() {
   const {user_details} = useSelector((state) => state.profile)
   return (
     <div className="App">
-    <Navbar/> 
-    <div className='h-[3.5rem] z-50 w-full'></div>
+      <Navbar/> 
+      <div className='h-[3.5rem] z-50 w-full'></div>
+
+      <div className='fixed w-full z-50 bottom-0'>
+        <DownBar/>
+      </div>
+
       <Routes>
         <Route path = '/' element = {<Home/>}/>
         <Route path = '/Signup' element = {<Signup/>}/>
@@ -82,7 +89,8 @@ function App() {
           user_details?.account_type === "Student" && (
               <>
                 <Route path='/Cycle/Cycle_Booking' element=<CycleBooking/>/>
-                <Route path='/Cycle/MyBookings' element=<MyBookings/>/>
+                <Route path='/Cycle/My_Booking' element=<MyBookings/>/>
+                <Route path='/Cycle/Availability' element=<Availability/>/>
               </>
           )
         }
@@ -91,7 +99,6 @@ function App() {
             <>
               <Route path='/Cycle/Manage_Cycle' element=<ManageCycle/>/>
               <Route path='/Cycle/Manage_Booking' element=<ManageBooking/>/>
-              
             </>
           ) 
         }
@@ -122,6 +129,7 @@ function App() {
         }
 
         </Route>
+
       </Routes>
     </div>
   );

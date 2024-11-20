@@ -9,9 +9,9 @@ export async function create_laundry_order(details, token,navigate){
 
         if(!response.data.success)
             throw new Error(response.data.message);
-        console.log(response);
+
         toast.success(response.data.message);
-        navigate("/Laundry/Create_Order");
+        navigate("/Laundry/Under_Washing");
     }
     catch(error){
         console.log(error);
@@ -30,9 +30,7 @@ export async function fetch_order_number(token ,navigate){
 
         if(!response.data.success)
             throw new Error(response.data.message);
-        //console.log(response);
-        toast.success(response.data.message);
-        //navigate("/Laundry/Create_Order");
+        
         result = response.data.order_number;
     }
     catch(error){
@@ -57,7 +55,6 @@ export async function fetch_under_washing_orders(laundry_account, token){
         if(!response.data.success)
             throw new Error(response.data.message);
 
-        toast.success(response.data.message);
         result = response.data.under_washing_orders;
     }
     catch(error){
@@ -81,7 +78,6 @@ export async function fetch_ready_to_collect_orders(laundry_account, token){
         if(!response.data.success)
             throw new Error(response.data.message);
 
-        toast.success(response.data.message);
         result = response.data.ready_to_collect_orders;
     }
     catch(error){
@@ -105,7 +101,6 @@ export async function fetch_completed_orders(laundry_account, token){
         if(!response.data.success)
             throw new Error(response.data.message);
 
-        toast.success(response.data.message);
         result = response.data.completed_orders;
     }
     catch(error){
@@ -129,7 +124,6 @@ export async function fetch_student_completed_orders( token){
         if(!response.data.success)
             throw new Error(response.data.message);
 
-        toast.success(response.data.message);
         result = response.data.completed_orders;
     }
     catch(error){
@@ -152,7 +146,6 @@ export async function fetch_student_active_orders( token){
         if(!response.data.success)
             throw new Error(response.data.message);
 
-        toast.success(response.data.message);
         result = response.data.active_orders;
     }
     catch(error){
@@ -216,7 +209,7 @@ export async function paid_in_cash(order_id, token, navigate){
             throw new Error(response.data.message);
 
         toast.success(response.data.message);
-        navigate("Laundry/Student_Completed_Orders");
+        navigate("/Laundry/Student_Completed_Orders");
     }
     catch(error){
         console.log(error);
@@ -236,7 +229,7 @@ export async function paid_in_online(order_id, token, navigate){
             throw new Error(response.data.message);
 
         toast.success(response.data.message);
-        navigate("Laundry/Student_Completed_Orders");
+        navigate("/Laundry/Student_Completed_Orders");
     }
     catch(error){
         console.log(error);
@@ -256,7 +249,6 @@ export async function view_order_details( order_id , token){
         if(!response.data.success)
             throw new Error(response.data.message);
 
-        
          result = response.data.order_details
     }
     catch(error){

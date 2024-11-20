@@ -11,7 +11,7 @@ export default function OrderStatus() {
     const {token} = useSelector((state) => state.auth);
     const {user_details} = useSelector((state) => state.profile);
     const[loading,set_loading] = useState(false);
-    const[details,set_details] = useState(null);
+    const[details,set_details] = useState([]);
     const [confirmation_model, set_confirmation_model] = useState(null);
     const [searched_order, set_searched_order] = useState(null);
     const {register,handleSubmit,formState:{errors}} = useForm();
@@ -19,23 +19,34 @@ export default function OrderStatus() {
     useEffect(()=>{
         const fetchUnderwashingOrders = async () =>{
             try{
-                const result = await fetch_under_washing_orders(user_details.laundry_account,token)
-                set_details(result)
+                const result = await fetch_under_washing_orders(user_details.laundry_account,token);
+                if(result)
+                    set_details(result)
             }
             catch(error){
                 console.error("Error in fetching details",error)
             }
         }
+
+        set_loading(true);
         fetchUnderwashingOrders();
+        set_loading(false);
+        
+        // eslint-disable-next-line
     },[])
+
     function on_submit(data){
+        set_loading(true);
+
         const number = parseInt(data.order_number, 10)
         const order = details.find(o => o.order_number === number);
-        //console.log(order);
+
         set_searched_order(order);
+
+        set_loading(false);
     }
 
-    if(loading || !details){
+    if(loading){
         return(<Spinner/>)
     }
     return (

@@ -5,10 +5,12 @@ export default function ManageBookingCard({ data, buttonFunction, setConfirmatio
     const onSubmit = () => {
         setConfirmationModel({
             data_1: `${data.status === "Not_issued" ? "Confirm Cycle Issued" : "Confirm Cycle Collected"}`,
+            data_2: "Please note that the action can not be reversed.",
             btn1_text: "Confirm",
             btn2_text: "Cancel",
             btn1_fun: () => buttonFunction(data._id),
-            btn2_fun: () => setConfirmationModel(null)
+            btn2_fun: () => setConfirmationModel(null),
+            color: "FF0000"
         });
     };
 

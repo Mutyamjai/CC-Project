@@ -9,25 +9,32 @@ import { fetch_student_completed_orders } from '../../../Services/Service_Functi
 
 export default function StudentCompletedOrders() {
     const {token} = useSelector((state) => state.auth);
-    const[details,set_details] = useState(null);
+    const[details,set_details] = useState([]);
     const[loading,set_loading] = useState(false);
 
     useEffect(()=>{
-      const fetchStudentCompletedOrders = async () =>{
-          try{
-              const result = await fetch_student_completed_orders(token);
-              set_details(result)
-              console.log(result);
-          }
-          catch(error){
-              console.error("Error in fetching details",error)
-          }
-      }
-      fetchStudentCompletedOrders();
+        const fetchStudentCompletedOrders = async () =>{
+            try{
+                const result = await fetch_student_completed_orders(token);
+                if(result)
+                        set_details(result)
+            }
+            catch(error){
+                console.error("Error in fetching details",error)
+            }
+        }
+
+        set_loading(true);
+        fetchStudentCompletedOrders();
+        set_loading(false);
+
+        // eslint-disable-next-line
     },[])
-    if(loading||!details){
+
+    if(loading){
       return <Spinner/>
     }
+
     return (
         <div className="bg-black bg-opacity-90 min-h-screen p-8 w-full">
             <h1 className="text-blue-300 font-bold text-center text-2xl mb-8">

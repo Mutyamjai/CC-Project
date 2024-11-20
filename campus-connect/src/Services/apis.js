@@ -30,7 +30,8 @@ export const cycle = {
     GET_TODAY_BOOKING_DETAILS : BASE_URL + "/cycle/get_today_booking_details",
     GET_STUDENT_BOOKING_DETAILS : BASE_URL + "/cycle/get_student_booking_details",
     ISSUE_BOOKING : BASE_URL + "/cycle/issue_booking",
-    COLLECT_BOOKING : BASE_URL + "/cycle/collect_booking"
+    COLLECT_BOOKING : BASE_URL + "/cycle/collect_booking",
+    GET_AVAILABILITY_DETAILS : BASE_URL + "/cycle/get_availabiity_details"
 }
 
 export const canteen = {
