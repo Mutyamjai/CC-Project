@@ -1,7 +1,6 @@
 const User = require("../Models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-require('dotenv').config();
 
 exports.login = async (req, res) => {
 
@@ -32,7 +31,7 @@ exports.login = async (req, res) => {
                 account_type : user.account_type,
             }
 
-            const token = jwt.sign(payload, process.env.SECRET_KEY, {
+            const token = jwt.sign(payload, "CampusConnect", {
                 expiresIn: "10h",
             });
             
