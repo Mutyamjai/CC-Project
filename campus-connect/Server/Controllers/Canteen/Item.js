@@ -14,7 +14,7 @@ exports.create_item = async (req, res) => {
             })
         }
         
-        const image = await upload_image(req.files.image , process.env.IMAGE_FOLDER_NAME, 100, 100);
+        const image = await upload_image(req.files.image , "Studynotion_Images", 100, 100);
 
         const new_item = await Item.create({
             item_name: item_name,

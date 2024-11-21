@@ -15,7 +15,7 @@ exports.auth = async (req, res, next) => {
         }
 
         try{
-            const decode = jwt.verify(token, process.env.SECRET_KEY);
+            const decode = jwt.verify(token, "CampusConnect");
             req.user = decode;
         }
         catch(error){

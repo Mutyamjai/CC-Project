@@ -113,8 +113,7 @@ exports.sign_up = async (req, res) => {
             email: email,
             contact_number : Number(contact_number),
             password: hashed_pass,
-            account_type: account_type,
-            image: `https://api.dicebear.com/5.x/initials/svg?seed=${user_name}`,
+            account_type: account_type
         })
 
         if(account_type === "Laundry"){
