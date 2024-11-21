@@ -30,8 +30,9 @@ exports.reset_password_token = async (req, res) => {
 
         const url = `https://campusconnectfrontend.vercel.app/Update_Password/${token}`;
 
-        await mail_sender(email, "Reset Password Link", url);
-
+        const response = await mail_sender(email, "Reset Password Link", url);
+        console.log(response);
+        
         return res.status(200).json({
             success: true,
             message: "RESET PASSWORD LINK SENT SUCCESSFULLY. PLEASE CHECK YOUR MAIL RESPECTIVELY",
