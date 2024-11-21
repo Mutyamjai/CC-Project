@@ -48,7 +48,7 @@ export default function Navbar() {
 
                 {/* Navigation Links */}
                 <div className="hidden md:flex space-x-4">
-                    <Help name="Home" address="/" />
+                    <Help name="HOME" address="/" />
                     {user_details &&
                         sideBarData
                             .filter((item) => item.account_type === user_details.account_type)

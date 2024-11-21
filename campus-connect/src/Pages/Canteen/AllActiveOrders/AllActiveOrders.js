@@ -121,13 +121,14 @@ export default function AllActiveOrders() {
                         />
                     ))}
                 </div>
+                
                 {all_under_cooking.length === 0 && (
-                    <div className="mb-8 text-center text-xl font-bold mt-4 text-red-500">
-                        NO UNDER COOKING ORDERS
+                    <div className="bg-gray-900 p-6 rounded-lg shadow-md w-full max-w-lg text-center mx-auto">
+                        <h2 className="text-red-500 text-2xl font-semibold">NO UNDER COOKING ORDERS ARE FOUND.</h2>
                     </div>
                 )}
 
-                <h1 className='text-blue-300 font-bold text-center mb-3 text-2xl'>NEW ORDERS</h1>
+                <h1 className='text-blue-300 font-bold text-center m-5 text-2xl'>NEW ORDERS</h1>
                 <div className="mt-4">
                     {new_orders.map((order, index) => (
                         <OrderCard order={order} key={index} make_it_under_delivering_fun={make_it_under_delivering_fun} 
@@ -137,8 +138,8 @@ export default function AllActiveOrders() {
                 </div>
 
                 {new_orders.length === 0 && (
-                    <div className="mb-8 text-center text-xl font-bold mt-4 text-red-500">
-                        NO NEW ORDERS
+                    <div className="bg-gray-900 p-6 rounded-lg shadow-md w-full max-w-lg text-center mx-auto">
+                        <h2 className="text-red-500 text-2xl font-semibold">NO NEW ORDERS ARE PLACED.</h2>
                     </div>
                 )}
             </div>

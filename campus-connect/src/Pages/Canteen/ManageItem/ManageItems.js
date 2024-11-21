@@ -61,8 +61,9 @@ export default function ManageItems() {
             <div className='w-5/6 mx-auto'>
                 <h1 className='text-red-500 font-bold text-center mb-4 text-3xl'>Manage Items</h1>
 
+                <h1 className='text-blue-300 font-bold text-center mb-3 text-2xl px-3 py-4'>SEARCH ITEM</h1>
+
                 <form onSubmit={handleSubmit(on_submit)} className="mb-6 flex justify-center">
-                    <label className="text-red-500 mr-2 text-xl">Search</label>
                     <input
                         type='text'
                         {...register('item_name', { required: true })}
@@ -80,17 +81,21 @@ export default function ManageItems() {
                     )}
                 </form>
 
-                <h1 className='text-blue-300 font-bold text-center mb-3 text-2xl px-3 py-4'>SEARCHED ITEM</h1>
-
                 {hasSearched && search_item.length === 0 ? ( 
                     <div className="mb-8 text-center text-xl font-bold mt-4 text-red-500">
                         ITEM NOT FOUND !!
                     </div>
                 ) : (
-                    search_item.map((item, index) => (
+                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
+                    {
+                        search_item.map((item, index) => (
                         <ManageItemCard data={item} key={index} alter_availability={alter_availability} />
                     ))
+                    }
+                    </div>
                 )}
+
+                <h1 className='text-blue-300 font-bold text-center mb-3 text-2xl px-3 py-4'>ALL ITEMS</h1>
 
                 <div>
                     {categoryData.map((category, index) => (
@@ -102,13 +107,6 @@ export default function ManageItems() {
                         />
                     ))}
                 </div>
-
-                <button
-                    type='button'
-                    className="ml-2 bg-red-500 text-white p-2 rounded transition duration-300 ease-in-out hover:bg-red-600 mb-6 mx-auto"
-                >
-                    Close Shop
-                </button>
             </div>
         </div>
     );

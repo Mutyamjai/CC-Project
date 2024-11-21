@@ -60,7 +60,9 @@ export default function AllDelivaryOrders() {
     if (orders.length === 0) {
         return (
             <div className="bg-black text-white min-h-screen flex items-center justify-center">
-                <h1 className="text-red-500 text-2xl">NO DELIVERABLE ORDERS ARE FOUND.</h1>
+                <div className="bg-gray-900 p-6 rounded-lg shadow-md w-full max-w-lg text-center">
+                    <h2 className="text-red-500 text-2xl font-semibold">NO DELIVERABLE ORDERS ARE FOUND.</h2>
+                </div>
             </div>
         );
     }

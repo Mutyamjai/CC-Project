@@ -40,6 +40,14 @@ function Helper({ cycle_id, bookings, active, set_active }) {
                     ))}
                 </div>
             )}
+
+            {
+                cycle_id === active && bookings.length === 0 && (
+                    <div>
+                        No Active Orders
+                    </div>
+                )
+            }
         </div>
     );
 }
@@ -142,13 +150,15 @@ export default function Availability() {
             {highlight === "tomorrow" && (
                 <div>
                     {tmr_bookings.map((cycle, index) => (
-                        <Helper
-                            cycle_id={cycle.cycle.id}
-                            key={index}
-                            bookings={cycle.bookings}
-                            active={tmr_active}
-                            set_active={set_tmr_active}
-                        />
+                        <div className="flex justify-center">
+                            <Helper
+                                cycle_id={cycle.cycle.id}
+                                key={index}
+                                bookings={cycle.bookings}
+                                active={tmr_active}
+                                set_active={set_tmr_active}
+                            />
+                        </div>
                     ))}
                 </div>
             )}

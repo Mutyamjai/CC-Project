@@ -3,6 +3,7 @@ import { get_my_order_details, order_received } from '../../Services/Service_Fun
 import { useSelector } from 'react-redux';
 import ConfirmationModel from '../../Components/Common/ConfirmationModel';
 import Spinner from '../../Components/Common/Spinner';
+import { useNavigate } from 'react-router-dom';
 
 export default function MyOrder() {
     const [loading, set_loading] = useState(false);
@@ -10,11 +11,13 @@ export default function MyOrder() {
     const { token } = useSelector(state => state.auth);
     const [order, set_order] = useState(null);
     const [confirmation_model, set_confirmation_model] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const get_my_order_details_fun = async () => {
             set_loading(true);
             const result = await get_my_order_details(user_details.user_name, token);
+            console.log(result);
             set_order(result);
             set_loading(false);
         };
@@ -30,12 +33,22 @@ export default function MyOrder() {
         set_loading(false);
     };
 
-    if (loading) return <Spinner />;
+    if (loading) 
+        return <Spinner />;
 
     if (!order) {
         return (
-            <div className="text-center text-white text-2xl mt-20 font-semibold">
-                NO ORDER IS PLACED BY YOU
+            <div className="bg-black p-8 min-h-screen text-white flex flex-col items-center justify-center">
+                <div className="bg-gray-900 p-6 rounded-lg shadow-md w-full max-w-lg text-center">
+                    <h2 className="text-red-500 text-2xl font-semibold mb-4">No Active Orders</h2>
+                    <p className="mb-4">It seems you haven't placed any order yet.</p>
+                    <button
+                        onClick={() => navigate('/Canteen/Menu')}
+                        className="bg-red-500 text-black font-bold py-3 px-8 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-200"
+                    >
+                        Go to Menu
+                    </button>
+                </div>
             </div>
         );
     }

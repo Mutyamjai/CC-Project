@@ -25,7 +25,7 @@ export const sideBarData = [
         account_type: "Cycle_admin"
     },
     {
-        name:"Canteen_admin",
+        name:"CANTEEN",
         address:"/Canteen/Create_Item",
         account_type: "Canteen_admin"
     },
