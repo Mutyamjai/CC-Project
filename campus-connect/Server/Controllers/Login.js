@@ -31,7 +31,7 @@ exports.login = async (req, res) => {
                 account_type : user.account_type,
             }
 
-            const token = jwt.sign(payload, process.env.SECRET_KEY, {
+            const token = jwt.sign(payload, "CampusConnect", {
                 expiresIn: "10h",
             });
             
